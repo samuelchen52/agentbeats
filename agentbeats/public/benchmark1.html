@@ -8,16 +8,35 @@
 .center {
 	text-align: center;
 }
+
+img {
+	width:400px;
+}
+
+table {
+	margin-left: 15%;
+	margin-right: 15%; 
+
+}
+
 </style>
   </head>
   <body>
 
-<h1 class = center> Agent Beats </h1>
-<h2 class = center> Game Design Document </h2>
-<h2 class = center> by David Chen, Chris Liang, Samuel Chen </h2>
-
-
-
+<table>
+<tr>
+	<th>
+		<img src = "logo.png">
+	</th>
+	<th>
+	<table>
+	<tr> <h1 class = center> Agent Beats </h1> </tr>
+	<tr> <h2 class = center> Game Design Document </h2> </tr>
+	<tr> <h2 class = center> by David Chen, Chris Liang, Samuel Chen </h2> </tr>
+	</table>
+	</th>
+</tr>
+</table>
 
 <h3> INTRODUCTION </h3>
 <p>
@@ -66,22 +85,77 @@ This game will be played with just the arrow keys. Once started, use the followi
 
 <h3>GRAPHICAL USER INTERFACE</h3>
 <p>
-As far as the GUI is concerned, if we consider
-Splash Screen - The splash screen GUI simply presents a game logo and a Start button for the user to press when they are ready to play. Upon pressing it, a brief scripted sequence is played explaining a little about Agent Beats and the back story for the game. While playing the message "Press ESC to Skip" should be displayed at the bottom of the screen. If pressed, the game should immediately start.
-In-Game Menu - While the game is in progress, we'll always have a game menu that allows the player to select from the following options:
-Exit Level - will prompt user if they really want to exit level. Upon pressing yes, will exit and go back to the level select screen
-Pause Game - This button is deactivated when a game is not in progress. If pressed, it will produce the same effect as the ESC key.
-Controls - If pressed, the game will display an info screen that includes a description of all game controls.
-Best Times - If pressed, the game will display an info screen with the fastest times for clearing the level.
-About - If pressed, the game will display an info screen with information about the game author.
-Exit - If pressed, the game program will exit.
-In-Game GUI - Once a game starts, a 5-4-3-2-1-Begin sequence is counted down and displayed for the player to see. At Begin, the changing room door opens and Spike pops out in his Red protective suit. Balloons will begin to be deployed about the chamber. While playing the following will be displayed at all times:
-Time Remaining
-Popped Red Balloons/Red Balloons Remaining
-Popped Green Balloons/Green Balloons Remaining
-Popped Blue Balloons/Blue Balloons Remaining
-In addition, three buttons will be be part of the in-game GUI, meaning overlayed on top of the game world. These are buttons for selecting Red, Green, and Blue suits. These buttons will only be selectable when Spike is standing in front of the changing room door. If Spike is in front of the door and the player clicks on a suit colored differently than the one Spike is currently wearing, then the door will slide open, Spike will disappear inside momentarily, the door will then slide closed, and then will slide open again, with Spike popping out in his new suit.
+As far as the GUI is concerned, if we consider: 
+<table>
+<tr>
+<th>
+Splash Screen - The splash screen GUI simply presents a game logo and a Start button for the user to press when they are ready to play. Upon pressing it, a brief scripted sequence is played explaining a little about Agent Beats and the back story for the game. While playing the message "Press ESC to Skip" should be displayed at the bottom of the screen. 
+</th>
+<th>
+	<img src = "splash.png">
+</th> 
+</tr>
+
+
+<tr>
+
+<th>
+In-Game Menu - Before the game starts, the user can choose from several options:
+<ul>
+<li> New Game - Start a new game</li>
+<li> Level Select - Bring user to the level select screen</li>
+<li> Controls - Displays an info screen that includes a description of all game controls.</li>
+<li> Help - Brings up info about the game's backstory and who the game developers are</li>
+</ul>
+</th>
+
+<th>
+	<img src = "menu.png">
+</th>
+</tr>
+
+<tr>
+<th> Controls- The user is brought here from choosing the Controls option from the main menu</th>
+<th> <img src = "controls.png" </th>
+</tr>
+
+<tr>
+<th> Info- The user is brought here from choosing the Help option from the main menu </th>
+<th> <img src = "help.png" </th>
+</tr>
+
+<tr>
+<th> Level Select- The user is brought here from choosing the Level Select option from the main menu </th>
+<th> <img src = "levelselect.png" </th>
+</tr>
+
+<tr>
+<th> Paused Menu- after the game starts, the user can pause the screen and choose from several options 
+<ul>
+<li> Restart Level - Restarts the level</li>
+<li> Controls - Displays an info screen that includes a description of all game controls.</li>
+<li> About - Brings up info about the game's backstory and who the game developers are</li>
+<li> Exit - Exits to the main menu</li>
+</ul>
+</th>
+<th> <img src = "ingamepaused.png"> </th>
+</tr>
+
+<tr>
+<th> Level Select- An approximation as to what the gameplay should look like </th>
+<th> <img src = "ingame.png"> </th>
+</tr>
+
+<p> NOTE: placeholder stock art will be replaced with original art. it is only there to show an idea of what our game will look like</p>
+
+</table>
 </p>
+
+
+
+
+
+
 
 
 <h3>ARTWORK</h3>
