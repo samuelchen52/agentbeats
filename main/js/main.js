@@ -17,7 +17,10 @@ var Preloader = new Phaser.Class({
         this.load.image('controls', './assets/screens/controls.png');
         this.load.image('help', './assets/screens/Help.png');
         this.load.image('ingame', './assets/screens/ingame.png');
-        this.load.image('paused', './assets/screens/ingamepaused.png');       
+        this.load.image('paused', './assets/screens/ingamepaused.png'); 
+        //TILES
+        this.load.image('tileset','./assets/tiles/tileset.png');
+        this.load.tilemapTiledJSON("level1","../assets/tiles/level1.json");
     },
 
     create: function ()
@@ -333,12 +336,33 @@ var InGame = new Phaser.Class({
     create: function ()
     {
         this.add.image(0, 0, 'ingame').setOrigin(0);
+        const level1 = this.make.tilemap({key: "level1"});
+        const tileset = level1.addTilesetImage("tiles","tileset");
 
+        const backgroundLayer = level1.createStaticLayer("backgroundLayer",tileset,0,0);
+        const blockedLayer = level1.createStaticLayer("blockedLayer",tileset,0,0);
+
+        const camera = this.cameras.main;
+
+        //set up arrows to control camera
+        const cursors =  this.input.keyboard.createCursorKeys();
+        controls = new Phaser.Cameras.Controls.FixedKeyControl({
+            camera: camera,
+            left: cursors.left,
+            right: cursors.right,
+            up: cursors.up,
+            down: cursors.down,
+            speed: 0.8
+        });
+        camera.setBounds(0,0, level1.widthInPixels, level1.heightInPixels);
         this.input.once('pointerdown', function () {
 
             this.scene.start('paused');
 
         }, this);
+    },
+    update: function(time, delta){
+        controls.update(delta);
     }
 
 });
