@@ -328,22 +328,25 @@ var InGame = new Phaser.Class({
         Phaser.Scene.call(this, { key: 'ingame' });
     },
 
-    // preload: function ()
-    // {
-    //     this.load.image('face', 'assets/pics/bw-face.png');
-    // },
+    preload: function ()
+    {
+        //TILES
+        this.load.image('tileset','./assets/tilesets/tileset.png');
+        this.load.tilemapTiledJSON('level1','./assets/tilemaps/level1.json');
+    },
 
     create: function ()
     {
-        this.add.image(0, 0, 'ingame').setOrigin(0);
-        const level1 = this.make.tilemap({key: "level1"});
-        const tileset = level1.addTilesetImage("tiles","tileset");
-
-        const backgroundLayer = level1.createStaticLayer("backgroundLayer",tileset,0,0);
-        const blockedLayer = level1.createStaticLayer("blockedLayer",tileset,0,0);
+        //this.add.image(0, 0, 'ingame').setOrigin(0);
+        //make our map
+        const level1 = this.add.tilemap('level1');
+        //add the tileset
+        const tileset = level1.addTilesetImage('tileset');
+        //make the layer(s) from tileset
+        const backgroundLayer = level1.createStaticLayer('backgroundLayer',tileset);
 
         //set collision of blocked layer
-        blockedLayer.setCollisionByProperty({collides: true});
+        //blockedLayer.setCollisionByProperty({collides: true});
         
         
         const camera = this.cameras.main;
