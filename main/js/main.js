@@ -78,23 +78,24 @@ var MainMenu = new Phaser.Class({
 
         this.add.image(0, 0, 'mainmenu').setOrigin(0);
 
-        this.add.text( this.game.renderer.width / 2 - 50, this.game.renderer.height / 2 + 50, '- PLAY', {
+        var something = this.add.text( this.game.renderer.width / 2 - 50, this.game.renderer.height / 2 + 50, '- PLAY', {
             fontFamily: 'neonabsolute',
             fontSize: 30,
-            align: 'center'
         }).setOrigin().setInteractive().key = 1;
+        
+        console.log(something);
 
 
         this.add.text( this.game.renderer.width / 2 - 50, this.game.renderer.height / 2 + 150, '- HELP', {
             fontFamily: 'neonabsolute',
             fontSize: 30,
-            align: 'center'
+            
         }).setOrigin().setInteractive().key = 2;
 
         this.add.text( this.game.renderer.width / 2 + 3, this.game.renderer.height / 2 + 100, '- CONTROLS', {
             fontFamily: 'neonabsolute',
             fontSize: 30,
-            align: 'center'
+            
         }).setOrigin().setInteractive().key = 3;
 
        
@@ -153,27 +154,60 @@ var LevelSelect = new Phaser.Class({
         var back = this.add.text(50, 50, 'BACK', {
             fontFamily: 'neonabsolute',
             fontSize: 30,
-            align: 'center'
-        }).setOrigin().setInteractive();
+        }).setOrigin().setInteractive().key = 0;
 
-        back.on('pointerover', function () {
+        var level1 = this.add.text( 125,190, 'level 1', {
+            fontFamily: 'retrocycles',
+            fontSize: 40,
+            
+        }).setOrigin().setInteractive().key = 1;
 
-            this.setTint(0xff0000, 0xff0000, 0xffff00, 0xff00ff);
 
+        // back.on('pointerover', function () {
+
+        //     this.setTint(0xff0000, 0xff0000, 0xffff00, 0xff00ff);
+
+    
+        // });
+
+        // back.on('pointerout', function () {
+
+        //     this.clearTint();
+
+    
+        // });
+
+        // back.on('pointerdown', function () {
+
+        //     this.scene.start('mainmenu');
+
+    
+        // }.bind(this));
+
+        this.input.on('gameobjectover', function (pointer, gameObject) {
+
+            gameObject.setTint(0xff0000, 0xff0000, 0xffff00, 0xff00ff);
+    
+        });
+    
+        this.input.on('gameobjectout', function (pointer, gameObject) {
+    
+            gameObject.clearTint();
     
         });
 
-        back.on('pointerout', function () {
+        this.input.on('gameobjectdown', function (pointer, gameObject) {
 
-            this.clearTint();
+            
+            switch(gameObject.key)
+            {
+                case 0: this.scene.start('mainmenu');
+                break;
 
-    
-        });
+                case 1: this.scene.start('ingame');
+                break;
 
-        back.on('pointerdown', function () {
-
-            this.scene.start('mainmenu');
-
+            }
     
         }.bind(this));
 
@@ -205,7 +239,6 @@ var Controls = new Phaser.Class({
         var back = this.add.text(50, 50, 'BACK', {
             fontFamily: 'neonabsolute',
             fontSize: 30,
-            align: 'center'
         }).setOrigin().setInteractive();
 
         back.on('pointerover', function () {
@@ -255,7 +288,6 @@ var Help = new Phaser.Class({
         var back = this.add.text(50, 50, 'BACK', {
             fontFamily: 'neonabsolute',
             fontSize: 30,
-            align: 'center'
         }).setOrigin().setInteractive();
 
         back.on('pointerover', function () {
