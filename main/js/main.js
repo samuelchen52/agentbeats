@@ -342,6 +342,10 @@ var InGame = new Phaser.Class({
         const backgroundLayer = level1.createStaticLayer("backgroundLayer",tileset,0,0);
         const blockedLayer = level1.createStaticLayer("blockedLayer",tileset,0,0);
 
+        //set collision of blocked layer
+        blockedLayer.setCollisionByProperty({collides: true});
+        
+        
         const camera = this.cameras.main;
 
         //set up arrows to control camera
@@ -404,7 +408,14 @@ var config = {
     autoCenter: true,
     //looks like
     //it initializes all the sceneobjects, only calls create and whatnot if active is true (true by default for first sceneobject)
-    scene: [ Preloader, Splash, MainMenu, LevelSelect, Controls, Help, InGame, Paused]
+    scene: [ Preloader, Splash, MainMenu, LevelSelect, Controls, Help, InGame, Paused],
+    //physics options
+    physics: {
+        default: "arcade",
+        arcade: {
+            gravity: {y: 0} //no gravityy
+        }
+    }
 };
 
 var game = new Phaser.Game(config);
