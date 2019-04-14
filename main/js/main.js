@@ -233,7 +233,7 @@ var Paused = new Phaser.Class({
 var config = {
     type: Phaser.AUTO,
     width: 800,
-    height: 600,
+    height: 500,
     backgroundColor: '#000000',
     parent: 'phaser-example',
     scene: [ Preloader, Splash, MainMenu, LevelSelect, Controls, Help, InGame, Paused]

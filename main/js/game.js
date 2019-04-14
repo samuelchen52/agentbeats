@@ -1,32 +1,25 @@
-// create a new scene named "Game"
-let gameScene = new Phaser.Scene('Game');
-// load asset files for our game
-gameScene.preload = function() {
-
-    this.load.image('background','assets/sci_fi_bg1.jpg');
-
-};
-
-//executed once, after assets were loaded
-
-gameScene.create = function(){
-    let bg = this.add.sprite(0,0,'background');
-    bg.setScale(0.5);
-    //change origin to the top-left of the sprite
-    //default origin is the center
-    bg.setOrigin(0,0);
-
-}
-
-//our game's configuration
-let config = {
-    type: Phaser.AUTO,
-    width: 800,
-    height: 600,
-    scene: gameScene
-};
-
-
-//create the game and pass it to the configuration
-let game = new Phaser.Game(config);
-
+const config = {
+    type: Phaser.AUTO, // Which renderer to use
+    width: 800, // Canvas width in pixels
+    height: 600, // Canvas height in pixels
+    parent: "game-container", // ID of the DOM element to add the canvas to
+    scene: {
+      preload: preload,
+      create: create,
+      update: update
+    }
+  };
+  
+  const game = new Phaser.Game(config);
+  
+  function preload() {
+    // Runs once, loads up assets like images and audio
+  }
+  
+  function create() {
+    // Runs once, after all assets in preload are loaded
+  }
+  
+  function update(time, delta) {
+    // Runs once per frame for the duration of the scene
+  }
