@@ -87,9 +87,6 @@ var MainMenu = new Phaser.Class({
             fontSize: 30,
         }).setOrigin().setInteractive().key = 1;
         
-        console.log(something);
-
-
         this.add.text( this.game.renderer.width / 2 - 50, this.game.renderer.height / 2 + 150, '- HELP', {
             fontFamily: 'neonabsolute',
             fontSize: 30,
@@ -356,7 +353,7 @@ var InGame = new Phaser.Class({
         });
         camera.setBounds(0,0, level1.widthInPixels, level1.heightInPixels);
 
-        var pauseButton = this.add.image(this.game.renderer.width - 50, 50, 'pausebutton').setInteractive();
+        var pauseButton = this.add.image(this.game.renderer.width - 50, 50, 'pausebutton').setInteractive().setScrollFactor(0);
 
         pauseButton.on('pointerover', function () {
 
@@ -406,13 +403,59 @@ var Paused = new Phaser.Class({
     create: function ()
     {
         this.add.image(0, 0, 'paused').setOrigin(0);
+     
+        var something = this.add.text( this.game.renderer.width / 2, this.game.renderer.height / 2 - 50, 'RESTART LEVEL', {
+            fontFamily: 'neonabsolute',
+            fontSize: 30,
+        }).setOrigin().setInteractive().key = 1;
+        
+        this.add.text( this.game.renderer.width / 2 - 13, this.game.renderer.height / 2 , 'LEVEL SELECT', {
+            fontFamily: 'neonabsolute',
+            fontSize: 30,
+        }).setOrigin().setInteractive().key = 2;
 
-        this.input.once('pointerdown', function () {
+        this.add.text( this.game.renderer.width / 2 - 68, this.game.renderer.height / 2 + 50, 'RESUME', {
+            fontFamily: 'neonabsolute',
+            fontSize: 30,
+        }).setOrigin().setInteractive().key = 3;
 
-            this.scene.stop('ingame');
-            this.scene.start('levelselect');
+        this.input.on('gameobjectover', function (pointer, gameObject) {
+
+            gameObject.setTint(0xff0000, 0xff0000, 0xffff00, 0xff00ff);
+    
+        });
+    
+        this.input.on('gameobjectout', function (pointer, gameObject) {
+    
+            gameObject.clearTint();
+    
+        });
+
+        this.input.on('gameobjectdown', function (pointer, gameObject) {
+
             
-        }, this);
+            switch(gameObject.key)
+            {
+                case 1: 
+                this.scene.stop('ingame');
+                this.scene.start('ingame');
+                break;
+
+                case 2: 
+                this.scene.stop('ingame');
+                this.scene.start('levelselect');
+                break;
+                
+                case 3: 
+                this.scene.stop('paused');
+                this.scene.resume('ingame');
+                break;
+
+            }
+    
+        }.bind(this));
+
+        
     }
 
 });
