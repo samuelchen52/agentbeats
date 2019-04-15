@@ -360,16 +360,18 @@ var InGame = new Phaser.Class({
         const camera = this.cameras.main;
 
         //set up arrows to control camera
-        const cursors =  this.input.keyboard.createCursorKeys();
-        this.scene.get('ingame').controls = new Phaser.Cameras.Controls.FixedKeyControl({
-            camera: camera,
-            left: cursors.left,
-            right: cursors.right,
-            up: cursors.up,
-            down: cursors.down,
-            speed: 0.8
-        });
+        // const cursors =  this.input.keyboard.createCursorKeys();
+        // this.scene.get('ingame').controls = new Phaser.Cameras.Controls.FixedKeyControl({
+        //     camera: camera,
+        //     left: cursors.left,
+        //     right: cursors.right,
+        //     up: cursors.up,
+        //     down: cursors.down,
+        //     speed: 0.8
+        // });
         camera.setBounds(0,0, level1.widthInPixels, level1.heightInPixels);
+        //camera follows player
+        camera.startFollow(player);
 
         var pauseButton = this.add.image(this.game.renderer.width - 50, 50, 'pausebutton').setInteractive().setScrollFactor(0);
 
@@ -396,7 +398,7 @@ var InGame = new Phaser.Class({
 
     },
     update: function(time, delta){
-        this.scene.get('ingame').controls.update(delta);
+        // this.scene.get('ingame').controls.update(delta);
     }
 
 });
