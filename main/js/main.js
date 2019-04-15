@@ -18,9 +18,10 @@ var Preloader = new Phaser.Class({
         this.load.image('help', './assets/screens/Help.png');
         this.load.image('ingame', './assets/screens/ingame.png');
         this.load.image('paused', './assets/screens/ingamepaused.png'); 
+        this.load.image('pausebutton', './assets/screens/pause.png'); 
         //TILES
-        this.load.image('tileset','./assets/tiles/tileset.png');
-        this.load.tilemapTiledJSON("level1","../assets/tiles/level1.json");
+        this.load.image('tileset','./assets/tilesets/tileset.png');
+        this.load.tilemapTiledJSON('level1','./assets/tilemaps/level1.json');
     },
 
     create: function ()
@@ -328,12 +329,6 @@ var InGame = new Phaser.Class({
         Phaser.Scene.call(this, { key: 'ingame' });
     },
 
-    preload: function ()
-    {
-        //TILES
-        this.load.image('tileset','./assets/tilesets/tileset.png');
-        this.load.tilemapTiledJSON('level1','./assets/tilemaps/level1.json');
-    },
 
     create: function ()
     {
@@ -362,11 +357,27 @@ var InGame = new Phaser.Class({
             speed: 0.8
         });
         camera.setBounds(0,0, level1.widthInPixels, level1.heightInPixels);
-        this.input.once('pointerdown', function () {
+
+        var pauseButton = this.add.image(this.game.renderer.width - 50, 50, 'pausebutton').setInteractive();
+
+        pauseButton.on('pointerover', function () {
+
+            this.setTintFill();
+        });
+
+        pauseButton.on('pointerout', function () {
+
+            this.clearTint();
+        });
+
+        pauseButton.on('pointerdown', function () {
 
             this.scene.start('paused');
 
-        }, this);
+    
+        }.bind(this));
+
+
     },
     update: function(time, delta){
         controls.update(delta);
