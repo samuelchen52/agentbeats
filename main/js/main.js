@@ -304,8 +304,6 @@ var Help = new Phaser.Class({
         back.on('pointerout', function () {
 
             this.clearTint();
-
-    
         });
 
         back.on('pointerdown', function () {
@@ -362,6 +360,7 @@ var InGame = new Phaser.Class({
 
         pauseButton.on('pointerover', function () {
 
+            //setTint() doesnt work for some reason idk
             this.setTintFill();
         });
 
@@ -372,7 +371,10 @@ var InGame = new Phaser.Class({
 
         pauseButton.on('pointerdown', function () {
 
-            this.scene.start('paused');
+            //pause itself
+            this.scene.pause('ingame');
+            //launch paused screen
+            this.scene.launch('paused');
 
     
         }.bind(this));
@@ -407,8 +409,9 @@ var Paused = new Phaser.Class({
 
         this.input.once('pointerdown', function () {
 
-            this.scene.start('splash');
-
+            this.scene.stop('ingame');
+            this.scene.start('levelselect');
+            
         }, this);
     }
 
