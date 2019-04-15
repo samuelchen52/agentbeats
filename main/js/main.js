@@ -353,8 +353,6 @@ var InGame = new Phaser.Class({
         });
         camera.setBounds(0,0, level1.widthInPixels, level1.heightInPixels);
 
-        console.log(this.scene.get('ingame').controls);
-
         var pauseButton = this.add.image(this.game.renderer.width - 50, 50, 'pausebutton').setInteractive().setScrollFactor(0);
 
         pauseButton.on('pointerover', function () {
