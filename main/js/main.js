@@ -343,7 +343,7 @@ var InGame = new Phaser.Class({
 
         //set up arrows to control camera
         const cursors =  this.input.keyboard.createCursorKeys();
-        controls = new Phaser.Cameras.Controls.FixedKeyControl({
+        this.scene.get('ingame').controls = new Phaser.Cameras.Controls.FixedKeyControl({
             camera: camera,
             left: cursors.left,
             right: cursors.right,
@@ -352,12 +352,12 @@ var InGame = new Phaser.Class({
             speed: 0.8
         });
         camera.setBounds(0,0, level1.widthInPixels, level1.heightInPixels);
-        console.log(camera);
+
+        console.log(this.scene.get('ingame').controls);
 
         var pauseButton = this.add.image(this.game.renderer.width - 50, 50, 'pausebutton').setInteractive().setScrollFactor(0);
 
         pauseButton.on('pointerover', function () {
-
             //setTint() doesnt work for some reason idk
             this.setTintFill();
         });
@@ -380,7 +380,7 @@ var InGame = new Phaser.Class({
 
     },
     update: function(time, delta){
-        controls.update(delta);
+        this.scene.get('ingame').controls.update(delta);
     }
 
 });
@@ -449,6 +449,11 @@ var Paused = new Phaser.Class({
                 
                 case 3: 
                 this.scene.stop('paused');
+                //release the keys, just in case player was holding down the cursors as he paused the game
+                this.scene.get('ingame').controls.left.isDown = false;
+                this.scene.get('ingame').controls.right.isDown = false;
+                this.scene.get('ingame').controls.up.isDown = false;
+                this.scene.get('ingame').controls.down.isDown = false;
                 this.scene.resume('ingame');
                 break;
 
