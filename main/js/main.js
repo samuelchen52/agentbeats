@@ -22,6 +22,11 @@ var Preloader = new Phaser.Class({
         //TILES
         this.load.image('tileset','./assets/tilesets/tileset.png');
         this.load.tilemapTiledJSON('level1','./assets/tilemaps/level1.json');
+
+        //SPRITESHEETS
+        this.load.spritesheet('agent','/assets/sprites/agentsprite.png',
+        {frameWidth: 64, frameHeight: 64}
+        );
     },
 
     create: function ()
@@ -337,8 +342,21 @@ var InGame = new Phaser.Class({
         const blockedLayer = level1.createStaticLayer('blockedLayer',tileset);
         //set collision of blocked layer
         //blockedLayer.setCollisionByProperty({collides: true});
-        
-        
+        //spawn point of player from tiled
+        const spawnPoint = level1.findObject("objectsLayer",obj => obj.name ==="Spawn Point");
+        player = this.physics.add.sprite(spawnPoint.x,spawnPoint.y,'agent');
+
+        //create animations for the sprites
+        this.anims.create({
+            key: 'idle',
+            frames: this.anims.generateFrameNumbers('agent',{start:0, end: 1}),
+            frameRate: 7,
+            //repeat -1 means loop
+            repeat: -1
+        });
+
+        //play animations
+        player.anims.play('idle',true);
         const camera = this.cameras.main;
 
         //set up arrows to control camera
