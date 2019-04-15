@@ -334,7 +334,7 @@ var InGame = new Phaser.Class({
         const tileset = level1.addTilesetImage('tileset');
         //make the layer(s) from tileset
         const backgroundLayer = level1.createStaticLayer('backgroundLayer',tileset);
-
+        const blockedLayer = level1.createStaticLayer('blockedLayer',tileset);
         //set collision of blocked layer
         //blockedLayer.setCollisionByProperty({collides: true});
         
@@ -352,6 +352,7 @@ var InGame = new Phaser.Class({
             speed: 0.8
         });
         camera.setBounds(0,0, level1.widthInPixels, level1.heightInPixels);
+        console.log(camera);
 
         var pauseButton = this.add.image(this.game.renderer.width - 50, 50, 'pausebutton').setInteractive().setScrollFactor(0);
 
