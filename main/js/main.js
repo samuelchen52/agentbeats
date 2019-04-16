@@ -21,6 +21,7 @@ var Preloader = new Phaser.Class({
         this.load.image('pausebutton', './assets/screens/pause.png'); 
         //TILES
         this.load.image('tileset','./assets/tilesets/tileset.png');
+        this.load.image('objects','./assets/sprites/agentsprite.png');
         this.load.tilemapTiledJSON('level1','./assets/tilemaps/level1.json');
 
         //SPRITESHEETS
@@ -337,9 +338,11 @@ var InGame = new Phaser.Class({
         const level1 = this.add.tilemap('level1');
         //add the tileset
         const tileset = level1.addTilesetImage('tileset');
+        const objects = level1.addTilesetImage('agentsprite', 'objects');
         //make the layer(s) from tileset
         const backgroundLayer = level1.createStaticLayer('backgroundLayer',tileset);
         const blockedLayer = level1.createStaticLayer('blockedLayer',tileset);
+        const trapsLayer = level1.createDynamicLayer('trapsLayer',objects);
         //set collision of blocked layer
         //blockedLayer.setCollisionByProperty({collides: true});
         //spawn point of player from tiled
