@@ -347,7 +347,9 @@ var InGame = new Phaser.Class({
         this.blockedLayer = level1.createStaticLayer('blockedLayer',tileset);
         this.trapsLayer = level1.createDynamicLayer('trapsLayer',objects);
         this.dynamicTrapLayer = level1.createDynamicLayer('dynamicTrapLayer',objects);
+        this.spikeLayer = level1.createDynamicLayer('spikeLayer',objects);
         this.dynamicTrapLayer.setVisible(false);
+        this.spikeLayer.setVisible(false);
         //set collision of blocked layer
         //blockedLayer.setCollisionByProperty({collides: true});
 
@@ -461,9 +463,19 @@ var InGame = new Phaser.Class({
 
     
         }.bind(this));
+        //SPIKES
+        this.SpikeEvent = this.time.addEvent({delay:1000, callback: fireSpikes, callbackScope: this, loop: true});
+        function fireSpikes(){
+            const sl = this.spikeLayer;
+            sl.setVisible(true);
+            setTimeout(function(){
+                sl.setVisible(false);
+            }, 500);
+        }
+        //LASERS
         this.LaserEvent = this.time.addEvent({delay: 2000, callback: fireLasers, callbackScope: this, loop: true });
         function fireLasers(){
-            console.log('fired');
+
             const dtl = this.dynamicTrapLayer;
             this.dynamicTrapLayer.setVisible(true);
             setTimeout(function(){
