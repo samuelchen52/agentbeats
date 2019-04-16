@@ -28,6 +28,9 @@ var Preloader = new Phaser.Class({
         this.load.spritesheet('agent','/assets/sprites/agentsprite.png',
         {frameWidth: 64, frameHeight: 64}
         );
+
+        //SOUNDS
+        this.load.audio("level1audio", 'assets/sounds/level1.mp3');
     },
 
     create: function ()
@@ -345,6 +348,11 @@ var InGame = new Phaser.Class({
         const trapsLayer = level1.createDynamicLayer('trapsLayer',objects);
         //set collision of blocked layer
         //blockedLayer.setCollisionByProperty({collides: true});
+
+        //music
+        music = this.sound.add('level1audio',1);
+        music.play();
+
         //spawn point of player from tiled
         const spawnPoint = level1.findObject("objectsLayer",obj => obj.name ==="Spawn Point");
         this.player = this.physics.add.sprite(spawnPoint.x,spawnPoint.y,'agent');
@@ -362,10 +370,44 @@ var InGame = new Phaser.Class({
         this.player.anims.play('idle',true);
 
         //set up key input
-        UpKey = this.input.keyboard.addKey(38);
-        DownKey = this.input.keyboard.addKey(40);
-        LeftKey = this.input.keyboard.addKey(37);
-        RightKey = this.input.keyboard.addKey(39);
+
+        var callback = function (event) { 
+            switch (event.keyCode)
+            {
+                case 37:
+                this.player.x -= 64;
+                break;
+
+                case 38:
+                this.player.y -= 64;
+                break;
+
+                case 39:
+                this.player.x += 64;
+                break;
+
+                case 40:
+                this.player.y += 64;
+                break;
+
+                default:
+                window.alert("this shouldnt happen");
+
+            }
+        }.bind(this);
+
+        this.input.keyboard.addKey(37);
+        this.input.keyboard.addKey(38);
+        this.input.keyboard.addKey(39);
+        this.input.keyboard.addKey(40);
+
+        this.input.keyboard.on('keydown-LEFT', callback);
+        this.input.keyboard.on('keydown-RIGHT', callback);
+        this.input.keyboard.on('keydown-UP', callback);
+        this.input.keyboard.on('keydown-DOWN', callback);
+
+        
+    
 
         const camera = this.cameras.main;
 
@@ -399,6 +441,7 @@ var InGame = new Phaser.Class({
 
             //pause itself
             this.scene.pause('ingame');
+            music.pause();
             //launch paused screen
             this.scene.launch('paused');
 
@@ -410,23 +453,6 @@ var InGame = new Phaser.Class({
     update: function(time, delta){
         // this.scene.get('ingame').controls.update(delta);
 
-        //update player position
-        if (UpKey.isDown)
-        {
-            this.player.y -= 64;
-        }
-        else if (DownKey.isDown)
-        {
-            this.player.y += 64;
-        }
-        else if (RightKey.isDown)
-        {
-            this.player.x += 64;
-        }
-        else if (LeftKey.isDown)
-        {
-            this.player.x -= 64;
-        }
     }
 
 });
@@ -486,11 +512,13 @@ var Paused = new Phaser.Class({
                 case 1: 
                 this.scene.stop('ingame');
                 this.scene.start('ingame');
+                music.stop();
                 break;
 
                 case 2: 
                 this.scene.stop('ingame');
                 this.scene.start('levelselect');
+                music.stop();
                 break;
                 
                 case 3: 
@@ -500,6 +528,7 @@ var Paused = new Phaser.Class({
                 // this.scene.get('ingame').controls.right.isDown = false;
                 // this.scene.get('ingame').controls.up.isDown = false;
                 // this.scene.get('ingame').controls.down.isDown = false;
+                music.resume();
                 this.scene.resume('ingame');
                 break;
 
