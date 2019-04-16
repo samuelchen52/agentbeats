@@ -25,12 +25,12 @@ var Preloader = new Phaser.Class({
         this.load.tilemapTiledJSON('level1','./assets/tilemaps/level1.json');
 
         //SPRITESHEETS
-        this.load.spritesheet('agent','/assets/sprites/agentsprite.png',
+        this.load.spritesheet('agent','./assets/sprites/agentsprite.png',
         {frameWidth: 64, frameHeight: 64}
         );
 
         //SOUNDS
-        this.load.audio("level1audio", 'assets/sounds/level1.mp3');
+        this.load.audio("level1audio", './assets/sounds/level1.mp3');
     },
 
     create: function ()
