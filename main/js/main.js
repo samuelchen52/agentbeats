@@ -345,14 +345,15 @@ var InGame = new Phaser.Class({
         const blockedLayer = level1.createStaticLayer('blockedLayer',tileset);
         //set collision of blocked layer
         //blockedLayer.setCollisionByProperty({collides: true});
-        //spawn point of player from tiled
-        const spawnPoint = level1.findObject("objectsLayer",obj => obj.name ==="Spawn Point");
-        player = this.physics.add.sprite(spawnPoint.x,spawnPoint.y,'agent');
 
+        //music
         music = this.sound.add('level1audio',1);
         music.play();
 
-
+        //spawn point of player from tiled
+        const spawnPoint = level1.findObject("objectsLayer",obj => obj.name ==="Spawn Point");
+        this.player = this.physics.add.sprite(spawnPoint.x,spawnPoint.y,'agent');
+    
         //create animations for the sprites
         this.anims.create({
             key: 'idle',
@@ -363,7 +364,14 @@ var InGame = new Phaser.Class({
         });
 
         //play animations
-        player.anims.play('idle',true);
+        this.player.anims.play('idle',true);
+
+        //set up key input
+        UpKey = this.input.keyboard.addKey(38);
+        DownKey = this.input.keyboard.addKey(40);
+        LeftKey = this.input.keyboard.addKey(37);
+        RightKey = this.input.keyboard.addKey(39);
+
         const camera = this.cameras.main;
 
         //set up arrows to control camera
@@ -378,7 +386,7 @@ var InGame = new Phaser.Class({
         // });
         camera.setBounds(0,0, level1.widthInPixels, level1.heightInPixels);
         //camera follows player
-        camera.startFollow(player);
+        camera.startFollow(this.player);
 
         var pauseButton = this.add.image(this.game.renderer.width - 50, 50, 'pausebutton').setInteractive().setScrollFactor(0);
 
@@ -407,6 +415,24 @@ var InGame = new Phaser.Class({
     },
     update: function(time, delta){
         // this.scene.get('ingame').controls.update(delta);
+
+        //update player position
+        if (UpKey.isDown)
+        {
+            this.player.y -= 64;
+        }
+        else if (DownKey.isDown)
+        {
+            this.player.y += 64;
+        }
+        else if (RightKey.isDown)
+        {
+            this.player.x += 64;
+        }
+        else if (LeftKey.isDown)
+        {
+            this.player.x -= 64;
+        }
     }
 
 });
