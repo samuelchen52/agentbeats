@@ -359,6 +359,10 @@ var InGame = new Phaser.Class({
 
         //spawn point of player from tiled
         const spawnPoint = level1.findObject("objectsLayer",obj => obj.name ==="Spawn Point");
+        const winCoord = level1.findObject("objectsLayer",obj =>obj.name ==="Goal Point");
+        const winTile = backgroundLayer.getTileAtWorldXY(winCoord.x,winCoord.y);
+        winTile.win = true;
+        console.log(winTile);
         this.player = this.physics.add.sprite(spawnPoint.x,spawnPoint.y,'agent');
     
         //create animations for the sprites
