@@ -343,9 +343,9 @@ var InGame = new Phaser.Class({
         const tileset = level1.addTilesetImage('tileset');
         const objects = level1.addTilesetImage('agentsprite', 'objects');
         //make the layer(s) from tileset
-         this.backgroundLayer = level1.createStaticLayer('backgroundLayer',tileset);
-        const blockedLayer = level1.createStaticLayer('blockedLayer',tileset);
-        const trapsLayer = level1.createDynamicLayer('trapsLayer',objects);
+        this.backgroundLayer = level1.createStaticLayer('backgroundLayer',tileset);
+        this.blockedLayer = level1.createStaticLayer('blockedLayer',tileset);
+        this.trapsLayer = level1.createDynamicLayer('trapsLayer',objects);
         //set collision of blocked layer
         //blockedLayer.setCollisionByProperty({collides: true});
 
@@ -459,14 +459,17 @@ var InGame = new Phaser.Class({
 
     
         }.bind(this));
+        this.LaserEvent = this.time.addEvent({delay: 2000, callback: fireLasers, callbackScope: this, loop: true });
 
-
+        function fireLasers(){
+            console.log('fired');
+            this.trapsLayer.putTileAt(1, 10, 14);
+        }
     },
     update: function(time, delta){
         // this.scene.get('ingame').controls.update(delta);
 
-    }
-
+    },
 });
 
 var Paused = new Phaser.Class({
