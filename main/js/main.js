@@ -344,7 +344,7 @@ var InGame = new Phaser.Class({
         //blockedLayer.setCollisionByProperty({collides: true});
         //spawn point of player from tiled
         const spawnPoint = level1.findObject("objectsLayer",obj => obj.name ==="Spawn Point");
-        player = this.physics.add.sprite(spawnPoint.x,spawnPoint.y,'agent');
+        const player = this.physics.add.sprite(spawnPoint.x,spawnPoint.y,'agent');
 
         //create animations for the sprites
         this.anims.create({
@@ -468,10 +468,10 @@ var Paused = new Phaser.Class({
                 case 3: 
                 this.scene.stop('paused');
                 //release the keys, just in case player was holding down the cursors as he paused the game
-                this.scene.get('ingame').controls.left.isDown = false;
-                this.scene.get('ingame').controls.right.isDown = false;
-                this.scene.get('ingame').controls.up.isDown = false;
-                this.scene.get('ingame').controls.down.isDown = false;
+                // this.scene.get('ingame').controls.left.isDown = false;
+                // this.scene.get('ingame').controls.right.isDown = false;
+                // this.scene.get('ingame').controls.up.isDown = false;
+                // this.scene.get('ingame').controls.down.isDown = false;
                 this.scene.resume('ingame');
                 break;
 

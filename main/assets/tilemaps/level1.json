@@ -53,6 +53,18 @@
                  "width":0,
                  "x":93,
                  "y":990
+                }, 
+                {
+                 "height":0,
+                 "id":2,
+                 "name":"Laser1",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":545,
+                 "y":737
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -61,7 +73,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":2,
+ "nextobjectid":3,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.3",
