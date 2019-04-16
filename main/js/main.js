@@ -27,6 +27,9 @@ var Preloader = new Phaser.Class({
         this.load.spritesheet('agent','/assets/sprites/agentsprite.png',
         {frameWidth: 64, frameHeight: 64}
         );
+
+        //SOUNDS
+        this.load.audio("level1audio", 'assets/sounds/level1.mp3');
     },
 
     create: function ()
@@ -342,6 +345,11 @@ var InGame = new Phaser.Class({
         const blockedLayer = level1.createStaticLayer('blockedLayer',tileset);
         //set collision of blocked layer
         //blockedLayer.setCollisionByProperty({collides: true});
+
+        //music
+        music = this.sound.add('level1audio',1);
+        music.play();
+
         //spawn point of player from tiled
         const spawnPoint = level1.findObject("objectsLayer",obj => obj.name ==="Spawn Point");
         this.player = this.physics.add.sprite(spawnPoint.x,spawnPoint.y,'agent');
@@ -430,6 +438,7 @@ var InGame = new Phaser.Class({
 
             //pause itself
             this.scene.pause('ingame');
+            music.pause();
             //launch paused screen
             this.scene.launch('paused');
 
@@ -500,11 +509,13 @@ var Paused = new Phaser.Class({
                 case 1: 
                 this.scene.stop('ingame');
                 this.scene.start('ingame');
+                music.stop();
                 break;
 
                 case 2: 
                 this.scene.stop('ingame');
                 this.scene.start('levelselect');
+                music.stop();
                 break;
                 
                 case 3: 
@@ -514,6 +525,7 @@ var Paused = new Phaser.Class({
                 // this.scene.get('ingame').controls.right.isDown = false;
                 // this.scene.get('ingame').controls.up.isDown = false;
                 // this.scene.get('ingame').controls.down.isDown = false;
+                music.resume();
                 this.scene.resume('ingame');
                 break;
 
