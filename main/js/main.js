@@ -358,11 +358,12 @@ var InGame = new Phaser.Class({
         music.play();
 
         //spawn point of player from tiled
-        const spawnPoint = level1.findObject("objectsLayer",obj => obj.name ==="Spawn Point");
+        this.spawnPoint = level1.findObject("objectsLayer",obj => obj.name ==="Spawn Point");
         const winCoord = level1.findObject("objectsLayer",obj =>obj.name ==="Goal Point");
         const winTile = backgroundLayer.getTileAtWorldXY(winCoord.x,winCoord.y);
         winTile.win = true;
         console.log(winTile);
+
         this.player = this.physics.add.sprite(spawnPoint.x,spawnPoint.y,'agent');
     
         //create animations for the sprites
@@ -414,6 +415,18 @@ var InGame = new Phaser.Class({
                 window.alert("this shouldnt happen");
 
             }
+            if (this.dynamicTrapLayer.visible && this.dynamicTrapLayer.getTileAtWorldXY(this.player.x, this.player.y) !== null )
+            {
+                this.player.destroy();
+                this.player = this.physics.add.sprite(spawnPoint.x,spawnPoint.y,'agent');
+                camera.startFollow(this.player);
+            }
+            if (this.spikeLayer.visible && this.spikeLayer.getTileAtWorldXY(this.player.x, this.player.y) !== null )
+            {
+                this.player.destroy();
+                this.player = this.physics.add.sprite(spawnPoint.x,spawnPoint.y,'agent');
+                camera.startFollow(this.player);
+            }
         }.bind(this);
 
         this.input.keyboard.addKey(37);
@@ -430,6 +443,7 @@ var InGame = new Phaser.Class({
     
 
         const camera = this.cameras.main;
+        this.camera = camera;
 
         //set up arrows to control camera
         // const cursors =  this.input.keyboard.createCursorKeys();
@@ -489,7 +503,18 @@ var InGame = new Phaser.Class({
     },
     update: function(time, delta){
         // this.scene.get('ingame').controls.update(delta);
-
+        if (this.dynamicTrapLayer.visible && this.dynamicTrapLayer.getTileAtWorldXY(this.player.x, this.player.y) !== null )
+        {
+            this.player.destroy();
+            this.player = this.physics.add.sprite(this.spawnPoint.x,this.spawnPoint.y,'agent');
+            this.camera.startFollow(this.player);
+        }
+        if (this.spikeLayer.visible && this.spikeLayer.getTileAtWorldXY(this.player.x, this.player.y) !== null )
+        {
+            this.player.destroy();
+            this.player = this.physics.add.sprite(this.spawnPoint.x,this.spawnPoint.y,'agent');
+            this.camera.startFollow(this.player);
+        }
     }
 
 });
@@ -572,7 +597,7 @@ var Paused = new Phaser.Class({
             }
     
         }.bind(this));
-
+        
         
     }
 
