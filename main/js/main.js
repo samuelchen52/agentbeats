@@ -359,10 +359,44 @@ var InGame = new Phaser.Class({
         this.player.anims.play('idle',true);
 
         //set up key input
-        UpKey = this.input.keyboard.addKey(38);
-        DownKey = this.input.keyboard.addKey(40);
-        LeftKey = this.input.keyboard.addKey(37);
-        RightKey = this.input.keyboard.addKey(39);
+
+        var callback = function (event) { 
+            switch (event.keyCode)
+            {
+                case 37:
+                this.player.x -= 64;
+                break;
+
+                case 38:
+                this.player.y -= 64;
+                break;
+
+                case 39:
+                this.player.x += 64;
+                break;
+
+                case 40:
+                this.player.y += 64;
+                break;
+
+                default:
+                window.alert("this shouldnt happen");
+
+            }
+        }.bind(this);
+
+        this.input.keyboard.addKey(37);
+        this.input.keyboard.addKey(38);
+        this.input.keyboard.addKey(39);
+        this.input.keyboard.addKey(40);
+
+        this.input.keyboard.on('keydown-LEFT', callback);
+        this.input.keyboard.on('keydown-RIGHT', callback);
+        this.input.keyboard.on('keydown-UP', callback);
+        this.input.keyboard.on('keydown-DOWN', callback);
+
+        
+    
 
         const camera = this.cameras.main;
 
@@ -407,23 +441,6 @@ var InGame = new Phaser.Class({
     update: function(time, delta){
         // this.scene.get('ingame').controls.update(delta);
 
-        //update player position
-        if (UpKey.isDown)
-        {
-            this.player.y -= 64;
-        }
-        else if (DownKey.isDown)
-        {
-            this.player.y += 64;
-        }
-        else if (RightKey.isDown)
-        {
-            this.player.x += 64;
-        }
-        else if (LeftKey.isDown)
-        {
-            this.player.x -= 64;
-        }
     }
 
 });
