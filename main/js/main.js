@@ -343,7 +343,7 @@ var InGame = new Phaser.Class({
         const tileset = level1.addTilesetImage('tileset');
         const objects = level1.addTilesetImage('agentsprite', 'objects');
         //make the layer(s) from tileset
-        const backgroundLayer = level1.createStaticLayer('backgroundLayer',tileset);
+         this.backgroundLayer = level1.createStaticLayer('backgroundLayer',tileset);
         const blockedLayer = level1.createStaticLayer('blockedLayer',tileset);
         const trapsLayer = level1.createDynamicLayer('trapsLayer',objects);
         //set collision of blocked layer
