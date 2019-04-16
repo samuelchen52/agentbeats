@@ -351,6 +351,7 @@ var InGame = new Phaser.Class({
 
         //music
         music = this.sound.add('level1audio',1);
+        console.log(music);
         music.play();
 
         //spawn point of player from tiled
