@@ -354,7 +354,7 @@ var InGame = new Phaser.Class({
         //blockedLayer.setCollisionByProperty({collides: true});
 
         //music
-        music = this.sound.add('level1audio',1);
+        music = this.sound.add('level1audio',1,true);
         music.play();
 
         //spawn point of player from tiled
