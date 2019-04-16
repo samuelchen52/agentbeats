@@ -342,7 +342,7 @@ var InGame = new Phaser.Class({
         const tileset = level1.addTilesetImage('tileset');
         //make the layer(s) from tileset
         const backgroundLayer = level1.createStaticLayer('backgroundLayer',tileset);
-        const blockedLayer = level1.createStaticLayer('blockedLayer',tileset);
+        this.blockedLayer = level1.createStaticLayer('blockedLayer',tileset);
         //set collision of blocked layer
         //blockedLayer.setCollisionByProperty({collides: true});
 
@@ -372,19 +372,31 @@ var InGame = new Phaser.Class({
             switch (event.keyCode)
             {
                 case 37:
+                if (this.blockedLayer.getTileAt(this.player.x - 64 + camera.x, this.player.y + camera.y) === null)
+                {
                 this.player.x -= 64;
+                }
                 break;
 
                 case 38:
+                if (this.blockedLayer.getTileAt(this.player.x+ camera.x, this.player.y - 64 + camera.y) === null)
+                {
                 this.player.y -= 64;
+                }
                 break;
 
                 case 39:
+                if (this.blockedLayer.getTileAt(this.player.x + 64 + camera.x, this.player.y + camera.y) === null)
+                {
                 this.player.x += 64;
+                }
                 break;
 
                 case 40:
+                if (this.blockedLayer.getTileAt(this.player.x+ camera.x, this.player.y + 64 + camera.y) === null)
+                {
                 this.player.y += 64;
+                }
                 break;
 
                 default:
