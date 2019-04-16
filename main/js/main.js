@@ -344,8 +344,8 @@ var InGame = new Phaser.Class({
         //blockedLayer.setCollisionByProperty({collides: true});
         //spawn point of player from tiled
         const spawnPoint = level1.findObject("objectsLayer",obj => obj.name ==="Spawn Point");
-        player = this.physics.add.sprite(spawnPoint.x,spawnPoint.y,'agent');
-
+        this.player = this.physics.add.sprite(spawnPoint.x,spawnPoint.y,'agent');
+    
         //create animations for the sprites
         this.anims.create({
             key: 'idle',
@@ -356,7 +356,14 @@ var InGame = new Phaser.Class({
         });
 
         //play animations
-        player.anims.play('idle',true);
+        this.player.anims.play('idle',true);
+
+        //set up key input
+        UpKey = this.input.keyboard.addKey(38);
+        DownKey = this.input.keyboard.addKey(40);
+        LeftKey = this.input.keyboard.addKey(37);
+        RightKey = this.input.keyboard.addKey(39);
+
         const camera = this.cameras.main;
 
         //set up arrows to control camera
@@ -371,7 +378,7 @@ var InGame = new Phaser.Class({
         // });
         camera.setBounds(0,0, level1.widthInPixels, level1.heightInPixels);
         //camera follows player
-        camera.startFollow(player);
+        camera.startFollow(this.player);
 
         var pauseButton = this.add.image(this.game.renderer.width - 50, 50, 'pausebutton').setInteractive().setScrollFactor(0);
 
@@ -399,6 +406,24 @@ var InGame = new Phaser.Class({
     },
     update: function(time, delta){
         // this.scene.get('ingame').controls.update(delta);
+
+        //update player position
+        if (UpKey.isDown)
+        {
+            this.player.y -= 64;
+        }
+        else if (DownKey.isDown)
+        {
+            this.player.y += 64;
+        }
+        else if (RightKey.isDown)
+        {
+            this.player.x += 64;
+        }
+        else if (LeftKey.isDown)
+        {
+            this.player.x -= 64;
+        }
     }
 
 });
@@ -468,10 +493,10 @@ var Paused = new Phaser.Class({
                 case 3: 
                 this.scene.stop('paused');
                 //release the keys, just in case player was holding down the cursors as he paused the game
-                this.scene.get('ingame').controls.left.isDown = false;
-                this.scene.get('ingame').controls.right.isDown = false;
-                this.scene.get('ingame').controls.up.isDown = false;
-                this.scene.get('ingame').controls.down.isDown = false;
+                // this.scene.get('ingame').controls.left.isDown = false;
+                // this.scene.get('ingame').controls.right.isDown = false;
+                // this.scene.get('ingame').controls.up.isDown = false;
+                // this.scene.get('ingame').controls.down.isDown = false;
                 this.scene.resume('ingame');
                 break;
 
