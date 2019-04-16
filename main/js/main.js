@@ -343,7 +343,7 @@ var InGame = new Phaser.Class({
         const tileset = level1.addTilesetImage('tileset');
         const objects = level1.addTilesetImage('agentsprite', 'objects');
         //make the layer(s) from tileset
-        this.backgroundLayer = level1.createStaticLayer('backgroundLayer',tileset);
+        const backgroundLayer = level1.createStaticLayer('backgroundLayer',tileset);
         this.blockedLayer = level1.createStaticLayer('blockedLayer',tileset);
         this.trapsLayer = level1.createDynamicLayer('trapsLayer',objects);
         this.dynamicTrapLayer = level1.createDynamicLayer('dynamicTrapLayer',objects);
@@ -486,7 +486,8 @@ var InGame = new Phaser.Class({
     update: function(time, delta){
         // this.scene.get('ingame').controls.update(delta);
 
-    },
+    }
+
 });
 
 var Paused = new Phaser.Class({
