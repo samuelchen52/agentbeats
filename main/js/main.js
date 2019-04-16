@@ -27,6 +27,9 @@ var Preloader = new Phaser.Class({
         this.load.spritesheet('agent','/assets/sprites/agentsprite.png',
         {frameWidth: 64, frameHeight: 64}
         );
+
+        //SOUNDS
+        this.load.audio("level1audio", 'assets/sounds/level1.mp3');
     },
 
     create: function ()
@@ -346,6 +349,10 @@ var InGame = new Phaser.Class({
         const spawnPoint = level1.findObject("objectsLayer",obj => obj.name ==="Spawn Point");
         player = this.physics.add.sprite(spawnPoint.x,spawnPoint.y,'agent');
 
+        music = this.sound.add('level1audio',1);
+        music.play();
+
+
         //create animations for the sprites
         this.anims.create({
             key: 'idle',
@@ -389,6 +396,7 @@ var InGame = new Phaser.Class({
 
             //pause itself
             this.scene.pause('ingame');
+            music.pause();
             //launch paused screen
             this.scene.launch('paused');
 
@@ -458,20 +466,23 @@ var Paused = new Phaser.Class({
                 case 1: 
                 this.scene.stop('ingame');
                 this.scene.start('ingame');
+                music.stop();
                 break;
 
                 case 2: 
                 this.scene.stop('ingame');
                 this.scene.start('levelselect');
+                music.stop();
                 break;
                 
                 case 3: 
                 this.scene.stop('paused');
                 //release the keys, just in case player was holding down the cursors as he paused the game
-                this.scene.get('ingame').controls.left.isDown = false;
-                this.scene.get('ingame').controls.right.isDown = false;
-                this.scene.get('ingame').controls.up.isDown = false;
-                this.scene.get('ingame').controls.down.isDown = false;
+                // this.scene.get('ingame').controls.left.isDown = false;
+                // this.scene.get('ingame').controls.right.isDown = false;
+                // this.scene.get('ingame').controls.up.isDown = false;
+                // this.scene.get('ingame').controls.down.isDown = false;
+                music.resume();
                 this.scene.resume('ingame');
                 break;
 
