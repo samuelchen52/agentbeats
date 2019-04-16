@@ -364,7 +364,7 @@ var InGame = new Phaser.Class({
         winTile.win = true;
         console.log(winTile);
 
-        this.player = this.physics.add.sprite(spawnPoint.x,spawnPoint.y,'agent');
+        this.player = this.physics.add.sprite(this.spawnPoint.x,this.spawnPoint.y,'agent');
     
         //create animations for the sprites
         this.anims.create({
