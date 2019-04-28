@@ -16,12 +16,13 @@ var InGame = new Phaser.Class({
     {
         //this.add.image(0, 0, 'ingame').setOrigin(0);
         //make our map
-        const level1 = this.add.tilemap('level1');
+        level1 = this.add.tilemap('level1');
+        this.level1 = level1;
         //add the tileset
         const tileset = level1.addTilesetImage('tileset');
         const objects = level1.addTilesetImage('agentsprite', 'objects');
         //make the layer(s) from tileset
-        const backgroundLayer = level1.createStaticLayer('backgroundLayer',tileset);
+        this.backgroundLayer = level1.createDynamicLayer('backgroundLayer',tileset);
         this.blockedLayer = level1.createStaticLayer('blockedLayer',tileset);
         this.trapsLayer = level1.createDynamicLayer('trapsLayer',objects);
         this.dynamicTrapLayer = level1.createDynamicLayer('dynamicTrapLayer',objects);
@@ -39,7 +40,7 @@ var InGame = new Phaser.Class({
         //spawn point of player from tiled
         this.spawnPoint = level1.findObject("objectsLayer",obj => obj.name ==="Spawn Point");
         const winCoord = level1.findObject("objectsLayer",obj =>obj.name ==="Goal Point");
-        const winTile = backgroundLayer.getTileAtWorldXY(winCoord.x,winCoord.y);
+        const winTile = this.backgroundLayer.getTileAtWorldXY(winCoord.x,winCoord.y);
         winTile.win = true;
         console.log(winTile);
 
@@ -97,13 +98,13 @@ var InGame = new Phaser.Class({
             if (this.dynamicTrapLayer.visible && this.dynamicTrapLayer.getTileAtWorldXY(this.player.x, this.player.y) !== null )
             {
                 this.player.destroy();
-                this.player = this.physics.add.sprite(spawnPoint.x,spawnPoint.y,'agent');
+                this.player = this.physics.add.sprite(this.spawnPoint.x, this.spawnPoint.y,'agent');
                 camera.startFollow(this.player);
             }
             if (this.spikeLayer.visible && this.spikeLayer.getTileAtWorldXY(this.player.x, this.player.y) !== null )
             {
                 this.player.destroy();
-                this.player = this.physics.add.sprite(spawnPoint.x,spawnPoint.y,'agent');
+                this.player = this.physics.add.sprite(this.spawnPoint.x, this.spawnPoint.y,'agent');
                 camera.startFollow(this.player);
             }
         }.bind(this);
@@ -194,7 +195,11 @@ var InGame = new Phaser.Class({
             this.player = this.physics.add.sprite(this.spawnPoint.x,this.spawnPoint.y,'agent');
             this.camera.startFollow(this.player);
         }
-    }
+
+        var tile = this.backgroundLayer.getTileAtWorldXY(this.player.x, this.player.y);
+        //console.log(this.backgroundLayer);
+        level1.putTileAt(5 , level1.worldToTileX(this.player.x), level1.worldToTileY(this.player.y), true, this.backgroundLayer);
+        }
 
 });
 
