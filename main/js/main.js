@@ -1,3 +1,10 @@
+class Conductor {
+    constructor(bpm, offset){
+        this.bpm = bpm;
+        this.offset = offset;
+    }
+}
+
 var Preloader = new Phaser.Class({
 
     Extends: Phaser.Scene,
