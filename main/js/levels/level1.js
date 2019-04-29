@@ -37,6 +37,8 @@ var InGame = new Phaser.Class({
         music.setLoop(true);
         music.play();
 
+        var laserSound = this.sound.add('laser',1,true);
+        laserSound.volume = 0.5;
         //spawn point of player from tiled
         this.spawnPoint = level1.findObject("objectsLayer",obj => obj.name ==="Spawn Point");
         const winCoord = level1.findObject("objectsLayer",obj =>obj.name ==="Goal Point");
@@ -176,6 +178,7 @@ var InGame = new Phaser.Class({
 
             const dtl = this.dynamicTrapLayer;
             this.dynamicTrapLayer.setVisible(true);
+            laserSound.play();
             setTimeout(function(){
                 dtl.setVisible(false);
             }, 500);

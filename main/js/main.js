@@ -4,7 +4,15 @@ class Conductor {
         this.offset = offset;
     }
 }
-
+var audioContext;
+function initAudio() {
+    try {
+        audioContext = new(window.AudioContext || window.webkitAudioContext)();
+    } catch(e){
+        console.error(e);
+    }
+}
+window.addEventListener('load',initAudio, false);
 var Preloader = new Phaser.Class({
 
     Extends: Phaser.Scene,
@@ -38,6 +46,7 @@ var Preloader = new Phaser.Class({
 
         //SOUNDS
         this.load.audio("level1audio", './assets/sounds/level1.mp3');
+        this.load.audio("laser", './assets/sounds/laser.mp3');
     },
 
     create: function ()
@@ -430,6 +439,9 @@ var config = {
         arcade: {
             gravity: {y: 0} //no gravityy
         }
+    },
+    audio: {
+        context: audioContext
     }
 };
 
