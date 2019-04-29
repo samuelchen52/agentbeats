@@ -22,7 +22,7 @@ var level2 = new Phaser.Class({
         this.level1 = level1;
         //add the tileset
         const tileset = level1.addTilesetImage('tileset'); //covers indices 1 - 100
-        const spikes = level1.addTilesetImage('spikes', null, 64, 128); //covers indices 101 - 105
+        const spikes = level1.addTilesetImage('spikes'); //covers indices 101 - 105
 
         
         //make the layer(s) from tileset
@@ -34,7 +34,7 @@ var level2 = new Phaser.Class({
         this.spikeTiles = this.findTileset(level1, "spikeObjectLayer");
         this.prepareSpikeTiles(this.spikeTiles);
         this.spikeIndicesArray = [101,102,103,104,105,104,103,102,101];
-        this.spikeEvent = this.time.addEvent({delay: 100, callback: function(){ this.updateSpikeTiles(this.spikeTiles, this.spikeIndicesArray, 105) }.bind(this), callbackScope: this, loop: true });
+        this.spikeEvent = this.time.addEvent({delay: 25, callback: function(){ this.updateSpikeTiles(this.spikeTiles, this.spikeIndicesArray, 105) }.bind(this), callbackScope: this, loop: true });
 
 
 

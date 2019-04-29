@@ -1167,8 +1167,19 @@
                 {
                  "name":"duration",
                  "type":"int",
-                 "value":2
+                 "value":16
                 }],
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":6,
+         "name":"laserObjectLayer",
+         "objects":[],
+         "opacity":1,
          "type":"objectgroup",
          "visible":true,
          "x":0,
@@ -1197,7 +1208,7 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":6,
+ "nextlayerid":7,
  "nextobjectid":161,
  "orientation":"orthogonal",
  "renderorder":"right-down",
