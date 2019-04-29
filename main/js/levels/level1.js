@@ -36,9 +36,7 @@ var level1 = new Phaser.Class({
 
         //music
         music = this.sound.add('level1audio',1,true);
-        music.setLoop(true);
-        music.play();
-
+        music.play('', {delay: 0.3});
         var laserSound = this.sound.add('laser',1,true);
         laserSound.volume = 0.2;
         //spawn point of player from tiled
@@ -170,7 +168,7 @@ var level1 = new Phaser.Class({
     
         }.bind(this));
         //SPIKES
-        this.SpikeEvent = this.time.addEvent({delay:1000, callback: fireSpikes, callbackScope: this, loop: true});
+        this.SpikeEvent = this.time.addEvent({delay:858, callback: fireSpikes, callbackScope: this, loop: true});
         function fireSpikes(){
             const sl = this.spikeLayer;
             sl.setVisible(true);
