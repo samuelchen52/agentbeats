@@ -43,8 +43,6 @@ var level2 = new Phaser.Class({
          music.play('', {delay: 0.3});
          var laserSound = this.sound.add('laser',1,true);
          laserSound.volume = 0.2;
-        var laserSound = this.sound.add('laser',1,true);
-        laserSound.volume = 0.5;
         //spawn point of player from tiled
         this.spawnPoint = level1.findObject("objectsLayer",obj => obj.name ==="Spawn Point");
 
