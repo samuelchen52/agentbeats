@@ -37,7 +37,11 @@ var Preloader = new Phaser.Class({
         //TILES
         this.load.image('tileset','./assets/tilesets/tileset.png');
         this.load.image('agentsprite','./assets/sprites/agentsprite.png');
+        this.load.image('spikes','./assets/sprites/spikes.png');
+        
         this.load.tilemapTiledJSON('level1','./assets/tilemaps/level1.json');
+        this.load.tilemapTiledJSON('level2','./assets/tilemaps/level2.json');
+
 
         //SPRITESHEETS
         this.load.spritesheet('agent','./assets/sprites/agentsprite.png',
