@@ -17,22 +17,22 @@ var level2 = new Phaser.Class({
     {
         //this.add.image(0, 0, 'ingame').setOrigin(0);
         //make our map
-        level1 = this.add.tilemap('level1');
+        level1 = this.add.tilemap('level2');
+        level1.setBaseTileSize(64,64);
         this.level1 = level1;
         //add the tileset
         const tileset = level1.addTilesetImage('tileset'); //covers indices 1 - 100
-        const objects = level1.addTilesetImage('agentsprite'); //covers indices 101 - 200
+        const spikes = level1.addTilesetImage('spikes', null, 64, 128);
+
+        
         //make the layer(s) from tileset
         this.backgroundLayer = level1.createDynamicLayer('backgroundLayer',tileset);
         this.blockedLayer = level1.createStaticLayer('blockedLayer',tileset);
-        this.trapsLayer = level1.createDynamicLayer('trapsLayer',objects);
-        this.dynamicTrapLayer = level1.createDynamicLayer('dynamicTrapLayer',objects);
-        this.spikeLayer = level1.createDynamicLayer('spikeLayer',objects);
+        //spike layer is made on the spot in this code, NOT in tiled;
+        this.spikeLayer = level1.createBlankDynamicLayer('spikeLayer',spikes);
+        this.spikeTiles = this.findTileset(level1, "spikeObjectLayer");
+        this.prepareSpikeTiles(this.spikeTiles);
 
-        this.dynamicTrapLayer.setVisible(false);
-        this.spikeLayer.setVisible(false);
-        //set collision of blocked layer
-        //blockedLayer.setCollisionByProperty({collides: true});
 
         //music
         music = this.sound.add('level1audio',1,true);
@@ -43,9 +43,6 @@ var level2 = new Phaser.Class({
         laserSound.volume = 0.5;
         //spawn point of player from tiled
         this.spawnPoint = level1.findObject("objectsLayer",obj => obj.name ==="Spawn Point");
-        const winCoord = level1.findObject("objectsLayer",obj =>obj.name ==="Goal Point");
-        const winTile = this.backgroundLayer.getTileAtWorldXY(winCoord.x,winCoord.y);
-        winTile.win = true;
 
         this.player = this.physics.add.sprite(this.spawnPoint.x,this.spawnPoint.y,'agent');
     
@@ -60,6 +57,8 @@ var level2 = new Phaser.Class({
 
         //play animations
         this.player.anims.play('idle',true);
+
+        console.log(this.player);
 
         //set up key input
 
@@ -98,20 +97,20 @@ var level2 = new Phaser.Class({
                 window.alert("this shouldnt happen");
 
             }
-            if (this.dynamicTrapLayer.visible && this.dynamicTrapLayer.getTileAtWorldXY(this.player.x, this.player.y) !== null )
-            {
-                this.player.destroy();
-                this.player = this.physics.add.sprite(this.spawnPoint.x, this.spawnPoint.y,'agent');
-                this.player.anims.play('idle',true);
-                camera.startFollow(this.player);
-            }
-            if (this.spikeLayer.visible && this.spikeLayer.getTileAtWorldXY(this.player.x, this.player.y) !== null )
-            {
-                this.player.destroy();
-                this.player = this.physics.add.sprite(this.spawnPoint.x, this.spawnPoint.y,'agent');
-                this.player.anims.play('idle',true);
-                camera.startFollow(this.player);
-            }
+            // if (this.dynamicTrapLayer.visible && this.dynamicTrapLayer.getTileAtWorldXY(this.player.x, this.player.y) !== null )
+            // {
+            //     this.player.destroy();
+            //     this.player = this.physics.add.sprite(this.spawnPoint.x, this.spawnPoint.y,'agent');
+            //     this.player.anims.play('idle',true);
+            //     camera.startFollow(this.player);
+            // }
+            // if (this.spikeLayer.visible && this.spikeLayer.getTileAtWorldXY(this.player.x, this.player.y) !== null )
+            // {
+            //     this.player.destroy();
+            //     this.player = this.physics.add.sprite(this.spawnPoint.x, this.spawnPoint.y,'agent');
+            //     this.player.anims.play('idle',true);
+            //     camera.startFollow(this.player);
+            // }
         }.bind(this);
 
         this.input.keyboard.addKey(37);
@@ -167,48 +166,70 @@ var level2 = new Phaser.Class({
 
     
         }.bind(this));
+        //setInterval(function(){ this.updateSpikeTiles(this.spikeTiles, [101,102,103,104,105,105,105,105,105,104,103,102,101]) }.bind(this), 100);
         //SPIKES
-        this.SpikeEvent = this.time.addEvent({delay:1000, callback: fireSpikes, callbackScope: this, loop: true});
-        function fireSpikes(){
-            const sl = this.spikeLayer;
-            sl.setVisible(true);
-            setTimeout(function(){
-                sl.setVisible(false);
-            }, 500);
-        }
-        //LASERS
-        this.LaserEvent = this.time.addEvent({delay: 2000, callback: fireLasers, callbackScope: this, loop: true });
-        function fireLasers(){
-
-            const dtl = this.dynamicTrapLayer;
-            this.dynamicTrapLayer.setVisible(true);
-            laserSound.play();
-            setTimeout(function(){
-                dtl.setVisible(false);
-            }, 500);
-        }
+        //this.SpikeEvent = this.time.addEvent({delay:0, callback: function() {this.updateSpikeTiles(spikeTiles, [101,102,103,104,105])}.bind(this), callbackScope: this, loop: true});
+        // //LASERS
+        this.spikeEvent = this.time.addEvent({delay: 100, callback: function(){ this.updateSpikeTiles(this.spikeTiles, [101,102,103,104,105,105,105,105,105,104,103,102,101]) }.bind(this), callbackScope: this, loop: true });
     },
     update: function(time, delta){
         // this.scene.get('ingame').controls.update(delta);
-        if (this.dynamicTrapLayer.visible && this.dynamicTrapLayer.getTileAtWorldXY(this.player.x, this.player.y) !== null )
-        {
-            this.player.destroy();
-            this.player = this.physics.add.sprite(this.spawnPoint.x,this.spawnPoint.y,'agent');
-            this.player.anims.play('idle',true);
-            this.camera.startFollow(this.player);
-        }
-        if (this.spikeLayer.visible && this.spikeLayer.getTileAtWorldXY(this.player.x, this.player.y) !== null )
-        {
-            this.player.destroy();
-            this.player = this.physics.add.sprite(this.spawnPoint.x,this.spawnPoint.y,'agent');
-            this.player.anims.play('idle',true);
-            this.camera.startFollow(this.player);
-        }
+        // if (this.dynamicTrapLayer.visible && this.dynamicTrapLayer.getTileAtWorldXY(this.player.x, this.player.y) !== null )
+        // {
+        //     this.player.destroy();
+        //     this.player = this.physics.add.sprite(this.spawnPoint.x,this.spawnPoint.y,'agent');
+        //     this.player.anims.play('idle',true);
+        //     this.camera.startFollow(this.player);
+        // }
+        // if (this.spikeLayer.visible && this.spikeLayer.getTileAtWorldXY(this.player.x, this.player.y) !== null )
+        // {
+        //     this.player.destroy();
+        //     this.player = this.physics.add.sprite(this.spawnPoint.x,this.spawnPoint.y,'agent');
+        //     this.player.anims.play('idle',true);
+        //     this.camera.startFollow(this.player);
+        // }
 
         //level1.putTileAt(101 , level1.worldToTileX(this.player.x), level1.worldToTileY(this.player.y), true, this.trapsLayer);
-        //console.log(this.trapsLayer.getTileAtWorldXY(this.player.x, this.player.y));
-        }
+        //console.log(this.backgroundLayer.getTileAtWorldXY(this.player.x, this.player.y));
+        //console.log(this.objectsLayer);
 
-});
+        
+
+    },
+
+    findTileset(map, key)
+    {
+        for (var i = 0; i < map.objects.length; i++)
+        {
+            if (map.objects[i].name === key)
+            {
+                return map.objects[i].objects;
+            }
+        }
+        window.alert("this shouldnt happen");
+
+    },
+    prepareSpikeTiles: function(tileArray) //spikes are bigger than 64x64, so have to do some offset
+    {
+        tileArray.forEach(function(element) {
+            element.renderX = element.x;
+            element.renderY = element.y * 2 - 256;
+            element.currentIndex = 0;
+          }.bind(this));
+    },
+    updateSpikeTiles: function (tileArray, indicesArray)
+    {
+        //level1.putTileAtWorldXY(101, this.player.x, this.player.y * 2 - 64, true, this.cameras.main, this.spikeLayer);
+        //for some reason, putTileAtWorldXY puts the tile based on the tile height / width, i.e. goes to the location at (width/ tilewidth, height/tileheight)
+        tileArray.forEach(function(element) {
+            element.currentIndex %= indicesArray.length;
+            level1.putTileAtWorldXY( indicesArray[element.currentIndex], element.x, element.y * 2 - 256, true, this.cameras.main, this.spikeLayer);
+            element.currentIndex ++;
+          }.bind(this));
+        
+    }
+
+}
+);
 
 this.levels.level2 = level2;
