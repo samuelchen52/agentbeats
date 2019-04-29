@@ -40,7 +40,7 @@ var level1 = new Phaser.Class({
         music.play();
 
         var laserSound = this.sound.add('laser',1,true);
-        laserSound.volume = 0.5;
+        laserSound.volume = 0.2;
         //spawn point of player from tiled
         this.spawnPoint = level1.findObject("objectsLayer",obj => obj.name ==="Spawn Point");
         const winCoord = level1.findObject("objectsLayer",obj =>obj.name ==="Goal Point");
@@ -179,7 +179,7 @@ var level1 = new Phaser.Class({
             }, 500);
         }
         //LASERS
-        this.LaserEvent = this.time.addEvent({delay: 2000, callback: fireLasers, callbackScope: this, loop: true });
+        this.LaserEvent = this.time.addEvent({delay: 1716, callback: fireLasers, callbackScope: this, loop: true });
         function fireLasers(){
 
             const dtl = this.dynamicTrapLayer;
