@@ -22,16 +22,20 @@ var level2 = new Phaser.Class({
         this.level1 = level1;
         //add the tileset
         const tileset = level1.addTilesetImage('tileset'); //covers indices 1 - 100
-        const spikes = level1.addTilesetImage('spikes', null, 64, 128);
+        const spikes = level1.addTilesetImage('spikes', null, 64, 128); //covers indices 101 - 105
 
         
         //make the layer(s) from tileset
         this.backgroundLayer = level1.createDynamicLayer('backgroundLayer',tileset);
         this.blockedLayer = level1.createStaticLayer('blockedLayer',tileset);
         //spike layer is made on the spot in this code, NOT in tiled;
+        //render spikes
         this.spikeLayer = level1.createBlankDynamicLayer('spikeLayer',spikes);
         this.spikeTiles = this.findTileset(level1, "spikeObjectLayer");
         this.prepareSpikeTiles(this.spikeTiles);
+        this.spikeIndicesArray = [101,102,103,104,105,104,103,102,101];
+        this.spikeEvent = this.time.addEvent({delay: 100, callback: function(){ this.updateSpikeTiles(this.spikeTiles, this.spikeIndicesArray, 105) }.bind(this), callbackScope: this, loop: true });
+
 
 
         //music
@@ -170,7 +174,6 @@ var level2 = new Phaser.Class({
         //SPIKES
         //this.SpikeEvent = this.time.addEvent({delay:0, callback: function() {this.updateSpikeTiles(spikeTiles, [101,102,103,104,105])}.bind(this), callbackScope: this, loop: true});
         // //LASERS
-        this.spikeEvent = this.time.addEvent({delay: 100, callback: function(){ this.updateSpikeTiles(this.spikeTiles, [101,102,103,104,105,105,105,105,105,104,103,102,101]) }.bind(this), callbackScope: this, loop: true });
     },
     update: function(time, delta){
         // this.scene.get('ingame').controls.update(delta);
@@ -188,6 +191,13 @@ var level2 = new Phaser.Class({
         //     this.player.anims.play('idle',true);
         //     this.camera.startFollow(this.player);
         // }
+        if (this.checkIfPlayerOnSpike (this.spikeIndicesArray, 105))
+        {
+            this.player.destroy();
+            this.player = this.physics.add.sprite(this.spawnPoint.x,this.spawnPoint.y,'agent');
+            this.player.anims.play('idle',true);
+            this.camera.startFollow(this.player);
+        }
 
         //level1.putTileAt(101 , level1.worldToTileX(this.player.x), level1.worldToTileY(this.player.y), true, this.trapsLayer);
         //console.log(this.backgroundLayer.getTileAtWorldXY(this.player.x, this.player.y));
@@ -209,22 +219,69 @@ var level2 = new Phaser.Class({
         window.alert("this shouldnt happen");
 
     },
+    checkIfPlayerOnSpike: function (indicesArray, deathIndex)
+    {
+        if ( level1.getTileAtWorldXY( this.player.x, this.player.y * 2 - 64, true, this.cameras.main, this.spikeLayer).index === deathIndex)
+        {
+            return true;
+        }
+        return false;
+
+    }
+    ,
     prepareSpikeTiles: function(tileArray) //spikes are bigger than 64x64, so have to do some offset
     {
         tileArray.forEach(function(element) {
             element.renderX = element.x;
             element.renderY = element.y * 2 - 256;
             element.currentIndex = 0;
+            element.counter = 0; //this is for the duration of the death frame of the trap
+            //copy properties from tiled over
+            for (var i = 0; i < element.properties.length; i ++)
+            {
+                element[element.properties[i].name] = element.properties[i].value;
+            }
+        
           }.bind(this));
     },
-    updateSpikeTiles: function (tileArray, indicesArray)
+    updateSpikeTiles: function (tileArray, indicesArray, deathIndex)
     {
         //level1.putTileAtWorldXY(101, this.player.x, this.player.y * 2 - 64, true, this.cameras.main, this.spikeLayer);
         //for some reason, putTileAtWorldXY puts the tile based on the tile height / width, i.e. goes to the location at (width/ tilewidth, height/tileheight)
+
+        //tileArray holds an array of objects representing tiles in the layer. they arent ACTUALLY tiles in the layer
+        //they have all the custom properties we put in from TILED, and we render all the tiles based on these objects
+        //currentIndex refers to index in the indicesArray
         tileArray.forEach(function(element) {
-            element.currentIndex %= indicesArray.length;
-            level1.putTileAtWorldXY( indicesArray[element.currentIndex], element.x, element.y * 2 - 256, true, this.cameras.main, this.spikeLayer);
-            element.currentIndex ++;
+            if (element.delay > 0)
+            {
+                element.delay --;
+            }
+            else{
+                    element.currentIndex %= indicesArray.length;
+                    if (indicesArray[element.currentIndex] === deathIndex)
+                    {
+                        console.log(element);
+                        if (element.counter === 0)
+                        {
+                            level1.putTileAtWorldXY( indicesArray[element.currentIndex], element.renderX, element.renderY, true, this.cameras.main, this.spikeLayer);
+                            element.counter ++;
+                        }
+                        else if (element.counter === element.duration) //element properties are from TILED
+                        {
+                            element.counter = 0;
+                            element.currentIndex ++;
+                        }
+                        else
+                        {
+                            element.counter ++;
+                        }
+                    }
+                    else{
+                        level1.putTileAtWorldXY( indicesArray[element.currentIndex], element.renderX, element.renderY, true, this.cameras.main, this.spikeLayer);
+                        element.currentIndex ++;
+                    }
+                }
           }.bind(this));
         
     }
