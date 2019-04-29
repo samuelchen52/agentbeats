@@ -49,22 +49,27 @@ var level1 = new Phaser.Class({
     
         //create animations for the sprites
         this.anims.create({
-            key: 'idle',
+            key: 'idleright',
             frames: this.anims.generateFrameNumbers('agent',{start:0, end: 1}),
-            frameRate: 7,
+            frameRate: 4,
             //repeat -1 means loop
             repeat: -1
         });
+        this.anims.create({
+            key: 'idleleft',
+            frames: this.anims.generateFrameNumbers('agent',{start:2, end: 3}),
+            frameRate: 4,
+            repeat: -1
+        });
 
-        //play animations
-        this.player.anims.play('idle',true);
-
+        this.player.anims.play('idleright');
         //set up key input
 
-        var callback = function (event) { 
+        var arrowkeyCallback = function (event) { 
             switch (event.keyCode)
             {
                 case 37:
+                this.player.anims.play('idleleft');
                 if (this.blockedLayer.getTileAtWorldXY(this.player.x - 64, this.player.y) === null)
                 {
                 this.player.x -= 64;
@@ -79,6 +84,7 @@ var level1 = new Phaser.Class({
                 break;
 
                 case 39:
+                this.player.anims.play('idleright');
                 if (this.blockedLayer.getTileAtWorldXY(this.player.x + 64 , this.player.y) === null)
                 {
                 this.player.x += 64;
@@ -100,14 +106,14 @@ var level1 = new Phaser.Class({
             {
                 this.player.destroy();
                 this.player = this.physics.add.sprite(this.spawnPoint.x, this.spawnPoint.y,'agent');
-                this.player.anims.play('idle',true);
+                this.player.anims.play('idleright',true);
                 camera.startFollow(this.player);
             }
             if (this.spikeLayer.visible && this.spikeLayer.getTileAtWorldXY(this.player.x, this.player.y) !== null )
             {
                 this.player.destroy();
                 this.player = this.physics.add.sprite(this.spawnPoint.x, this.spawnPoint.y,'agent');
-                this.player.anims.play('idle',true);
+                this.player.anims.play('idleright',true);
                 camera.startFollow(this.player);
             }
         }.bind(this);
@@ -117,10 +123,10 @@ var level1 = new Phaser.Class({
         this.input.keyboard.addKey(39);
         this.input.keyboard.addKey(40);
 
-        this.input.keyboard.on('keydown-LEFT', callback);
-        this.input.keyboard.on('keydown-RIGHT', callback);
-        this.input.keyboard.on('keydown-UP', callback);
-        this.input.keyboard.on('keydown-DOWN', callback);
+        this.input.keyboard.on('keydown-LEFT', arrowkeyCallback);
+        this.input.keyboard.on('keydown-RIGHT', arrowkeyCallback);
+        this.input.keyboard.on('keydown-UP', arrowkeyCallback);
+        this.input.keyboard.on('keydown-DOWN', arrowkeyCallback);
 
         
     
@@ -194,14 +200,14 @@ var level1 = new Phaser.Class({
         {
             this.player.destroy();
             this.player = this.physics.add.sprite(this.spawnPoint.x,this.spawnPoint.y,'agent');
-            this.player.anims.play('idle',true);
+            this.player.anims.play('idleright',true);
             this.camera.startFollow(this.player);
         }
         if (this.spikeLayer.visible && this.spikeLayer.getTileAtWorldXY(this.player.x, this.player.y) !== null )
         {
             this.player.destroy();
             this.player = this.physics.add.sprite(this.spawnPoint.x,this.spawnPoint.y,'agent');
-            this.player.anims.play('idle',true);
+            this.player.anims.play('idleright',true);
             this.camera.startFollow(this.player);
         }
 
