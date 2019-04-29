@@ -45,7 +45,7 @@ var Preloader = new Phaser.Class({
 
         //SPRITESHEETS
         this.load.spritesheet('agent','./assets/sprites/agentsprite.png',
-        {frameWidth: 64, frameHeight: 64}
+        {frameWidth: 64, frameHeight: 75}
         );
 
         //SOUNDS
