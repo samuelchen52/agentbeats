@@ -1,15 +1,15 @@
 this.levels = this.levels || {};
 
-var level1 = new Phaser.Class({
+var level2 = new Phaser.Class({
 
     Extends: Phaser.Scene,
 
     initialize:
 
-    function level1 ()
+    function level2 ()
     {
-        this.key = "level1";
-        Phaser.Scene.call(this, { key: 'level1' });
+        this.key = "level2";
+        Phaser.Scene.call(this, { key: 'level2' });
     },
 
 
@@ -164,8 +164,6 @@ var level1 = new Phaser.Class({
             //launch paused screen
             this.game.currentLevel = this.key;
             this.scene.launch('paused');
-    
-            
 
     
         }.bind(this));
@@ -213,4 +211,4 @@ var level1 = new Phaser.Class({
 
 });
 
-this.levels.level1 = level1;
+this.levels.level2 = level2;

@@ -188,6 +188,12 @@ var LevelSelect = new Phaser.Class({
             
         }).setOrigin().setInteractive().key = 1;
 
+        var level2 = this.add.text( 400,190, 'level 2', {
+            fontFamily: 'retrocycles',
+            fontSize: 40,
+            
+        }).setOrigin().setInteractive().key = 2;
+
 
         // back.on('pointerover', function () {
 
@@ -230,7 +236,10 @@ var LevelSelect = new Phaser.Class({
                 case 0: this.scene.start('mainmenu');
                 break;
 
-                case 1: this.scene.start('ingame');
+                case 1: this.scene.start('level1');
+                break;
+
+                case 2: this.scene.start('level2');
                 break;
 
             }
@@ -389,17 +398,17 @@ var Paused = new Phaser.Class({
 
         this.input.on('gameobjectdown', function (pointer, gameObject) {
 
-            
+            console.log(this);
             switch(gameObject.key)
             {
                 case 1: 
-                this.scene.stop('ingame');
-                this.scene.start('ingame');
+                this.scene.stop(this.game.currentLevel);
+                this.scene.start(this.game.currentLevel);
                 music.stop();
                 break;
 
                 case 2: 
-                this.scene.stop('ingame');
+                this.scene.stop(this.game.currentLevel);
                 this.scene.start('levelselect');
                 music.stop();
                 break;
@@ -412,7 +421,7 @@ var Paused = new Phaser.Class({
                 // this.scene.get('ingame').controls.up.isDown = false;
                 // this.scene.get('ingame').controls.down.isDown = false;
                 music.resume();
-                this.scene.resume('ingame');
+                this.scene.resume(this.game.currentLevel);
                 break;
 
             }
@@ -432,7 +441,7 @@ var config = {
     autoCenter: true,
     //looks like
     //it initializes all the sceneobjects, only calls create and whatnot if active is true (true by default for first sceneobject)
-    scene: [ Preloader, Splash, MainMenu, LevelSelect, Controls, Help, level1, Paused],
+    scene: [ Preloader, Splash, MainMenu, LevelSelect, Controls, Help, level1, level2, Paused],
     //physics options
     physics: {
         default: "arcade",
