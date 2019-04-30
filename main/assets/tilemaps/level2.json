@@ -45,6 +45,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":100
                         }],
                  "rotation":0,
                  "type":"",
@@ -68,6 +73,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":100
                         }],
                  "rotation":0,
                  "type":"",
@@ -91,6 +101,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":100
                         }],
                  "rotation":0,
                  "type":"",
@@ -114,6 +129,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":100
                         }],
                  "rotation":0,
                  "type":"",
@@ -137,6 +157,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -160,6 +185,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -183,6 +213,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -206,6 +241,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -229,6 +269,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -252,6 +297,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -275,6 +325,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -298,6 +353,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -321,6 +381,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -344,6 +409,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -367,6 +437,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -390,6 +465,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -413,6 +493,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -436,6 +521,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -459,6 +549,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -482,6 +577,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -505,6 +605,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -528,6 +633,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -551,6 +661,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -574,6 +689,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -597,6 +717,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -620,6 +745,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -643,6 +773,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -666,6 +801,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -689,6 +829,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -712,6 +857,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -735,6 +885,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -758,6 +913,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -781,6 +941,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -804,6 +969,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -827,6 +997,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -850,6 +1025,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -873,6 +1053,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -896,6 +1081,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -919,6 +1109,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -942,6 +1137,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -965,6 +1165,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -988,6 +1193,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -1011,6 +1221,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":0
                         }],
                  "rotation":0,
                  "type":"",
@@ -1061,6 +1276,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":15
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":50
                         }],
                  "rotation":0,
                  "type":"",
@@ -1089,6 +1309,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":15
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":50
                         }],
                  "rotation":0,
                  "type":"",
@@ -1117,6 +1342,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":15
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":50
                         }],
                  "rotation":0,
                  "type":"",
@@ -1145,6 +1375,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":15
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":50
                         }],
                  "rotation":0,
                  "type":"",
@@ -1173,6 +1408,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":15
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":50
                         }],
                  "rotation":0,
                  "type":"",
@@ -1201,6 +1441,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":15
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":10
                         }],
                  "rotation":0,
                  "type":"",
@@ -1229,6 +1474,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":15
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":10
                         }],
                  "rotation":0,
                  "type":"",
@@ -1257,6 +1507,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":15
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":10
                         }],
                  "rotation":0,
                  "type":"",
@@ -1285,6 +1540,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":15
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":10
                         }],
                  "rotation":0,
                  "type":"",
@@ -1313,6 +1573,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":15
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":50
                         }],
                  "rotation":0,
                  "type":"",
@@ -1341,6 +1606,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":15
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":10
                         }],
                  "rotation":0,
                  "type":"",
@@ -1369,6 +1639,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":15
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":50
                         }],
                  "rotation":0,
                  "type":"",
@@ -1397,6 +1672,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":15
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":50
                         }],
                  "rotation":0,
                  "type":"",

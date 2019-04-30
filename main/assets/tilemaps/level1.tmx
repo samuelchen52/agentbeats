@@ -93,12 +93,14 @@
    <properties>
     <property name="delay" type="int" value="0"/>
     <property name="duration" type="int" value="10"/>
+    <property name="wait" type="int" value="10"/>
    </properties>
   </object>
   <object id="2" gid="101" x="768" y="1024" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="0"/>
     <property name="duration" type="int" value="10"/>
+    <property name="wait" type="int" value="10"/>
    </properties>
   </object>
  </objectgroup>
@@ -119,6 +121,10 @@
   </object>
  </objectgroup>
  <objectgroup id="5" name="objectsLayer">
-  <object id="5" name="Spawn Point" gid="127" x="543.297" y="986.742" width="64" height="64"/>
+  <object id="5" name="Spawn Point" gid="127" x="543.297" y="986.742" width="64" height="64">
+   <properties>
+    <property name="wait" type="int" value="10"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

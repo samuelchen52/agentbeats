@@ -31,7 +31,6 @@ var level1 = new Phaser.Class({
         console.log(level1);
         //make the layer(s) from tileset
         this.backgroundLayer = level1.createDynamicLayer('backgroundLayer',tileset);
-<<<<<<< HEAD
         this.blockedLayer = level1.createDynamicLayer('blockedLayer',[tileset,agentstuff]);
         //spike layer is made on the spot in this code, NOT in tiled;
         //render spikes
@@ -57,24 +56,6 @@ var level1 = new Phaser.Class({
          music.play('', {delay: 0.3});
          var laserSound = this.sound.add('laser',1,true);
          laserSound.volume = 0.2;
-=======
-        this.blockedLayer = level1.createStaticLayer('blockedLayer',tileset);
-        this.trapsLayer = level1.createDynamicLayer('trapsLayer',objects);
-        this.dynamicTrapLayer = level1.createDynamicLayer('dynamicTrapLayer',objects);
-        this.spikeLayer = level1.createDynamicLayer('spikeLayer',objects);
-
-        this.dynamicTrapLayer.setVisible(false);
-        this.spikeLayer.setVisible(false);
-        //set collision of blocked layer
-        //blockedLayer.setCollisionByProperty({collides: true});
-
-        //music
-        music = this.sound.add('level1audio',1,true);
-        music.play('', {delay: 0.3});
-        music.setLoop(true);
-        var laserSound = this.sound.add('laser',1,true);
-        laserSound.volume = 0.2;
->>>>>>> 545b2206c84bf09653139c55e44e0b9c63b28f74
         //spawn point of player from tiled
         this.spawnPoint = level1.findObject("objectsLayer",obj => obj.name ==="Spawn Point");
 
@@ -336,7 +317,25 @@ var level1 = new Phaser.Class({
                             element.counter ++;
                         }
                     }
-                    else{
+                    else if (element.currentIndex === indicesArray.length - 1)
+                    {
+                        if (element.counter === 0)
+                        {
+                            level1.putTileAtWorldXY( indicesArray[element.currentIndex], element.renderX, element.renderY, true, this.cameras.main, this.spikeLayer);
+                            element.counter ++;
+                        }
+                        else if (element.counter === element.wait) //element properties are from TILED
+                        {
+                            element.counter = 0;
+                            element.currentIndex ++;
+                        }
+                        else
+                        {
+                            element.counter ++;
+                        }
+                    }             
+                    else
+                    {
                         level1.putTileAtWorldXY( indicesArray[element.currentIndex], element.renderX, element.renderY, true, this.cameras.main, this.spikeLayer);
                         element.currentIndex ++;
                     }
