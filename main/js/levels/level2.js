@@ -145,7 +145,20 @@ var level2 = new Phaser.Class({
         this.input.keyboard.on('keydown-UP', arrowkeyCallback);
         this.input.keyboard.on('keydown-DOWN', arrowkeyCallback);
 
-        
+        //CHEATS
+        this.invincible = false;
+        this.input.keyboard.on('keydown', function (event) {
+            if (event.key === "1")
+            {
+            music.stop();
+            this.scene.start('level1');
+            }
+            else if(event.key === "I" || event.key === "i")
+            {
+            this.invincible = !this.invincible;
+            }
+
+        }, this);
     
 
         const camera = this.cameras.main;
@@ -209,21 +222,25 @@ var level2 = new Phaser.Class({
         //     this.player.anims.play('idle',true);
         //     this.camera.startFollow(this.player);
         // }
-        if (this.checkIfPlayerOnSpike (this.spikeIndicesArray, this.spikeGid + 4) && this.player.dead == false)
-        {
-            this.player.dead = true;
-            this.player.anims.play("dead");
-            this.deathTime = time;
-            this.camera.zoomTo(0.5,500);
-        }
-        if (this.checkIfPlayerOnLaser (this.verticalLaserArray) && this.player.dead == false)
-        {
-            this.player.dead = true;
-            this.player.anims.play("dead");
-            this.deathTime = time;
-            this.camera.zoomTo(0.5,500);
-        }
+         if (!this.invincible)
+         {
+            if (this.checkIfPlayerOnSpike (this.spikeIndicesArray, this.spikeGid + 4) && this.player.dead == false)
+            {
+                this.player.dead = true;
+                this.player.anims.play("dead");
+                this.deathTime = time;
+                this.camera.zoomTo(0.5,500);
+            }
+            if (this.checkIfPlayerOnLaser (this.verticalLaserArray) && this.player.dead == false)
+            {
+                this.player.dead = true;
+                this.player.anims.play("dead");
+                this.deathTime = time;
+                this.camera.zoomTo(0.5,500);
+            }
+        
         this.checkDeath(time);
+        }
 
         //level1.putTileAt(101 , level1.worldToTileX(this.player.x), level1.worldToTileY(this.player.y), true, this.trapsLayer);, level1.worldToTileX(this.player.x), level1.worldToTileY(this.player.y), true, this.trapsLayer);
         //console.log(this.backgroundLayer.getTileAtWorldXY(this.player.x, this.player.y));
