@@ -53,6 +53,7 @@ var Preloader = new Phaser.Class({
         //SOUNDS
         this.load.audio("level1audio", './assets/sounds/level_1.mp3');
         this.load.audio("laser", './assets/sounds/laser.mp3');
+        this.load.audio("mainmenu", './assets/sounds/mainmenu.mp3');
     },
 
     create: function ()
@@ -81,10 +82,13 @@ var Splash = new Phaser.Class({
     create: function ()
     {
         this.add.image(0, 0, 'splash').setOrigin(0);
+        //music
+        music = this.sound.add('mainmenu',1,true);
+        music.play('', {loop:true});
+        music.volume = 0.3;
         this.input.keyboard.once('keydown', function () {
 
             this.scene.start('mainmenu');
-
         }, this);
     }
 
@@ -110,7 +114,7 @@ var MainMenu = new Phaser.Class({
     {
         //var offsetTop = this.game.canvas.offsetTop;
         //var offsetLeft = this.game.canvas.offsetLeft;
-
+        //music
         this.add.image(0, 0, 'mainmenu').setOrigin(0);
 
         var something = this.add.text( this.game.renderer.width / 2 - 50, this.game.renderer.height / 2 + 50, '- PLAY', {
@@ -243,9 +247,11 @@ var LevelSelect = new Phaser.Class({
                 break;
 
                 case 1: this.scene.start('level1');
+                music.stop();
                 break;
 
                 case 2: this.scene.start('level2');
+                music.stop();
                 break;
 
             }
