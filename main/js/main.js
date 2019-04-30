@@ -34,6 +34,7 @@ var Preloader = new Phaser.Class({
         this.load.image('ingame', './assets/screens/ingame.png');
         this.load.image('paused', './assets/screens/ingamepaused.png'); 
         this.load.image('pausebutton', './assets/screens/pause.png'); 
+        this.load.image('win','./assets/screens/levelcomplete.png' )
         //TILES
         this.load.image('tileset','./assets/tilesets/tileset.png');
         this.load.image('agentsprite','./assets/sprites/agentsprite.png');
@@ -353,6 +354,8 @@ var Help = new Phaser.Class({
 });
 
 var level1 = this.levels.level1;
+var level2 = this.levels.level2;
+
 
 var Paused = new Phaser.Class({
 
@@ -437,6 +440,40 @@ var Paused = new Phaser.Class({
     }
 
 });
+
+
+var Win = new Phaser.Class({
+
+    Extends: Phaser.Scene,
+
+    initialize:
+
+    function Help ()
+    {
+        Phaser.Scene.call(this, { key: 'win' });
+    },
+
+    // preload: function ()
+    // {
+    //     this.load.image('face', 'assets/pics/bw-face.png');
+    // },
+
+    create: function ()
+    {
+        this.add.image(0, 0, 'win').setOrigin(0);
+
+        this.input.keyboard.once('keydown', function () {
+            //game.nextLevel set by me
+            this.scene.stop();
+            music.stop();
+            this.scene.start(this.game.nextLevel);
+        }, this);
+
+    }
+
+});
+
+
 var config = {
     type: Phaser.AUTO,
     width: 800,
@@ -446,7 +483,7 @@ var config = {
     autoCenter: true,
     //looks like
     //it initializes all the sceneobjects, only calls create and whatnot if active is true (true by default for first sceneobject)
-    scene: [ Preloader, Splash, MainMenu, LevelSelect, Controls, Help, level1, level2, Paused],
+    scene: [ Preloader, Splash, MainMenu, LevelSelect, Controls, Help, level1, level2, Paused, Win],
     //physics options
     physics: {
         default: "arcade",
