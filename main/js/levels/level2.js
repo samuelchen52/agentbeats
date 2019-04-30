@@ -52,7 +52,7 @@ var level2 = new Phaser.Class({
 
          //music
          music = this.sound.add('level1audio',1,true);
-         music.play('', {delay: 0.3});
+         music.play('', {delay: 0.3,loop:true});
          var laserSound = this.sound.add('laser',1,true);
          laserSound.volume = 0.2;
         //spawn point of player from tiled
@@ -211,6 +211,7 @@ var level2 = new Phaser.Class({
             this.player.dead = true;
             this.player.anims.play("dead");
             this.deathTime = time;
+            this.camera.zoomTo(0.5,500);
         }
         this.checkDeath(time);
 
