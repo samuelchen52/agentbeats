@@ -43,10 +43,10 @@ var level2 = new Phaser.Class({
         this.laserLayer = level1.createBlankDynamicLayer('laserLayer', lasers);
         this.pointerTiles = this.findTileset(level1, "laserObjectLayer"); //have an array of laser pointers, with properties that tell us which way they point
         this.laserTiles = this.prepareLaserTiles(this.pointerTiles);
-        this.horizontalLaserArray = [209, 210, 211];
-        this.verticalLaserArray = [206,207,208];
+        this.horizontalLaserArray = [209, 210, 211, 209, 210, 209, 211 ,210, 1];
+        this.verticalLaserArray = [206,207,208, 207, 206, 208, 206, 208, 1];
         console.log(this.level1);
-        this.laserEvent = this.time.addEvent({delay: 25, callback: function(){ this.updateLaserTiles(this.laserTiles, this.verticalLaserArray, this.horizontalLaserArray) }.bind(this), callbackScope: this, loop: true });
+        this.laserEvent = this.time.addEvent({delay: 50, callback: function(){ this.updateLaserTiles(this.laserTiles, this.verticalLaserArray, this.horizontalLaserArray) }.bind(this), callbackScope: this, loop: true });
 
 
 
@@ -335,6 +335,8 @@ var level2 = new Phaser.Class({
                     object.delay = element.delay;
                     object.direction = "vertical";
                     object.currentIndex = 0;
+                    object.counter = 0;
+                    object.anotherCounter = element.duration;
                     laserTiles.push(object);
                     y += 64;
                 }
@@ -352,7 +354,9 @@ var level2 = new Phaser.Class({
                     object.duration = element.duration;
                     object.delay = element.delay;
                     object.direction = "vertical";
-                    object.currentIndex = 0;                                                                
+                    object.currentIndex = 0;
+                    object.counter = 0;
+                    object.anotherCounter = element.duration;                                                             
                     laserTiles.push(object);
                     y -= 64;
                 }
@@ -371,6 +375,8 @@ var level2 = new Phaser.Class({
                     object.delay = element.delay;
                     object.direction = "horizontal";
                     object.currentIndex = 0;
+                    object.counter = 0;
+                    object.anotherCounter = element.duration;
                     laserTiles.push(object);
                     x += 64;
                 }
@@ -389,6 +395,8 @@ var level2 = new Phaser.Class({
                     object.delay = element.delay;
                     object.direction = "horizontal";
                     object.currentIndex = 0;
+                    object.counter = 0;
+                    object.anotherCounter = element.duration;
                     laserTiles.push(object);
                     x -= 64;
                 }
@@ -405,17 +413,36 @@ var level2 = new Phaser.Class({
                 element.delay --;
             }
             else{
-                    element.currentIndex %= verticalLaserArray.length; //or horizontalLaserArray.length, they will be the same length
-                    if (element.direction === "horizontal")
-                    {
-                        level1.putTileAtWorldXY( horizontalLaserArray[element.currentIndex], element.x, element.y, true, this.cameras.main, this.laserLayer);
+                    
+                        element.currentIndex %= verticalLaserArray.length; //or horizontalLaserArray.length, they will be the same length
+                        if (element.currentIndex === verticalLaserArray.length - 1)
+                        {
+                            if (element.counter === 0)
+                            {
+                                level1.putTileAtWorldXY( horizontalLaserArray[element.currentIndex], element.x, element.y, true, this.cameras.main, this.laserLayer);
+                                element.counter ++;
+                            }
+                            else if (element.counter === element.duration)
+                            {
+                                element.counter = 0; 
+                                element.currentIndex ++;
+                            }
+                            else{
+                                element.counter ++;
+                            }
+                        }
+                        else{
+                            if (element.direction === "horizontal")
+                            {
+                                level1.putTileAtWorldXY( horizontalLaserArray[element.currentIndex], element.x, element.y, true, this.cameras.main, this.laserLayer);
+                            }
+                            else //else vertical
+                            {
+                                level1.putTileAtWorldXY( verticalLaserArray[element.currentIndex], element.x, element.y, true, this.cameras.main, this.laserLayer);
+                            }
+                            element.currentIndex ++;
                     }
-                    else //else vertical
-                    {
-                        level1.putTileAtWorldXY( verticalLaserArray[element.currentIndex], element.x, element.y, true, this.cameras.main, this.laserLayer);
                     }
-                    element.currentIndex ++;
-                }
           }.bind(this));
     }
 

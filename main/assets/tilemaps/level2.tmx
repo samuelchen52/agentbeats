@@ -355,93 +355,93 @@
  <objectgroup id="6" name="laserObjectLayer">
   <object id="170" name="laserPointer" gid="116" x="1088" y="1536" width="64" height="64">
    <properties>
-    <property name="delay" type="int" value="2"/>
+    <property name="delay" type="int" value="5"/>
     <property name="direction" value="up"/>
-    <property name="duration" type="int" value="3"/>
+    <property name="duration" type="int" value="15"/>
    </properties>
   </object>
   <object id="171" name="laserPointer" gid="116" x="1216" y="1536" width="64" height="64">
    <properties>
-    <property name="delay" type="int" value="2"/>
+    <property name="delay" type="int" value="5"/>
     <property name="direction" value="up"/>
-    <property name="duration" type="int" value="3"/>
+    <property name="duration" type="int" value="15"/>
    </properties>
   </object>
   <object id="172" name="laserPointer" gid="116" x="1344" y="1536" width="64" height="64">
    <properties>
-    <property name="delay" type="int" value="2"/>
+    <property name="delay" type="int" value="5"/>
     <property name="direction" value="up"/>
-    <property name="duration" type="int" value="3"/>
+    <property name="duration" type="int" value="15"/>
    </properties>
   </object>
   <object id="173" name="laserPointer" gid="116" x="1472" y="1536" width="64" height="64">
    <properties>
-    <property name="delay" type="int" value="2"/>
+    <property name="delay" type="int" value="5"/>
     <property name="direction" value="up"/>
-    <property name="duration" type="int" value="3"/>
+    <property name="duration" type="int" value="15"/>
    </properties>
   </object>
   <object id="174" name="laserPointer" gid="116" x="1600" y="1536" width="64" height="64">
    <properties>
-    <property name="delay" type="int" value="2"/>
+    <property name="delay" type="int" value="5"/>
     <property name="direction" value="up"/>
-    <property name="duration" type="int" value="3"/>
+    <property name="duration" type="int" value="15"/>
    </properties>
   </object>
   <object id="175" name="laserPointer" gid="136" x="1152" y="896" width="64" height="64">
    <properties>
     <property name="delay" type="int" value="2"/>
     <property name="direction" value="down"/>
-    <property name="duration" type="int" value="3"/>
+    <property name="duration" type="int" value="15"/>
    </properties>
   </object>
   <object id="176" name="laserPointer" gid="136" x="1280" y="896" width="64" height="64">
    <properties>
     <property name="delay" type="int" value="2"/>
     <property name="direction" value="down"/>
-    <property name="duration" type="int" value="3"/>
+    <property name="duration" type="int" value="15"/>
    </properties>
   </object>
   <object id="177" name="laserPointer" gid="136" x="1408" y="896" width="64" height="64">
    <properties>
     <property name="delay" type="int" value="2"/>
     <property name="direction" value="down"/>
-    <property name="duration" type="int" value="3"/>
+    <property name="duration" type="int" value="15"/>
    </properties>
   </object>
   <object id="178" name="laserPointer" gid="136" x="1536" y="896" width="64" height="64">
    <properties>
     <property name="delay" type="int" value="2"/>
     <property name="direction" value="down"/>
-    <property name="duration" type="int" value="3"/>
+    <property name="duration" type="int" value="15"/>
    </properties>
   </object>
   <object id="179" name="laserPointer" gid="116" x="960" y="1472" width="64" height="64">
    <properties>
-    <property name="delay" type="int" value="2"/>
+    <property name="delay" type="int" value="5"/>
     <property name="direction" value="up"/>
-    <property name="duration" type="int" value="2"/>
+    <property name="duration" type="int" value="15"/>
    </properties>
   </object>
   <object id="180" name="laserPointer" gid="126" x="1024" y="1024" width="64" height="64">
    <properties>
-    <property name="delay" type="int" value="2"/>
+    <property name="delay" type="int" value="0"/>
     <property name="direction" value="right"/>
-    <property name="duration" type="int" value="2"/>
+    <property name="duration" type="int" value="15"/>
    </properties>
   </object>
   <object id="181" name="laserPointer" gid="146" x="1792" y="1344" width="64" height="64">
    <properties>
-    <property name="delay" type="int" value="2"/>
+    <property name="delay" type="int" value="0"/>
     <property name="direction" value="left"/>
-    <property name="duration" type="int" value="2"/>
+    <property name="duration" type="int" value="15"/>
    </properties>
   </object>
   <object id="183" name="laserPointer" gid="116" x="1856" y="1472" width="64" height="64">
    <properties>
-    <property name="delay" type="int" value="2"/>
+    <property name="delay" type="int" value="5"/>
     <property name="direction" value="up"/>
-    <property name="duration" type="int" value="2"/>
+    <property name="duration" type="int" value="15"/>
    </properties>
   </object>
  </objectgroup>
