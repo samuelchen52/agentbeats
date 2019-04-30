@@ -328,6 +328,7 @@ var level1 = new Phaser.Class({
         tileArray.forEach(function(element) {
             if (element.delay > 0)
             {
+                level1.putTileAtWorldXY( indicesArray[element.currentIndex], element.renderX, element.renderY, true, this.cameras.main, this.spikeLayer);
                 element.delay --;
             }
             else{
