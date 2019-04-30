@@ -37,6 +37,7 @@ var level1 = new Phaser.Class({
         //music
         music = this.sound.add('level1audio',1,true);
         music.play('', {delay: 0.3});
+        music.setLoop(true);
         var laserSound = this.sound.add('laser',1,true);
         laserSound.volume = 0.2;
         //spawn point of player from tiled
