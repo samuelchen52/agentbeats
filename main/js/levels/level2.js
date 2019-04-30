@@ -15,6 +15,8 @@ var level2 = new Phaser.Class({
 
     create: function ()
     {
+        //variables for use
+        var deathTime = 0;
         //this.add.image(0, 0, 'ingame').setOrigin(0);
         //make our map
         level1 = this.add.tilemap('level2');
@@ -47,7 +49,7 @@ var level2 = new Phaser.Class({
         this.spawnPoint = level1.findObject("objectsLayer",obj => obj.name ==="Spawn Point");
 
         this.player = this.physics.add.sprite(this.spawnPoint.x,this.spawnPoint.y,'agent');
-    
+        this.player.dead = false;
         //create animations for the sprites
         this.anims.create({
             key: 'idleright',
@@ -63,10 +65,19 @@ var level2 = new Phaser.Class({
             repeat: -1
         });
 
+        this.anims.create({
+            key: 'dead',
+            frames: this.anims.generateFrameNumbers('agent',{start:4, end: 4}),
+            frameRate: 4,
+            repeat: -1
+        });
         this.player.anims.play('idleright');
         //set up key input
 
         var arrowkeyCallback = function (event) { 
+            if(this.player.dead == true){
+                return;
+            }
             switch (event.keyCode)
             {
                 case 37:
@@ -103,27 +114,9 @@ var level2 = new Phaser.Class({
                 window.alert("this shouldnt happen");
 
             }
-            if (this.dynamicTrapLayer.visible && this.dynamicTrapLayer.getTileAtWorldXY(this.player.x, this.player.y) !== null )
-            {
-                this.player.destroy();
-                this.player = this.physics.add.sprite(this.spawnPoint.x, this.spawnPoint.y,'agent');
-                this.player.anims.play('idleright',true);
-                camera.startFollow(this.player);
-            }
-            if (this.spikeLayer.visible && this.spikeLayer.getTileAtWorldXY(this.player.x, this.player.y) !== null )
-            {
-                this.player.destroy();
-                this.player = this.physics.add.sprite(this.spawnPoint.x, this.spawnPoint.y,'agent');
-                this.player.anims.play('idleright',true);
-                camera.startFollow(this.player);
-            }
         }.bind(this);
 
-        this.input.keyboard.addKey(37);
-        this.input.keyboard.addKey(38);
-        this.input.keyboard.addKey(39);
-        this.input.keyboard.addKey(40);
-
+        this.input.keyboard.addCapture([37,38,39,40]);
         this.input.keyboard.on('keydown-LEFT', arrowkeyCallback);
         this.input.keyboard.on('keydown-RIGHT', arrowkeyCallback);
         this.input.keyboard.on('keydown-UP', arrowkeyCallback);
@@ -193,13 +186,13 @@ var level2 = new Phaser.Class({
         //     this.player.anims.play('idle',true);
         //     this.camera.startFollow(this.player);
         // }
-        if (this.checkIfPlayerOnSpike (this.spikeIndicesArray, 105))
+        if (this.checkIfPlayerOnSpike (this.spikeIndicesArray, 105) && this.player.dead == false)
         {
-            this.player.destroy();
-            this.player = this.physics.add.sprite(this.spawnPoint.x,this.spawnPoint.y,'agent');
-            this.player.anims.play('idleright',true);
-            this.camera.startFollow(this.player);
+            this.player.dead = true;
+            this.player.anims.play("dead");
+            this.deathTime = time;
         }
+        this.checkDeath(time);
 
         //level1.putTileAt(101 , level1.worldToTileX(this.player.x), level1.worldToTileY(this.player.y), true, this.trapsLayer);
         //console.log(this.backgroundLayer.getTileAtWorldXY(this.player.x, this.player.y));
@@ -231,6 +224,19 @@ var level2 = new Phaser.Class({
 
     }
     ,
+    checkDeath: function (time){
+        if(this.player.dead == true){
+            if(time - this.deathTime >= 1000){
+                this.player.destroy();
+                this.player = this.physics.add.sprite(this.spawnPoint.x,this.spawnPoint.y,'agent');
+                this.player.anims.play('idleright',true);
+                this.player.dead = false;
+                this.camera.startFollow(this.player);
+                //restore keyboard use
+
+            }
+        }
+    },
     prepareSpikeTiles: function(tileArray) //spikes are bigger than 64x64, so have to do some offset
     {
         tileArray.forEach(function(element) {
@@ -263,7 +269,7 @@ var level2 = new Phaser.Class({
                     element.currentIndex %= indicesArray.length;
                     if (indicesArray[element.currentIndex] === deathIndex)
                     {
-                        console.log(element);
+                        //console.log(element);
                         if (element.counter === 0)
                         {
                             level1.putTileAtWorldXY( indicesArray[element.currentIndex], element.renderX, element.renderY, true, this.cameras.main, this.spikeLayer);
