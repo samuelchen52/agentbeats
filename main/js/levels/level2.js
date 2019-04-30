@@ -22,6 +22,7 @@ var level2 = new Phaser.Class({
         level1 = this.add.tilemap('level2');
         level1.setBaseTileSize(64,64);
         this.level1 = level1;
+        console.log(level1);
         //add the tileset
         const tileset = level1.addTilesetImage('tileset'); //covers indices 1 - 100
         const spikes = level1.addTilesetImage('spikes'); //covers indices 101 - 105
@@ -211,6 +212,7 @@ var level2 = new Phaser.Class({
             this.player.dead = true;
             this.player.anims.play("dead");
             this.deathTime = time;
+            this.camera.zoomTo(0.5,500);
         }
         this.checkDeath(time);
 
