@@ -472,6 +472,7 @@ var Win = new Phaser.Class({
             //game.nextLevel set by me
             this.scene.stop();
             music.stop();
+
             console.log(this.game.nextLevel);
             if (this.game.nextLevel == "level3") {
                 console.log("mainmenu");
