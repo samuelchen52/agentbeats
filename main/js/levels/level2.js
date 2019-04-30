@@ -126,7 +126,10 @@ var level2 = new Phaser.Class({
             }
         }.bind(this);
 
-        this.input.keyboard.addCapture([37,38,39,40]);
+        this.input.keyboard.addKey(37);
+        this.input.keyboard.addKey(38);
+        this.input.keyboard.addKey(39);
+        this.input.keyboard.addKey(40);
         this.input.keyboard.on('keydown-LEFT', arrowkeyCallback);
         this.input.keyboard.on('keydown-RIGHT', arrowkeyCallback);
         this.input.keyboard.on('keydown-UP', arrowkeyCallback);
@@ -137,7 +140,7 @@ var level2 = new Phaser.Class({
 
         const camera = this.cameras.main;
         this.camera = camera;
-
+        
         //set up arrows to control camera
         // const cursors =  this.input.keyboard.createCursorKeys();
         // this.scene.get('ingame').controls = new Phaser.Cameras.Controls.FixedKeyControl({
@@ -201,6 +204,13 @@ var level2 = new Phaser.Class({
             this.player.dead = true;
             this.player.anims.play("dead");
             this.deathTime = time;
+            this.camera.zoomTo(0.5,500);
+        }
+        if (this.checkIfPlayerOnLaser (this.verticalLaserArray) && this.player.dead == false)
+        {
+            this.player.dead = true;
+            this.player.anims.play("dead");
+            this.deathTime = time;
         }
         this.checkDeath(time);
 
@@ -232,6 +242,16 @@ var level2 = new Phaser.Class({
         }
         return false;
 
+    },
+    checkIfPlayerOnLaser: function (indicesArray)
+    {
+        var index = level1.getTileAtWorldXY( this.player.x, this.player.y, true, this.cameras.main, this.laserLayer).index;
+        if ( index === 1 || index === -1)
+        {
+            return false;
+        }
+        return true;
+
     }
     ,
     checkDeath: function (time){
@@ -241,7 +261,8 @@ var level2 = new Phaser.Class({
                 this.player = this.physics.add.sprite(this.spawnPoint.x,this.spawnPoint.y,'agent');
                 this.player.anims.play('idleright',true);
                 this.player.dead = false;
-                this.camera.startFollow(this.player);
+                this.cameras.main.pan(0,0,1000,'Linear',false, function(){this.camera.startFollow(this.player)});
+                this.camera.zoomTo(1,500);
                 //restore keyboard use
 
             }
