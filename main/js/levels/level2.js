@@ -202,6 +202,12 @@ var level2 = new Phaser.Class({
             this.player.anims.play("dead");
             this.deathTime = time;
         }
+        if (this.checkIfPlayerOnLaser (this.verticalLaserArray) && this.player.dead == false)
+        {
+            this.player.dead = true;
+            this.player.anims.play("dead");
+            this.deathTime = time;
+        }
         this.checkDeath(time);
 
         //level1.putTileAt(101 , level1.worldToTileX(this.player.x), level1.worldToTileY(this.player.y), true, this.trapsLayer);, level1.worldToTileX(this.player.x), level1.worldToTileY(this.player.y), true, this.trapsLayer);
@@ -231,6 +237,16 @@ var level2 = new Phaser.Class({
             return true;
         }
         return false;
+
+    },
+    checkIfPlayerOnLaser: function (indicesArray)
+    {
+        var index = level1.getTileAtWorldXY( this.player.x, this.player.y, true, this.cameras.main, this.laserLayer).index;
+        if ( index === 1 || index === -1)
+        {
+            return false;
+        }
+        return true;
 
     }
     ,
