@@ -22,38 +22,38 @@ var level1 = new Phaser.Class({
         level1 = this.add.tilemap('level1');
         level1.setBaseTileSize(64,64);
         this.level1 = level1;
+        console.log(level1);
         //add the tileset
         const tileset = level1.addTilesetImage('tileset'); //covers indices 1 - 100
         const spikes = level1.addTilesetImage('spikes'); //covers indices 101 - 105
         const agentstuff = level1.addTilesetImage('agentsprite');
         const lasers = level1.addTilesetImage('lasers'); //covers indices 206 - 211 206 - 208 vertical lasers, 209 - 211 horizontal lasers
         
-        console.log(level1);
         //make the layer(s) from tileset
         this.backgroundLayer = level1.createDynamicLayer('backgroundLayer',tileset);
         this.blockedLayer = level1.createDynamicLayer('blockedLayer',[tileset,agentstuff]);
         //spike layer is made on the spot in this code, NOT in tiled;
         //render spikes
         this.spikeLayer = level1.createBlankDynamicLayer('spikeLayer',spikes);
-        this.spikeTiles = this.findTileset(level1, "spikeObjectLayer");
+        this.spikeTiles = this.findTileLayerObjects(level1, "spikeObjectLayer");
         this.prepareSpikeTiles(this.spikeTiles);
-        this.spikeIndicesArray = [101,102,103,104,105,104,103,102,101];
+        this.spikeGid = this.findTileset(level1, "spikes").firstgid;
+        this.spikeIndicesArray = [this.spikeGid,this.spikeGid + 1,this.spikeGid + 2,this.spikeGid + 3, this.spikeGid + 4,this.spikeGid + 3,this.spikeGid + 2,this.spikeGid + 1,this.spikeGid];
         this.spikeEvent = this.time.addEvent({delay: 25, callback: function(){ this.updateSpikeTiles(this.spikeTiles, this.spikeIndicesArray, 105) }.bind(this), callbackScope: this, loop: true });
 
 
         this.laserLayer = level1.createBlankDynamicLayer('laserLayer', lasers);
-        this.pointerTiles = this.findTileset(level1, "laserObjectLayer"); //have an array of laser pointers, with properties that tell us which way they point
+        this.pointerTiles = this.findTileLayerObjects(level1, "laserObjectLayer"); //have an array of laser pointers, with properties that tell us which way they point
         this.laserTiles = this.prepareLaserTiles(this.pointerTiles);
-        this.horizontalLaserArray = [209, 210, 211, 209, 210, 209, 211 ,210, 1];
-        this.verticalLaserArray = [206,207,208, 207, 206, 208, 206, 208, 1];
-        console.log(this.level1);
+        this.laserGid = this.findTileset(level1, "lasers").firstgid;
+        this.horizontalLaserArray = [ this.laserGid + 3, this.laserGid + 4, this.laserGid + 5];
+        this.verticalLaserArray = [this.laserGid,this.laserGid + 1, this.laserGid + 2];
         this.laserEvent = this.time.addEvent({delay: 50, callback: function(){ this.updateLaserTiles(this.laserTiles, this.verticalLaserArray, this.horizontalLaserArray) }.bind(this), callbackScope: this, loop: true });
-
-
 
          //music
          music = this.sound.add('level1audio',1,true);
          music.play('', {delay: 0.3});
+         music.setLoop(true);
          var laserSound = this.sound.add('laser',1,true);
          laserSound.volume = 0.2;
         //spawn point of player from tiled
@@ -200,7 +200,7 @@ var level1 = new Phaser.Class({
         //     this.player.anims.play('idle',true);
         //     this.camera.startFollow(this.player);
         // }
-        if (this.checkIfPlayerOnSpike (this.spikeIndicesArray, 105) && this.player.dead == false)
+        if (this.checkIfPlayerOnSpike (this.spikeIndicesArray, this.spikeGid + 4) && this.player.dead == false)
         {
             this.player.dead = true;
             this.player.anims.play("dead");
@@ -224,13 +224,25 @@ var level1 = new Phaser.Class({
 
     },
 
-    findTileset(map, key)
+    findTileLayerObjects(map, key)
     {
         for (var i = 0; i < map.objects.length; i++)
         {
             if (map.objects[i].name === key)
             {
                 return map.objects[i].objects;
+            }
+        }
+        window.alert("this shouldnt happen");
+
+    },
+    findTileset(map, key)
+    {
+        for (var i = 0; i < map.tilesets.length; i++)
+        {
+            if (map.tilesets[i].name === key)
+            {
+                return map.tilesets[i];
             }
         }
         window.alert("this shouldnt happen");
@@ -324,7 +336,7 @@ var level1 = new Phaser.Class({
                             level1.putTileAtWorldXY( indicesArray[element.currentIndex], element.renderX, element.renderY, true, this.cameras.main, this.spikeLayer);
                             element.counter ++;
                         }
-                        else if (element.counter === element.wait) //element properties are from TILED
+                        else if (element.counter >= element.wait) //element properties are from TILED
                         {
                             element.counter = 0;
                             element.currentIndex ++;
@@ -333,9 +345,8 @@ var level1 = new Phaser.Class({
                         {
                             element.counter ++;
                         }
-                    }             
-                    else
-                    {
+                    }
+                    else{
                         level1.putTileAtWorldXY( indicesArray[element.currentIndex], element.renderX, element.renderY, true, this.cameras.main, this.spikeLayer);
                         element.currentIndex ++;
                     }
@@ -356,10 +367,12 @@ var level1 = new Phaser.Class({
             }
           }.bind(this));
 
-          pointerArray.forEach(function(element) { //136
+          this.agentGid = this.findTileset(level1, "agentsprite").firstgid;
+          
+          pointerArray.forEach(function(element) { // agentgid + 30
             if (element.direction === "down")
             {
-                level1.putTileAtWorldXY( 136, element.x, element.y - 64 , true, this.cameras.main, this.blockedLayer);
+                level1.putTileAtWorldXY( this.agentGid + 30, element.x, element.y - 64 , true, this.cameras.main, this.blockedLayer);
                 var x = element.x;
                 var y = element.y - 64;
                 while (this.blockedLayer.getTileAtWorldXY(x, y + 64) === null)
@@ -369,17 +382,18 @@ var level1 = new Phaser.Class({
                     object.y = y + 64;
                     object.duration = element.duration;
                     object.delay = element.delay;
+                    object.wait = element.wait;
                     object.direction = "vertical";
                     object.currentIndex = 0;
                     object.counter = 0;
-                    object.anotherCounter = element.duration;
+                    object.fireLaser = true;
                     laserTiles.push(object);
                     y += 64;
                 }
             }
-            else if (element.direction === "up") // 116
+            else if (element.direction === "up") //agentgid + 10
             {
-                level1.putTileAtWorldXY( 116, element.x, element.y - 64 , true, this.cameras.main, this.blockedLayer);
+                level1.putTileAtWorldXY( this.agentGid + 10, element.x, element.y - 64 , true, this.cameras.main, this.blockedLayer);
                 var x = element.x;
                 var y = element.y - 64;
                 while (this.blockedLayer.getTileAtWorldXY(x , y - 64) === null)
@@ -389,17 +403,18 @@ var level1 = new Phaser.Class({
                     object.y = y - 64;
                     object.duration = element.duration;
                     object.delay = element.delay;
+                    object.wait = element.wait;
                     object.direction = "vertical";
                     object.currentIndex = 0;
                     object.counter = 0;
-                    object.anotherCounter = element.duration;                                                             
+                    object.fireLaser = true;                                                             
                     laserTiles.push(object);
                     y -= 64;
                 }
             }
-            else if (element.direction === "right") //126
+            else if (element.direction === "right") // agentgid + 20
             {
-                level1.putTileAtWorldXY( 126, element.x, element.y - 64 , true, this.cameras.main, this.blockedLayer);
+                level1.putTileAtWorldXY( this.agentGid + 20, element.x, element.y - 64 , true, this.cameras.main, this.blockedLayer);
                 var x = element.x;
                 var y = element.y - 64;
                 while (this.blockedLayer.getTileAtWorldXY(x + 64, y) === null)
@@ -409,17 +424,18 @@ var level1 = new Phaser.Class({
                     object.y = y;
                     object.duration = element.duration;
                     object.delay = element.delay;
+                    object.wait = element.wait;
                     object.direction = "horizontal";
                     object.currentIndex = 0;
                     object.counter = 0;
-                    object.anotherCounter = element.duration;
+                    object.fireLaser = true;
                     laserTiles.push(object);
                     x += 64;
                 }
             }
-            else // left //146
+            else // left,  agentgid + 40
             {
-                level1.putTileAtWorldXY( 146, element.x, element.y - 64 , true, this.cameras.main, this.blockedLayer);
+                level1.putTileAtWorldXY( this.agentGid + 40, element.x, element.y - 64 , true, this.cameras.main, this.blockedLayer);
                 var x = element.x;
                 var y = element.y - 64;
                 while (this.blockedLayer.getTileAtWorldXY(x - 64, y) === null)
@@ -429,10 +445,11 @@ var level1 = new Phaser.Class({
                     object.y = y;
                     object.duration = element.duration;
                     object.delay = element.delay;
+                    object.wait = element.wait;
                     object.direction = "horizontal";
                     object.currentIndex = 0;
                     object.counter = 0;
-                    object.anotherCounter = element.duration;
+                    object.fireLaser = true;
                     laserTiles.push(object);
                     x -= 64;
                 }
@@ -443,40 +460,49 @@ var level1 = new Phaser.Class({
     },
     updateLaserTiles: function(tileArray, verticalLaserArray, horizontalLaserArray)
     {
+        var randomIndex = Math.floor(Math.random()*verticalLaserArray.length);
         tileArray.forEach(function(element) {
             if (element.delay > 0)
             {
                 element.delay --;
             }
             else{
-                    
-                        element.currentIndex %= verticalLaserArray.length; //or horizontalLaserArray.length, they will be the same length
-                        if (element.currentIndex === verticalLaserArray.length - 1)
+                        if (!element.fireLaser)
                         {
                             if (element.counter === 0)
                             {
-                                level1.putTileAtWorldXY( horizontalLaserArray[element.currentIndex], element.x, element.y, true, this.cameras.main, this.laserLayer);
+                                level1.putTileAtWorldXY( -1, element.x, element.y, true, this.cameras.main, this.laserLayer);
                                 element.counter ++;
                             }
-                            else if (element.counter === element.duration)
+                            else if (element.counter >= element.wait)
                             {
                                 element.counter = 0; 
-                                element.currentIndex ++;
+                                element.fireLaser = true;
                             }
                             else{
                                 element.counter ++;
                             }
                         }
-                        else{
-                            if (element.direction === "horizontal")
+                        else //firelaser is true
+                        {
+                            if (element.counter < element.duration)
                             {
-                                level1.putTileAtWorldXY( horizontalLaserArray[element.currentIndex], element.x, element.y, true, this.cameras.main, this.laserLayer);
+                                if (element.direction === "horizontal")
+                                {
+                                    level1.putTileAtWorldXY( horizontalLaserArray[randomIndex], element.x, element.y, true, this.cameras.main, this.laserLayer);
+                                }
+                                else //else vertical
+                                {
+                                    level1.putTileAtWorldXY( verticalLaserArray[randomIndex], element.x, element.y, true, this.cameras.main, this.laserLayer);
+                                }
+                                element.counter ++;
                             }
-                            else //else vertical
+                            else // (element.counter >= element.duration)
                             {
-                                level1.putTileAtWorldXY( verticalLaserArray[element.currentIndex], element.x, element.y, true, this.cameras.main, this.laserLayer);
+                                element.counter = 0; 
+                                element.fireLaser = false;
                             }
-                            element.currentIndex ++;
+
                     }
                     }
           }.bind(this));

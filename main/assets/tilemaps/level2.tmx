@@ -472,7 +472,7 @@
    <properties>
     <property name="delay" type="int" value="5"/>
     <property name="direction" value="up"/>
-    <property name="duration" type="int" value="15"/>
+    <property name="duration" type="int" value="500"/>
     <property name="wait" type="int" value="50"/>
    </properties>
   </object>

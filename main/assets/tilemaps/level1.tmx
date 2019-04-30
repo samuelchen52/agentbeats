@@ -89,6 +89,9 @@
 </data>
  </layer>
  <objectgroup id="3" name="spikeObjectLayer">
+  <properties>
+   <property name="wait" type="int" value="0"/>
+  </properties>
   <object id="1" gid="101" x="576" y="1024" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="0"/>
@@ -110,6 +113,7 @@
     <property name="delay" type="int" value="5"/>
     <property name="direction" value="down"/>
     <property name="duration" type="int" value="20"/>
+    <property name="wait" type="int" value="20"/>
    </properties>
   </object>
   <object id="4" name="laserPointer" gid="21" x="1472" y="1344" width="64" height="64">
@@ -117,6 +121,7 @@
     <property name="delay" type="int" value="0"/>
     <property name="direction" value="right"/>
     <property name="duration" type="int" value="15"/>
+    <property name="wait" type="int" value="20"/>
    </properties>
   </object>
  </objectgroup>

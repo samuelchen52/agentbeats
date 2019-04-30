@@ -45,6 +45,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":10
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":10
                         }],
                  "rotation":0,
                  "type":"",
@@ -68,6 +73,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":10
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":10
                         }],
                  "rotation":0,
                  "type":"",
@@ -77,6 +87,12 @@
                  "y":1024
                 }],
          "opacity":1,
+         "properties":[
+                {
+                 "name":"wait",
+                 "type":"int",
+                 "value":0
+                }],
          "type":"objectgroup",
          "visible":true,
          "x":0,
@@ -107,6 +123,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":20
                         }],
                  "rotation":0,
                  "type":"",
@@ -135,6 +156,11 @@
                          "name":"duration",
                          "type":"int",
                          "value":15
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":20
                         }],
                  "rotation":0,
                  "type":"",
@@ -159,12 +185,18 @@
                  "height":64,
                  "id":5,
                  "name":"Spawn Point",
+                 "properties":[
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":10
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":543.296572280179,
-                 "y":986.74217585693
+                 "x":543.297,
+                 "y":986.742
                 }],
          "opacity":1,
          "type":"objectgroup",
