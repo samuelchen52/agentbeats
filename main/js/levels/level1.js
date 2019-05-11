@@ -5,14 +5,12 @@ var level1 = new Phaser.Class({
     Extends: Phaser.Scene,
 
     initialize:
-
+    
     function level1 ()
     {
         this.key = "level1";
         Phaser.Scene.call(this, { key: 'level1' });
     },
-
-
     create: function ()
     {
         //variables for use
@@ -45,11 +43,28 @@ var level1 = new Phaser.Class({
         this.laserLayer = level1.createBlankDynamicLayer('laserLayer', lasers);
         this.pointerTiles = this.findTileLayerObjects(level1, "laserObjectLayer"); //have an array of laser pointers, with properties that tell us which way they point
         this.laserTiles = this.prepareLaserTiles(this.pointerTiles);
+        const musicLaser = this.laserTiles;
         this.laserGid = this.findTileset(level1, "lasers").firstgid;
         this.horizontalLaserArray = [ this.laserGid + 3, this.laserGid + 4, this.laserGid + 5];
+        const musicLaserArrayX = this.horizontalLaserArray;
         this.verticalLaserArray = [this.laserGid,this.laserGid + 1, this.laserGid + 2];
-        this.laserEvent = this.time.addEvent({delay: 50, callback: function(){ this.updateLaserTiles(this.laserTiles, this.verticalLaserArray, this.horizontalLaserArray) }.bind(this), callbackScope: this, loop: true });
-
+        const musicLaserArrayY = this.verticalLaserArray;
+       // this.laserEvent = this.time.addEvent({delay: 50, callback: function(){ this.updateLaserTiles(this.laserTiles, this.verticalLaserArray, this.horizontalLaserArray) }.bind(this), callbackScope: this, loop: true });
+        //making our music
+        const synth = new Tone.MembraneSynth().toMaster();
+        const notes = ["C3", "Eb3", "G3", "Bb3"];
+        const fireLaser = (x) => this.shootLaser(x);
+        const synthPart = new Tone.Sequence(
+            function(time, note){
+                synth.triggerAttackRelease(note, "10hz", time);
+                fireLaser(musicLaser);
+            },
+            notes,
+            "4n"
+        );
+        synthPart.start();
+        Tone.Transport.start();
+        //end music creation
 
         this.objectLayer = level1.createBlankDynamicLayer('objectlayer', tileset);
         this.endPoint = level1.findObject("objectsLayer",obj => obj.name ==="End");
@@ -59,7 +74,7 @@ var level1 = new Phaser.Class({
 
          //music
          music = this.sound.add('level1audio',1,true);
-         music.play('', {delay: 0.3,loop:true});
+         //music.play('', {delay: 0.3,loop:true});
 
          var laserSound = this.sound.add('laser',1,true);
          laserSound.volume = 0.2;
@@ -151,6 +166,7 @@ var level1 = new Phaser.Class({
             if (event.key === "2")
             {
             music.stop();
+            
             this.scene.start('level2');
             }
             else if(event.key === "I" || event.key === "i")
@@ -201,6 +217,7 @@ var level1 = new Phaser.Class({
 
     
         }.bind(this));
+        
         //setInterval(function(){ this.updateSpikeTiles(this.spikeTiles, [101,102,103,104,105,105,105,105,105,104,103,102,101]) }.bind(this), 100);
         //SPIKES
         //this.SpikeEvent = this.time.addEvent({delay:0, callback: function() {this.updateSpikeTiles(spikeTiles, [101,102,103,104,105])}.bind(this), callbackScope: this, loop: true});
@@ -240,6 +257,8 @@ var level1 = new Phaser.Class({
             }
         
         this.checkDeath(time);
+        
+        this.animateLaser(this.laserTiles,this.verticalLaserArray,this.horizontalLaserArray);
        }
 
         //level1.putTileAt(101 , level1.worldToTileX(this.player.x), level1.worldToTileY(this.player.y), true, this.trapsLayer);, level1.worldToTileX(this.player.x), level1.worldToTileY(this.player.y), true, this.trapsLayer);
@@ -297,9 +316,12 @@ var level1 = new Phaser.Class({
     {
         if (level1.getTileAtWorldXY( this.player.x, this.player.y, true, this.cameras.main, this.objectLayer).index !== -1)
         {
+            
             this.game.nextLevel = "level2";
             this.game.currentLevel = this.key;
             music.pause();
+            synthPart.stop();
+            Tone.Transport.stop();
             this.scene.pause(this.key);
             this.scene.launch('win');
 
@@ -544,6 +566,43 @@ var level1 = new Phaser.Class({
                     }
                     }
           }.bind(this));
+    },
+    //new laser functions
+    //toggles laser on and off. put this in music callback
+    shootLaser: function(tileArray)
+    {
+        tileArray.forEach(function(element){
+            if(!element.fireLaser)
+            {
+                element.fireLaser = true;
+            }
+            else{
+                element.fireLaser = false;
+            }
+        })
+    },
+    //if laser is on, animates it. should be checked every frame, so put it in update
+    animateLaser: function(tileArray, verticalLaserArray, horizontalLaserArray)
+    {
+        var camera = this.cameras.main;
+        var laserLayer = this.laserLayer;
+        var randomIndex = Math.floor(Math.random()*verticalLaserArray.length);
+        tileArray.forEach(function(element){
+            if(element.fireLaser){
+                if (element.direction === "horizontal"){
+                    level1.putTileAtWorldXY(horizontalLaserArray[randomIndex], element.x, element.y, true, camera, laserLayer);
+                }
+                else
+                {
+
+                    level1.putTileAtWorldXY( verticalLaserArray[randomIndex], element.x, element.y, true, camera, laserLayer);
+                }
+            }
+            else{
+                //if laser not being fired
+                level1.putTileAtWorldXY( -1, element.x, element.y, true, camera, laserLayer);
+            }
+        })
     }
 
 }
