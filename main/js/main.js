@@ -28,6 +28,7 @@ var Preloader = new Phaser.Class({
     {
         this.load.image('splash', './assets/screens/splashbeats.png');
         this.load.image('mainmenu', './assets/screens/mainmenunew.png');
+        this.load.image('mainmenu2', './assets/screens/mainmenunew2.png');
         this.load.image('levelselect', './assets/screens/levelselect.png');
         this.load.image('controls', './assets/screens/controls.png');
         this.load.image('help', './assets/screens/Help.png');
@@ -368,7 +369,6 @@ var Paused = new Phaser.Class({
     Extends: Phaser.Scene,
 
     initialize:
-
     function Paused ()
     {
         Phaser.Scene.call(this, { key: 'paused' });
@@ -444,7 +444,6 @@ var Paused = new Phaser.Class({
         
         
     }
-
 });
 
 
