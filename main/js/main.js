@@ -472,13 +472,15 @@ var Win = new Phaser.Class({
             //game.nextLevel set by me
             this.scene.stop();
             music.stop();
-            //temporary for benchmark 3 bc no level 3 yet
-            if(this.game.nextLevel === "level3"){
-                alert("level 3 not implemented yet, please refresh to restart the game");
+
+            console.log(this.game.nextLevel);
+            if (this.game.nextLevel == "level3") {
+                console.log("mainmenu");
+                this.scene.start('level2');
             }
-            else{
-                this.scene.start(this.game.nextLevel);
-            }
+            else {
+            this.scene.start(this.game.nextLevel);
+        }
         }, this);
 
     }
