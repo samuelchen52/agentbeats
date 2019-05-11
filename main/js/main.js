@@ -26,8 +26,8 @@ var Preloader = new Phaser.Class({
 
     preload: function ()
     {
-        this.load.image('splash', './assets/screens/Splash.png');
-        this.load.image('mainmenu', './assets/screens/Mainmenu.png');
+        this.load.image('splash', './assets/screens/splashbeats.png');
+        this.load.image('mainmenu', './assets/screens/mainmenunew.png');
         this.load.image('levelselect', './assets/screens/levelselect.png');
         this.load.image('controls', './assets/screens/controls.png');
         this.load.image('help', './assets/screens/Help.png');
@@ -117,19 +117,19 @@ var MainMenu = new Phaser.Class({
         //music
         this.add.image(0, 0, 'mainmenu').setOrigin(0);
 
-        var something = this.add.text( this.game.renderer.width / 2 - 50, this.game.renderer.height / 2 + 50, '- PLAY', {
-            fontFamily: 'neonabsolute',
+        var something = this.add.text( this.game.renderer.width / 2 + 180, this.game.renderer.height / 2 + 10, '- PLAY', {
+            fontFamily: 'jetsetitalic',
             fontSize: 30,
         }).setOrigin().setInteractive().key = 1;
         
-        this.add.text( this.game.renderer.width / 2 - 50, this.game.renderer.height / 2 + 150, '- HELP', {
-            fontFamily: 'neonabsolute',
+        this.add.text( this.game.renderer.width / 2 + 180, this.game.renderer.height / 2 + 110, '- HELP', {
+            fontFamily: 'jetsetitalic',
             fontSize: 30,
             
         }).setOrigin().setInteractive().key = 2;
 
-        this.add.text( this.game.renderer.width / 2 + 3, this.game.renderer.height / 2 + 100, '- CONTROLS', {
-            fontFamily: 'neonabsolute',
+        this.add.text( this.game.renderer.width / 2 + 180, this.game.renderer.height / 2 + 60, '- CONTROLS', {
+            fontFamily: 'jetsetitalic',
             fontSize: 30,
             
         }).setOrigin().setInteractive().key = 3;
