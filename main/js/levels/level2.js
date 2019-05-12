@@ -38,8 +38,8 @@ var level2 = new Phaser.Class({
         this.spikeTiles = this.findTileLayerObjects(level1, "spikeObjectLayer");
         this.prepareSpikeTiles(this.spikeTiles);
         this.spikeGid = this.findTileset(level1, "spikes").firstgid;
-        this.spikeIndicesArray = [this.spikeGid,this.spikeGid + 1,this.spikeGid + 2,this.spikeGid + 3, this.spikeGid + 4,this.spikeGid + 3,this.spikeGid + 2,this.spikeGid + 1,this.spikeGid];
-        this.spikeEvent = this.time.addEvent({delay: 25, callback: function(){ this.updateSpikeTiles(this.spikeTiles, this.spikeIndicesArray, 105) }.bind(this), callbackScope: this, loop: true });
+        this.spikeIndicesArray = [this.spikeGid,this.spikeGid + 1,this.spikeGid + 2,this.spikeGid + 1,this.spikeGid];
+        this.spikeEvent = this.time.addEvent({delay: 25, callback: function(){ this.updateSpikeTiles(this.spikeTiles, this.spikeIndicesArray, 102) }.bind(this), callbackScope: this, loop: true });
 
 
         this.laserLayer = level1.createBlankDynamicLayer('laserLayer', lasers);
@@ -224,7 +224,7 @@ var level2 = new Phaser.Class({
         // }
          if (!this.invincible)
          {
-            if (this.checkIfPlayerOnSpike (this.spikeIndicesArray, this.spikeGid + 4) && this.player.dead == false)
+            if (this.checkIfPlayerOnSpike (this.spikeIndicesArray, this.spikeGid + 2) && this.player.dead == false)
             {
                 this.player.dead = true;
                 this.player.anims.play("dead");

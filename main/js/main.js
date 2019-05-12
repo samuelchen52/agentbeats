@@ -39,7 +39,7 @@ var Preloader = new Phaser.Class({
         //TILES
         this.load.image('tileset','./assets/tilesets/tileset.png');
         this.load.image('agentsprite','./assets/sprites/agentsprite.png');
-        this.load.image('spikes','./assets/sprites/spikes.png');
+        this.load.image('spikes','./assets/sprites/spikesnew.png');
         this.load.image('lasers','./assets/sprites/lasers.png');
 
         this.load.tilemapTiledJSON('level1','./assets/tilemaps/level1.json');
@@ -48,7 +48,7 @@ var Preloader = new Phaser.Class({
 
         //SPRITESHEETS
         this.load.spritesheet('agent','./assets/sprites/agentsprite.png',
-        {frameWidth: 64, frameHeight: 75}
+        {frameWidth: 64, frameHeight: 64}
         );
 
         //SOUNDS
@@ -249,10 +249,12 @@ var LevelSelect = new Phaser.Class({
 
                 case 1: this.scene.start('level1');
                 music.stop();
+                Tone.Transport.stop();
                 break;
 
                 case 2: this.scene.start('level2');
                 music.stop();
+                Tone.Transport.stop();
                 break;
 
             }
@@ -419,12 +421,14 @@ var Paused = new Phaser.Class({
                 this.scene.stop(this.game.currentLevel);
                 this.scene.start(this.game.currentLevel);
                 music.stop();
+                Tone.Transport.stop();
                 break;
 
                 case 2: 
                 this.scene.stop(this.game.currentLevel);
                 this.scene.start('levelselect');
                 music.stop();
+                Tone.Transport.stop();
                 break;
                 
                 case 3: 
@@ -435,6 +439,7 @@ var Paused = new Phaser.Class({
                 // this.scene.get('ingame').controls.up.isDown = false;
                 // this.scene.get('ingame').controls.down.isDown = false;
                 music.resume();
+                Tone.Transport.start();
                 this.scene.resume(this.game.currentLevel);
                 break;
 
@@ -471,6 +476,7 @@ var Win = new Phaser.Class({
             //game.nextLevel set by me
             this.scene.stop();
             music.stop();
+            Tone.Transport.stop();
 
             console.log(this.game.nextLevel);
             if (this.game.nextLevel == "level3") {
