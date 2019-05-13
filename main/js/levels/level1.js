@@ -159,6 +159,9 @@ var level1 = new Phaser.Class({
 
             }
             this.checkIfPlayerWin();
+            //TIMER COORD
+            me.timeLabel.setX(this.player.x-20);
+            me.timeLabel.setY(this.player.y-200);
         }.bind(this);
 
         this.input.keyboard.addKey(37);
@@ -230,7 +233,16 @@ var level1 = new Phaser.Class({
 
     
         }.bind(this));
-        
+        //TIMER
+        var me = this;
+
+	    me.startTime = new Date();
+	    me.totalTime = 120;
+	    me.timeElapsed = 0;
+
+	    me.createTimer();
+
+        this.gameTimer = this.time.addEvent({ delay: 100, callback: this.updateTimer, callbackScope: this, loop: true });
         //setInterval(function(){ this.updateSpikeTiles(this.spikeTiles, [101,102,103,104,105,105,105,105,105,104,103,102,101]) }.bind(this), 100);
         //SPIKES
         //this.SpikeEvent = this.time.addEvent({delay:0, callback: function() {this.updateSpikeTiles(spikeTiles, [101,102,103,104,105])}.bind(this), callbackScope: this, loop: true});
@@ -279,6 +291,35 @@ var level1 = new Phaser.Class({
         //console.log(this.objectsLayer);
 
         
+
+    },
+    createTimer: function() {
+        var me = this;
+        me.timeLabel = me.add.text(this.player.x-20, this.player.y-200, "00:00", {font: "20px jetset", fill: "#fff"}); 
+        me.timeLabel.align = 'center';
+    },
+    updateTimer: function(){
+
+        var me = this;
+        //console.log(me.timeLabel);
+        var currentTime = new Date();
+        var timeDifference = me.startTime.getTime() - currentTime.getTime();
+
+        //Time elapsed in seconds
+        me.timeElapsed = Math.abs(timeDifference / 1000);
+
+        //Convert seconds into minutes and seconds
+        var minutes = Math.floor(me.timeElapsed / 60);
+        var seconds = Math.floor(me.timeElapsed) - (60 * minutes);
+
+        //Display minutes, add a 0 to the start if less than 10
+        var result = (minutes < 10) ? "0" + minutes : minutes; 
+
+        //Display seconds, add a 0 to the start if less than 10
+        result += (seconds < 10) ? ":0" + seconds : ":" + seconds; 
+
+        me.timeLabel.text = result;
+        console.log(this.player.x);
 
     },
 
