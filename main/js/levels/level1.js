@@ -17,6 +17,7 @@ var level1 = new Phaser.Class({
         var deathTime = 0;
         //this.add.image(0, 0, 'ingame').setOrigin(0);
         //make our map
+        //pause var
         level1 = this.add.tilemap('level1');
         level1.setBaseTileSize(64,64);
         this.level1 = level1;
@@ -182,7 +183,6 @@ var level1 = new Phaser.Class({
         this.input.keyboard.on('keydown-UP', arrowkeyCallback);
         this.input.keyboard.on('keydown-DOWN', arrowkeyCallback);
 
-
         //CHEATS
         this.invincible = false;
         this.input.keyboard.on('keydown', function (event) {
@@ -196,8 +196,24 @@ var level1 = new Phaser.Class({
             {
             this.invincible = !this.invincible;
             }
-
         }, this);
+
+        document.onkeydown = function(evt) {
+            evt = evt || window.event;
+            if (evt.keyCode == 27) {
+                pause = true;
+                this.scene.pause(this.key);
+                music.pause();
+            
+                Tone.Transport.pause();
+                //launch paused screen
+                this.game.currentLevel = this.key;
+                this.scene.launch('paused');
+                
+                //pause itself
+            }
+        }.bind(this);
+
     
 
         const camera = this.cameras.main;
@@ -292,7 +308,6 @@ var level1 = new Phaser.Class({
         
        // this.animateLaser(this.laserTiles,this.verticalLaserArray,this.horizontalLaserArray);
        }
-
         //level1.putTileAt(101 , level1.worldToTileX(this.player.x), level1.worldToTileY(this.player.y), true, this.trapsLayer);, level1.worldToTileX(this.player.x), level1.worldToTileY(this.player.y), true, this.trapsLayer);
        
         
@@ -393,6 +408,10 @@ var level1 = new Phaser.Class({
                 this.player.dead = false;
                 this.cameras.main.pan(0,0,1000,'Linear',false, function(){this.camera.startFollow(this.player)});
                 this.camera.zoomTo(1,500);
+                //reset timer
+                var me = this;
+                me.timeLabel.setX(this.player.x-20);
+                me.timeLabel.setY(this.player.y-200);
                 //restore keyboard use
 
             }
