@@ -35,6 +35,7 @@ var level1 = new Phaser.Class({
         //render spikes
         this.spikeLayer = level1.createBlankDynamicLayer('spikeLayer',spikes);
         this.spikeTiles = this.findTileLayerObjects(level1, "spikeObjectLayer");
+        console.log(this.spikeTiles);
         this.prepareSpikeTiles(this.spikeTiles);
         this.spikeGid = this.findTileset(level1, "spikes").firstgid;
         this.spikeIndicesArray = [this.spikeGid,this.spikeGid + 1,this.spikeGid + 2,this.spikeGid + 1,this.spikeGid];
@@ -70,7 +71,7 @@ var level1 = new Phaser.Class({
         this.lasercounter = 0;
         this.spikeDuration = 6;
         this.spikeCounter = 0;
-        this.maxSpikeCounter = 1;
+        this.maxSpikeCounter = 2;
         //const fireLaser = (x) => this.shootLaser(x);
         const synthPart = new Tone.Sequence(
             function(time, note){
@@ -400,7 +401,7 @@ var level1 = new Phaser.Class({
             this.game.nextLevel = "level2";
             this.game.currentLevel = this.key;
             music.pause();
-            synthPart.stop();
+            
             Tone.Transport.stop();
             this.scene.pause(this.key);
             this.scene.launch('win');
@@ -427,6 +428,7 @@ var level1 = new Phaser.Class({
     },
     prepareSpikeTiles: function(tileArray) //spikes are bigger than 64x64, so have to do some offset
     {
+        console.log(tileArray);
         tileArray.forEach(function(element) {
             element.renderX = element.x;
             element.renderY = element.y * 2 - 256;
@@ -715,7 +717,7 @@ var level1 = new Phaser.Class({
         var me = this;
         for(let element of tileArray){
             if(element.delay > me.spikeCounter){
-                break;
+                continue;
             }
             if(element.continue == true)
             if(indicesArray[element.currentIndex] == deathIndex){
