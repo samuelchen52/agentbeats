@@ -205,6 +205,30 @@ var LevelSelect = new Phaser.Class({
             
         }).setOrigin().setInteractive().key = 2;
 
+        var level3 = this.add.text( 655,190, 'level 3', {
+            fontFamily: 'retrocycles',
+            fontSize: 40,
+            
+        }).setOrigin().setInteractive().key = 3;
+
+        var level4 = this.add.text( 125,370, 'level 4', {
+            fontFamily: 'retrocycles',
+            fontSize: 40,
+            
+        }).setOrigin().setInteractive().key = 4;
+
+        var level5 = this.add.text( 400,370, 'level 5', {
+            fontFamily: 'retrocycles',
+            fontSize: 40,
+            
+        }).setOrigin().setInteractive().key = 5;
+
+        var level6 = this.add.text( 655,370, 'level 6', {
+            fontFamily: 'retrocycles',
+            fontSize: 40,
+            
+        }).setOrigin().setInteractive().key = 6;
+
 
         // back.on('pointerover', function () {
 
@@ -253,6 +277,26 @@ var LevelSelect = new Phaser.Class({
                 break;
 
                 case 2: this.scene.start('level2');
+                music.stop();
+                Tone.Transport.stop();
+                break;
+
+                case 3: this.scene.start('level3');
+                music.stop();
+                Tone.Transport.stop();
+                break;
+
+                case 4: this.scene.start('level4');
+                music.stop();
+                Tone.Transport.stop();
+                break;
+
+                case 5: this.scene.start('level5');
+                music.stop();
+                Tone.Transport.stop();
+                break;
+
+                case 6: this.scene.start('level6');
                 music.stop();
                 Tone.Transport.stop();
                 break;
@@ -364,6 +408,10 @@ var Help = new Phaser.Class({
 
 var level1 = this.levels.level1;
 var level2 = this.levels.level2;
+var level3 = this.levels.level3;
+var level4 = this.levels.level4;
+var level5 = this.levels.level5;
+var level6 = this.levels.level6;
 
 
 var Paused = new Phaser.Class({
@@ -502,7 +550,7 @@ var config = {
     autoCenter: true,
     //looks like
     //it initializes all the sceneobjects, only calls create and whatnot if active is true (true by default for first sceneobject)
-    scene: [ Preloader, Splash, MainMenu, LevelSelect, Controls, Help, level1, level2, Paused, Win],
+    scene: [ Preloader, Splash, MainMenu, LevelSelect, Controls, Help, level1, level2, level3, level4, level5, level6, Paused, Win],
     //physics options
     physics: {
         default: "arcade",

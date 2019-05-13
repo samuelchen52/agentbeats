@@ -1,15 +1,15 @@
 this.levels = this.levels || {};
 
-var level2 = new Phaser.Class({
+var level5 = new Phaser.Class({
 
     Extends: Phaser.Scene,
 
     initialize:
 
-    function level2 ()
+    function level5 ()
     {
-        this.key = "level2";
-        Phaser.Scene.call(this, { key: 'level2' });
+        this.key = "level5";
+        Phaser.Scene.call(this, { key: 'level5' });
     },
 
 
@@ -549,4 +549,4 @@ var level2 = new Phaser.Class({
 }
 );
 
-this.levels.level2 = level2;
+this.levels.level5 = level5;
