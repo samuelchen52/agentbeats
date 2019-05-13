@@ -68,7 +68,9 @@ var level1 = new Phaser.Class({
           ];
         var me = this;
         this.lasercounter = 0;
-        this.spikeduration = 6;
+        this.spikeDuration = 6;
+        this.spikeCounter = 0;
+        this.maxSpikeCounter = 1;
         //const fireLaser = (x) => this.shootLaser(x);
         const synthPart = new Tone.Sequence(
             function(time, note){
@@ -77,6 +79,12 @@ var level1 = new Phaser.Class({
                 me.fireLaser = me.time.addEvent({delay:50, callback: function(){me.animateLaser(musicLaser, musicLaserArrayY, musicLaserArrayX)}.bind(me), callbackScope: me, repeat: 6});
                 me.shootSpikes(me.spikeTiles);
                 me.fireSpikes = me.time.addEvent({delay:20, callback: function(){me.animateSpikes(me.spikeTiles,me.spikeIndicesArray, 103)}.bind(me), callbackScope: me, repeat: 11});
+                if(me.spikeCounter == me.maxSpikeCounter ){
+                    me.spikeCounter = 0;
+                }
+                else{
+                    me.spikeCounter++;
+                }
                 me.lasercounter = 0;
                 
             },
@@ -704,16 +712,11 @@ var level1 = new Phaser.Class({
     },
     animateSpikes: function (tileArray, indicesArray, deathIndex)
     {
-        //level1.putTileAtWorldXY(101, this.player.x, this.player.y * 2 - 64, true, this.cameras.main, this.spikeLayer);
-        //for some reason, putTileAtWorldXY puts the tile based on the tile height / width, i.e. goes to the location at (width/ tilewidth, height/tileheight)
-
-        //tileArray holds an array of objects representing tiles in the layer. they arent ACTUALLY tiles in the layer
-        //they have all the custom properties we put in from TILED, and we render all the tiles based on these objects
-        //currentIndex refers to index in the indicesArray
         var me = this;
-        
-        tileArray.forEach(function(element) {
-            //console.log(element.currentIndex);
+        for(let element of tileArray){
+            if(element.delay > me.spikeCounter){
+                break;
+            }
             if(element.continue == true)
             if(indicesArray[element.currentIndex] == deathIndex){
 
@@ -721,7 +724,7 @@ var level1 = new Phaser.Class({
                 level1.putTileAtWorldXY(indicesArray[element.currentIndex], element.renderX,element.renderY, true, me.cameras.main, me.spikeLayer);
                 element.counter++;
                 }
-                else if (element.counter == me.spikeduration){
+                else if (element.counter == me.spikeDuration){
                     element.counter = 0;
                     element.currentIndex++;
                 }
@@ -738,7 +741,7 @@ var level1 = new Phaser.Class({
                 level1.putTileAtWorldXY(indicesArray[element.currentIndex], element.renderX, element.renderY, true, me.cameras.main, me.spikeLayer);
                 element.currentIndex++;
             }
-          })
+        }
         
     }
 

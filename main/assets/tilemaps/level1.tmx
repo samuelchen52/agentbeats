@@ -101,7 +101,7 @@
   </object>
   <object id="2" gid="101" x="768" y="1024" width="64" height="128">
    <properties>
-    <property name="delay" type="int" value="0"/>
+    <property name="delay" type="int" value="1"/>
     <property name="duration" type="int" value="10"/>
     <property name="wait" type="int" value="10"/>
    </properties>
