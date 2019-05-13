@@ -39,7 +39,7 @@ var level2 = new Phaser.Class({
         this.prepareSpikeTiles(this.spikeTiles);
         this.spikeGid = this.findTileset(level1, "spikes").firstgid;
         this.spikeIndicesArray = [this.spikeGid,this.spikeGid + 1,this.spikeGid + 2,this.spikeGid + 1,this.spikeGid];
-        this.spikeEvent = this.time.addEvent({delay: 25, callback: function(){ this.updateSpikeTiles(this.spikeTiles, this.spikeIndicesArray, 102) }.bind(this), callbackScope: this, loop: true });
+        this.spikeEvent = this.time.addEvent({delay: 25, callback: function(){ this.updateSpikeTiles(this.spikeTiles, this.spikeIndicesArray, this.spikeGid + 2) }.bind(this), callbackScope: this, loop: true });
 
 
         this.laserLayer = level1.createBlankDynamicLayer('laserLayer', lasers);
