@@ -56,10 +56,10 @@ var level4 = new Phaser.Class({
         level1.putTileAtWorldXY( this.endPoint.gid, this.endPoint.x , this.endPoint.y - 64, true, this.cameras.main, this.objectLayer);
 
         //checkpoint
-        this.check = -1;
-        this.checkpoint = level1.findObject("objectsLayer", obj => obj.name === "Checkpoint");
+        //this.check = -1;
+        //this.checkpoint = level1.findObject("objectsLayer", obj => obj.name === "Checkpoint");
         //this.checkpoint2 = level1.findObject("objectsLayer", obj => obj.name === "Checkpoint2");
-        this.backgroundLayer.getTileAtWorldXY(this.checkpoint.x, this.checkpoint.y).tint = 0x0f0ff00;
+        //this.backgroundLayer.getTileAtWorldXY(this.checkpoint.x, this.checkpoint.y).tint = 0x0f0ff00;
         //this.backgroundLayer.getTileAtWorldXY(this.checkpoint2.x, this.checkpoint2.y).tint = 0x0f0ff00;
 
         //65344 green
@@ -275,7 +275,7 @@ var level4 = new Phaser.Class({
                 this.deathTime = time;
                 this.camera.zoomTo(0.5,500);
             }
-            this. checkIfPlayerCheckpoint();
+            ///this. checkIfPlayerCheckpoint();
             this.checkDeath(time);
         }
 
