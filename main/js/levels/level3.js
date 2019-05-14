@@ -86,7 +86,7 @@ var level3 = new Phaser.Class({
 
             }.bind(this), callbackScope: this, loop: true });
          music.play('', {delay: 0.0,loop:true, seek: 0});
-
+         music.volume = 2.5;
          console.log(music);
          var laserSound = this.sound.add('laser',1,true);
          laserSound.volume = 0.2;

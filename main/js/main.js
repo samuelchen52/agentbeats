@@ -87,11 +87,12 @@ var Splash = new Phaser.Class({
 
     create: function ()
     {
-        this.add.image(0, 0, 'splash').setOrigin(0);
-        //music
         music = this.sound.add('mainmenu',1,true);
         music.play('', {loop:true});
-        music.volume = 0.3;
+        music.volume = 0.2;
+        this.add.image(0, 0, 'splash').setOrigin(0);
+        //music
+        
         this.input.keyboard.once('keydown', function () {
 
             this.scene.start('mainmenu');
