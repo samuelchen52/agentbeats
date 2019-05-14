@@ -35,7 +35,8 @@ var Preloader = new Phaser.Class({
         this.load.image('ingame', './assets/screens/ingame.png');
         this.load.image('paused', './assets/screens/ingamepaused.png'); 
         this.load.image('pausebutton', './assets/screens/pause.png'); 
-        this.load.image('win','./assets/screens/levelcomplete.png' )
+        this.load.image('win','./assets/screens/levelcomplete.png' );
+        this.load.image('highscore','./assets/screens/HighScore.png');
         //TILES
         this.load.image('tileset','./assets/tilesets/tileset.png');
         this.load.image('agentsprite','./assets/sprites/agentsprite.png');
@@ -141,6 +142,12 @@ var MainMenu = new Phaser.Class({
             
         }).setOrigin().setInteractive().key = 3;
 
+        this.add.text( this.game.renderer.width / 2 + 180, this.game.renderer.height / 2 + 170, '- HIGH SCORES', {
+            fontFamily: 'jetsetitalic',
+            fontSize: 30,
+            
+        }).setOrigin().setInteractive().key = 4;
+
        
         this.input.on('gameobjectover', function (pointer, gameObject) {
 
@@ -167,13 +174,126 @@ var MainMenu = new Phaser.Class({
 
                 case 3: this.scene.start('controls');
                 break;
+
+                case 4: this.scene.start('highscore');
+                break;
             }
     
         }.bind(this));
     }
 
 });
+var HighScore = new Phaser.Class({
+    Extends: Phaser.Scene,
 
+    initialize:
+
+    function HighScore()
+    {
+        Phaser.Scene.call(this, {key: 'highscore'});
+    },
+
+    create: function(){
+        this.add.image(0,0,'highscore').setOrigin(0);
+
+        var back = this.add.text(50, 50, 'BACK', {
+            fontFamily: 'neonabsolute',
+            fontSize: 30,
+        }).setOrigin().setInteractive().key = 0;
+        if(localStorage.getItem("level1scores") != null){
+            var level1text = localStorage.getItem("level1scores").split(" ");
+            level1text.sort();
+            for(var i = 0; i < level1text.length; i++){
+                if(i == 5){
+                    break;
+                }
+                this.add.text(122, 120+(i*20), level1text[i] + "\n",{
+                    fontFamily: 'retrocycles',
+                    fontSize: 20,
+                })
+            }
+        }
+        if(localStorage.getItem("level2scores") != null){
+            var level2text = localStorage.getItem("level2scores").split(" ");
+            level2text.sort();
+            for(var i = 0; i < level2text.length; i++){
+                if(i == 5){
+                    break;
+                }
+                this.add.text(382, 120+(i*20), level2text[i] + "\n",{
+                    fontFamily: 'retrocycles',
+                    fontSize: 20,
+                })
+            }
+        }
+        if(localStorage.getItem("level3scores") != null){
+            var level3text = localStorage.getItem("level3scores").split(" ");
+            level3text.sort();
+            for(var i = 0; i < level3text.length; i++){
+                if(i == 5){
+                    break;
+                }
+                this.add.text(662, 120+(i*20), level3text[i] + "\n",{
+                    fontFamily: 'retrocycles',
+                    fontSize: 20,
+                })
+            }
+        }
+        if(localStorage.getItem("level4scores") != null){
+            var level4text = localStorage.getItem("level4scores").split(" ");
+            level4text.sort();
+            for(var i = 0; i < level4text.length; i++){
+                if(i == 5){
+                    break;
+                }
+                this.add.text(242, 310+(i*20), level4text[i] + "\n",{
+                    fontFamily: 'retrocycles',
+                    fontSize: 20,
+                })
+            }
+        }
+        if(localStorage.getItem("level5scores") != null){
+            var level5text = localStorage.getItem("level5scores").split(" ");
+            level5text.sort();
+            for(var i = 0; i < level5text.length; i++){
+                if(i == 5){
+                    break;
+                }
+                this.add.text(542, 310+(i*20), level5text[i] + "\n",{
+                    fontFamily: 'retrocycles',
+                    fontSize: 20,
+                })
+            }
+        }
+        
+        
+        
+        
+       
+        this.input.on('gameobjectover', function (pointer, gameObject) {
+
+            gameObject.setTint(0xff0000, 0xff0000, 0xffff00, 0xff00ff);
+    
+        });
+    
+        this.input.on('gameobjectout', function (pointer, gameObject) {
+    
+            gameObject.clearTint();
+    
+        });
+
+        this.input.on('gameobjectdown', function (pointer, gameObject) {
+
+            
+            switch(gameObject.key)
+            {
+                case 0: this.scene.start('mainmenu');
+                break;
+            }
+        }.bind(this));
+
+    }
+});
 var LevelSelect = new Phaser.Class({
 
     Extends: Phaser.Scene,
@@ -558,7 +678,7 @@ var config = {
     autoCenter: true,
     //looks like
     //it initializes all the sceneobjects, only calls create and whatnot if active is true (true by default for first sceneobject)
-    scene: [ Preloader, Splash, MainMenu, LevelSelect, Controls, Help, level1, level2, level3, level4, level5, level6, Paused, Win],
+    scene: [ Preloader, Splash, MainMenu, LevelSelect, Controls, Help, HighScore, level1, level2, level3, level4, level5, level6, Paused, Win],
     //physics options
     physics: {
         default: "arcade",
