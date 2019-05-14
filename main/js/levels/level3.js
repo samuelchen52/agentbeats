@@ -365,6 +365,14 @@ var level3 = new Phaser.Class({
             this.game.nextLevel = "level4";
             this.game.currentLevel = this.key;
             music.pause();
+            var score = this.timeLabel.text;
+            
+            if(localStorage.getItem("level3scores") == null){
+                localStorage.setItem("level3scores", score + " ");
+            }else{
+                localStorage.setItem("level3scores", localStorage.getItem("level3scores")+ score + " ");
+            }
+            
             this.scene.pause(this.key);
             this.scene.launch('win');
 
@@ -382,7 +390,7 @@ var level3 = new Phaser.Class({
             var text = this.add.text(this.player.x - 150, this.player.y - 72, "Checkpoint Reached", style);
             setTimeout(function() {text.destroy(); }, 2000);
         }
-        else if (this.player.x >= 1728 && this.player.y <= 384) {
+        else if (this.player.x >= 1728 && this.player.y <= 448) {
             this.check = 1;
             this.checkDisplay = 1;
             console.log("checkpoint 1 reached");

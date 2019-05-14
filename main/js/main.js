@@ -539,7 +539,7 @@ var Win = new Phaser.Class({
             Tone.Transport.cancel();
             Tone.Transport.stop();
 
-            console.log(this.game.nextLevel);
+            
             this.scene.start(this.game.nextLevel);
         }, this);
 
