@@ -19,7 +19,7 @@ var level4 = new Phaser.Class({
         var deathTime = 0;
         //this.add.image(0, 0, 'ingame').setOrigin(0);
         //make our map
-        level1 = this.add.tilemap('level3');
+        level1 = this.add.tilemap('level4');
         level1.setBaseTileSize(64,64);
         this.level1 = level1;
         console.log(level1);
