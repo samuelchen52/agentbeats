@@ -278,26 +278,31 @@ var LevelSelect = new Phaser.Class({
 
                 case 1: this.scene.start('level1');
                 music.stop();
+                Tone.Transport.cancel();
                 Tone.Transport.stop();
                 break;
 
                 case 2: this.scene.start('level2');
                 music.stop();
+                Tone.Transport.cancel();
                 Tone.Transport.stop();
                 break;
 
                 case 3: this.scene.start('level3');
                 music.stop();
+                Tone.Transport.cancel();
                 Tone.Transport.stop();
                 break;
 
                 case 4: this.scene.start('level4');
                 music.stop();
+                Tone.Transport.cancel();
                 Tone.Transport.stop();
                 break;
 
                 case 5: this.scene.start('level5');
                 music.stop();
+                Tone.Transport.cancel();
                 Tone.Transport.stop();
                 break;
 
@@ -473,6 +478,7 @@ var Paused = new Phaser.Class({
                 case 1: 
                 this.scene.stop(this.game.currentLevel);
                 music.stop();
+                Tone.Transport.cancel();
                 Tone.Transport.stop();
                 this.scene.start(this.game.currentLevel);
                 break;
@@ -480,6 +486,7 @@ var Paused = new Phaser.Class({
                 case 2: 
                 this.scene.stop(this.game.currentLevel);
                 music.stop();
+                Tone.Transport.cancel();
                 Tone.Transport.stop();
                 this.scene.start('levelselect');
                 break;
@@ -527,8 +534,9 @@ var Win = new Phaser.Class({
 
         this.input.keyboard.once('keydown', function () {
             //game.nextLevel set by me
-            this.scene.stop();
+            this.scene.stop(this.game.currentLevel);
             music.stop();
+            Tone.Transport.cancel();
             Tone.Transport.stop();
 
             
