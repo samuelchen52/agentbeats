@@ -326,14 +326,21 @@ var level5 = new Phaser.Class({
             element.renderY = element.y * 2 - 256;
             element.currentIndex = 0;
             element.counter = 0; //this is for the duration of the death frame of the trap
+            element.currentDurationIndex = 0;
+            element.currentWaitIndex = 0;
             //copy properties from tiled over
             for (var i = 0; i < element.properties.length; i ++)
             {
                 element[element.properties[i].name] = element.properties[i].value;
             }
-        
+            element.wait = element.wait.split(" ");
+            element.duration = element.duration.split(" ");
+            for (var i = 0; i < element.wait.length; i ++) {element.wait[i] = parseInt(element.wait[i]); }
+            for (var i = 0; i < element.duration.length; i ++) {element.duration[i] = parseInt(element.duration[i]); }
+
           }.bind(this));
     },
+    //ASSUMES tilearray is no spikes, little spikes, spikes, little spikes no spikes
     updateSpikeTiles: function (tileArray, indicesArray, deathIndex)
     {
         //level1.putTileAtWorldXY(101, this.player.x, this.player.y * 2 - 64, true, this.cameras.main, this.spikeLayer);
@@ -357,10 +364,16 @@ var level5 = new Phaser.Class({
                             level1.putTileAtWorldXY( indicesArray[element.currentIndex], element.renderX, element.renderY, true, this.cameras.main, this.spikeLayer);
                             element.counter ++;
                         }
-                        else if (element.counter === element.duration) //element properties are from TILED
+                        else if (element.counter === element.duration[element.currentDurationIndex]) //element properties are from TILED
                         {
                             element.counter = 0;
                             element.currentIndex ++;
+                            element.currentindex %= indicesArray.length;
+
+                            level1.putTileAtWorldXY( indicesArray[element.currentIndex], element.renderX, element.renderY, true, this.cameras.main, this.spikeLayer);
+                            element.currentIndex ++;
+                            element.currentDurationIndex ++;
+                            element.currentDurationIndex %= element.duration.length;
                         }
                         else
                         {
@@ -374,10 +387,13 @@ var level5 = new Phaser.Class({
                             level1.putTileAtWorldXY( indicesArray[element.currentIndex], element.renderX, element.renderY, true, this.cameras.main, this.spikeLayer);
                             element.counter ++;
                         }
-                        else if (element.counter >= element.wait) //element properties are from TILED
+                        else if (element.counter >= element.wait[element.currentWaitIndex]) //element properties are from TILED
                         {
                             element.counter = 0;
-                            element.currentIndex ++;
+                            element.currentIndex = 2;
+                            level1.putTileAtWorldXY( indicesArray[1], element.renderX, element.renderY, true, this.cameras.main, this.spikeLayer);
+                            element.currentWaitIndex++;
+                            element.currentWaitIndex %= element.wait.length;
                         }
                         else
                         {
@@ -403,6 +419,11 @@ var level5 = new Phaser.Class({
             {
                 element[element.properties[i].name] = element.properties[i].value;
             }
+            element.wait = element.wait.split(" ");
+            element.duration = element.duration.split(" ");
+            for (var i = 0; i < element.wait.length; i ++) {element.wait[i] = parseInt(element.wait[i]); }
+            for (var i = 0; i < element.duration.length; i ++) {element.duration[i] = parseInt(element.duration[i]); }
+
           }.bind(this));
 
           //this.agentGid = this.findTileset(level1, "agentsprite").firstgid;
@@ -425,6 +446,8 @@ var level5 = new Phaser.Class({
                     object.currentIndex = 0;
                     object.counter = 0;
                     object.fireLaser = true;
+                    object.currentDurationIndex = 0;
+                    object.currentWaitIndex = 0;
                     laserTiles.push(object);
                     y += 64;
                 }
@@ -445,7 +468,9 @@ var level5 = new Phaser.Class({
                     object.direction = "vertical";
                     object.currentIndex = 0;
                     object.counter = 0;
-                    object.fireLaser = true;                                                             
+                    object.fireLaser = true;     
+                    object.currentDurationIndex = 0;
+                    object.currentWaitIndex = 0;                                                        
                     laserTiles.push(object);
                     y -= 64;
                 }
@@ -467,6 +492,8 @@ var level5 = new Phaser.Class({
                     object.currentIndex = 0;
                     object.counter = 0;
                     object.fireLaser = true;
+                    object.currentDurationIndex = 0;
+                    object.currentWaitIndex = 0;
                     laserTiles.push(object);
                     x += 64;
                 }
@@ -488,6 +515,8 @@ var level5 = new Phaser.Class({
                     object.currentIndex = 0;
                     object.counter = 0;
                     object.fireLaser = true;
+                    object.currentDurationIndex = 0;
+                    object.currentWaitIndex = 0;
                     laserTiles.push(object);
                     x -= 64;
                 }
@@ -512,10 +541,21 @@ var level5 = new Phaser.Class({
                                 level1.putTileAtWorldXY( -1, element.x, element.y, true, this.cameras.main, this.laserLayer);
                                 element.counter ++;
                             }
-                            else if (element.counter >= element.wait)
+                            else if (element.counter >= element.wait[element.currentWaitIndex])
                             {
-                                element.counter = 0; 
+                                element.counter = 1; 
                                 element.fireLaser = true;
+                                if (element.direction === "horizontal")
+                                {
+                                    level1.putTileAtWorldXY( horizontalLaserArray[randomIndex], element.x, element.y, true, this.cameras.main, this.laserLayer);
+                                }
+                                else //else vertical
+                                {
+                                    level1.putTileAtWorldXY( verticalLaserArray[randomIndex], element.x, element.y, true, this.cameras.main, this.laserLayer);
+                                }
+                                element.currentWaitIndex ++;
+                                element.currentWaitIndex %= element.wait.length;
+
                             }
                             else{
                                 element.counter ++;
@@ -523,7 +563,7 @@ var level5 = new Phaser.Class({
                         }
                         else //firelaser is true
                         {
-                            if (element.counter < element.duration)
+                            if (element.counter < element.duration[element.currentDurationIndex])
                             {
                                 if (element.direction === "horizontal")
                                 {
@@ -537,8 +577,11 @@ var level5 = new Phaser.Class({
                             }
                             else // (element.counter >= element.duration)
                             {
-                                element.counter = 0; 
+                                element.counter = 1; 
                                 element.fireLaser = false;
+                                level1.putTileAtWorldXY( -1, element.x, element.y, true, this.cameras.main, this.laserLayer);
+                                element.currentDurationIndex ++;
+                                element.currentDurationIndex %= element.duration.length;
                             }
 
                     }
