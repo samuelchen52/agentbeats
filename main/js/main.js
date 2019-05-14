@@ -56,7 +56,8 @@ var Preloader = new Phaser.Class({
 
         //SOUNDS
         this.load.audio("level1audio", './assets/sounds/level_1.mp3');
-        this.load.audio("level3audio", './assets/sounds/level_3.wav')
+        this.load.audio("level3audio", './assets/sounds/level_3.wav');
+        this.load.audio("level4audio", './assets/sounds/level_4.wav');
         this.load.audio("laser", './assets/sounds/laser.mp3');
         this.load.audio("mainmenu", './assets/sounds/mainmenu.mp3');
     },
