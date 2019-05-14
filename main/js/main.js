@@ -44,6 +44,7 @@ var Preloader = new Phaser.Class({
 
         this.load.tilemapTiledJSON('level1','./assets/tilemaps/level1.json');
         this.load.tilemapTiledJSON('level2','./assets/tilemaps/level2.json');
+        this.load.tilemapTiledJSON('level5','./assets/tilemaps/level5.json');
 
 
         //SPRITESHEETS
