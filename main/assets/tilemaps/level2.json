@@ -813,6 +813,52 @@
                  "width":64,
                  "x":960,
                  "y":1216
+                }, 
+                {
+                 "gid":101,
+                 "height":128,
+                 "id":257,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"delay",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"duration",
+                         "type":"int",
+                         "value":20
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":50
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":320,
+                 "y":1152
+                }, 
+                {
+                 "gid":101,
+                 "height":128,
+                 "id":258,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"delay",
+                         "type":"int",
+                         "value":0
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":320,
+                 "y":1280
                 }],
          "opacity":1,
          "properties":[
@@ -1114,7 +1160,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":255,
+ "nextobjectid":261,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.3",
@@ -1123,7 +1169,7 @@
         {
          "columns":10,
          "firstgid":1,
-         "image":"..\/tilesets\/tileset.png",
+         "image":"..\/tilesets\/tileset2.png",
          "imageheight":640,
          "imagewidth":640,
          "margin":0,
@@ -1136,7 +1182,7 @@
         {
          "columns":5,
          "firstgid":101,
-         "image":"..\/sprites\/spikes.png",
+         "image":"..\/sprites\/spikesnew.png",
          "imageheight":128,
          "imagewidth":320,
          "margin":0,

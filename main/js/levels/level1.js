@@ -34,6 +34,7 @@ var level1 = new Phaser.Class({
         //render spikes
         this.spikeLayer = level1.createBlankDynamicLayer('spikeLayer',spikes);
         this.spikeTiles = this.findTileLayerObjects(level1, "spikeObjectLayer");
+        console.log(this.spikeTiles);
         this.prepareSpikeTiles(this.spikeTiles);
         this.spikeGid = this.findTileset(level1, "spikes").firstgid;
         this.spikeIndicesArray = [this.spikeGid,this.spikeGid + 1,this.spikeGid + 2,this.spikeGid + 1,this.spikeGid];
@@ -64,11 +65,27 @@ var level1 = new Phaser.Class({
             "F2",
             "F#2"
           ];
-        const fireLaser = (x) => this.shootLaser(x);
+        var me = this;
+        this.lasercounter = 0;
+        this.spikeDuration = 6;
+        this.spikeCounter = 0;
+        this.maxSpikeCounter = 2;
+        //const fireLaser = (x) => this.shootLaser(x);
         const synthPart = new Tone.Sequence(
             function(time, note){
                 synth.triggerAttackRelease(note, "10hz", time);
-                fireLaser(musicLaser);
+                me.shootLaser(me.laserTiles);
+                me.fireLaser = me.time.addEvent({delay:50, callback: function(){me.animateLaser(musicLaser, musicLaserArrayY, musicLaserArrayX)}.bind(me), callbackScope: me, repeat: 6});
+                me.shootSpikes(me.spikeTiles);
+                me.fireSpikes = me.time.addEvent({delay:20, callback: function(){me.animateSpikes(me.spikeTiles,me.spikeIndicesArray, 103)}.bind(me), callbackScope: me, repeat: 11});
+                if(me.spikeCounter == me.maxSpikeCounter ){
+                    me.spikeCounter = 0;
+                }
+                else{
+                    me.spikeCounter++;
+                }
+                me.lasercounter = 0;
+                
             },
             notes,
             "4n"
@@ -333,7 +350,7 @@ var level1 = new Phaser.Class({
             this.game.nextLevel = "level2";
             this.game.currentLevel = this.key;
             music.pause();
-            synthPart.stop();
+            
             Tone.Transport.stop();
             this.scene.pause(this.key);
             this.scene.launch('win');
@@ -356,6 +373,7 @@ var level1 = new Phaser.Class({
     },
     prepareSpikeTiles: function(tileArray) //spikes are bigger than 64x64, so have to do some offset
     {
+        console.log(tileArray);
         tileArray.forEach(function(element) {
             element.renderX = element.x;
             element.renderY = element.y * 2 - 256;
@@ -616,6 +634,48 @@ var level1 = new Phaser.Class({
                 level1.putTileAtWorldXY( -1, element.x, element.y, true, camera, laserLayer);
             }
         })
+        me.lasercounter++;
+    },
+    //new spike function
+    //counter should loop up to number of frames in spikearray + duration of deathframe
+    shootSpikes: function(tileArray){
+        tileArray.forEach(function(element){
+            element.continue =true;
+        })
+    },
+    animateSpikes: function (tileArray, indicesArray, deathIndex)
+    {
+        var me = this;
+        for(let element of tileArray){
+            if(element.delay > me.spikeCounter){
+                continue;
+            }
+            if(element.continue == true)
+            if(indicesArray[element.currentIndex] == deathIndex){
+
+                if(element.counter == 0){
+                level1.putTileAtWorldXY(indicesArray[element.currentIndex], element.renderX,element.renderY, true, me.cameras.main, me.spikeLayer);
+                element.counter++;
+                }
+                else if (element.counter == me.spikeDuration){
+                    element.counter = 0;
+                    element.currentIndex++;
+                }
+                else{
+                    element.counter++;
+                }
+            }
+            else if (element.currentIndex == indicesArray.length-1){
+                level1.putTileAtWorldXY(indicesArray[element.currentIndex], element.renderX, element.renderY, true, me.cameras.main, me.spikeLayer);
+                element.currentIndex = 0;
+                element.continue = false;
+            }
+            else{
+                level1.putTileAtWorldXY(indicesArray[element.currentIndex], element.renderX, element.renderY, true, me.cameras.main, me.spikeLayer);
+                element.currentIndex++;
+            }
+        }
+        
     }
 
 }

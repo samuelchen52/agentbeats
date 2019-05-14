@@ -67,7 +67,7 @@
                         {
                          "name":"delay",
                          "type":"int",
-                         "value":0
+                         "value":1
                         }, 
                         {
                          "name":"duration",
@@ -84,6 +84,34 @@
                  "visible":true,
                  "width":64,
                  "x":768,
+                 "y":1024
+                }, 
+                {
+                 "gid":101,
+                 "height":128,
+                 "id":7,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"delay",
+                         "type":"int",
+                         "value":2
+                        }, 
+                        {
+                         "name":"duration",
+                         "type":"int",
+                         "value":10
+                        }, 
+                        {
+                         "name":"wait",
+                         "type":"int",
+                         "value":10
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":832,
                  "y":1024
                 }],
          "opacity":1,
@@ -217,7 +245,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":7,
+ "nextobjectid":8,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.3",
