@@ -57,6 +57,9 @@ var level5 = new Phaser.Class({
         //level1.createFromObjects("objectsLayer", this.endPoint.id, {key: "agentsprite", frame: this.endPoint.gid});
         level1.putTileAtWorldXY( this.endPoint.gid, this.endPoint.x , this.endPoint.y - 64, true, this.cameras.main, this.objectLayer);
 
+        this.check = -1;
+        this.checkpoint = level1.findObject("objectsLayer", obj => obj.name === "Checkpoint");
+        this.checkpoint2 = level1.findObject("objectsLayer", obj => obj.name === "Checkpoint2");
 
          //music
          music = this.sound.add('level1audio',1,true);
@@ -134,6 +137,9 @@ var level5 = new Phaser.Class({
 
             }
             this.checkIfPlayerWin();
+            //TIMER COORD
+            me.timeLabel.setX(this.player.x-20);
+            me.timeLabel.setY(this.player.y-200);
         }.bind(this);
 
         this.input.keyboard.addKey(37);
@@ -201,6 +207,15 @@ var level5 = new Phaser.Class({
 
     
         }.bind(this));
+        //TIMER
+        var me = this;
+        me.startTime = new Date();
+        me.totalTime = 120;
+        me.timeElapsed = 0;
+
+        me.createTimer();
+
+        this.gameTimer = this.time.addEvent({ delay: 100, callback: this.updateTimer, callbackScope: this, loop: true });
         //setInterval(function(){ this.updateSpikeTiles(this.spikeTiles, [101,102,103,104,105,105,105,105,105,104,103,102,101]) }.bind(this), 100);
         //SPIKES
         //this.SpikeEvent = this.time.addEvent({delay:0, callback: function() {this.updateSpikeTiles(spikeTiles, [101,102,103,104,105])}.bind(this), callbackScope: this, loop: true});
@@ -238,7 +253,7 @@ var level5 = new Phaser.Class({
                 this.deathTime = time;
                 this.camera.zoomTo(0.5,500);
             }
-        
+        this. checkIfPlayerCheckpoint();
         this.checkDeath(time);
         }
 
@@ -249,7 +264,33 @@ var level5 = new Phaser.Class({
         
 
     },
+    createTimer: function() {
+        var me = this;
+        me.timeLabel = me.add.text(this.player.x-20, this.player.y-200, "00:00", {font: "20px jetset", fill: "#fff"}); 
+        me.timeLabel.align = 'center';
+    },
+    updateTimer: function(){
 
+        var me = this;
+        
+        var currentTime = new Date();
+        var timeDifference = me.startTime.getTime() - currentTime.getTime();
+
+        //Time elapsed in seconds
+        me.timeElapsed = Math.abs(timeDifference / 1000);
+
+        //Convert seconds into minutes and seconds
+        var minutes = Math.floor(me.timeElapsed / 60);
+        var seconds = Math.floor(me.timeElapsed) - (60 * minutes);
+
+        //Display minutes, add a 0 to the start if less than 10
+        var result = (minutes < 10) ? "0" + minutes : minutes; 
+
+        //Display seconds, add a 0 to the start if less than 10
+        result += (seconds < 10) ? ":0" + seconds : ":" + seconds; 
+
+        me.timeLabel.text = result;
+    },
     findTileLayerObjects(map, key)
     {
         for (var i = 0; i < map.objects.length; i++)
@@ -302,20 +343,45 @@ var level5 = new Phaser.Class({
             music.pause();
             this.scene.pause(this.key);
             this.scene.launch('win');
-
+        }
+    },
+    checkIfPlayerCheckpoint: function() {
+        if (this.check === 2) {
+            return;
+        }
+        if (this.player.x >= 2432 && this.player.y <= 704) {
+            this.check = 2;
+            console.log("checkpoint 2 reached");
+        }
+        else if (this.player.x >= 1920) {
+            this.check = 1;
+            console.log("checkpoint 1 reached");
         }
     },
     checkDeath: function (time){
         if(this.player.dead == true){
             if(time - this.deathTime >= 1000){
                 this.player.destroy();
-                this.player = this.physics.add.sprite(this.spawnPoint.x,this.spawnPoint.y,'agent');
+                if (this.check === -1) { 
+                    this.player = this.physics.add.sprite(this.spawnPoint.x,this.spawnPoint.y,'agent');
+                }
+                else {
+                    if (this.check === 1)  {
+                        this.player = this.physics.add.sprite(this.checkpoint.x,this.checkpoint.y,'agent');
+                    }
+                    else {
+                        this.player = this.physics.add.sprite(this.checkpoint2.x,this.checkpoint2.y,'agent');
+                    }
+                }
                 this.player.anims.play('idleright',true);
                 this.player.dead = false;
                 this.cameras.main.pan(0,0,1000,'Linear',false, function(){this.camera.startFollow(this.player)});
                 this.camera.zoomTo(1,500);
+                //reset timer
+                var me = this;
+                me.timeLabel.setX(this.player.x-20);
+                me.timeLabel.setY(this.player.y-200);
                 //restore keyboard use
-
             }
         }
     },
