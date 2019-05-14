@@ -86,7 +86,7 @@ var level3 = new Phaser.Class({
 
             }.bind(this), callbackScope: this, loop: true });
          music.play('', {delay: 0.0,loop:true, seek: 0});
-
+         music.volume = 2.5;
          console.log(music);
          var laserSound = this.sound.add('laser',1,true);
          laserSound.volume = 0.2;
@@ -382,7 +382,7 @@ var level3 = new Phaser.Class({
         if (this.check === 2) {
             return;
         }
-        if (this.player.x >= 1920 && this.player.y >= 1280) {
+        if (this.player.x >= 1920 && this.player.y >= 1280 && this.checkDisplay == 1) {
             this.check = 2;
             this.checkDisplay = 2;
             console.log("checkpoint 2 reached");
@@ -390,7 +390,7 @@ var level3 = new Phaser.Class({
             var text = this.add.text(this.player.x - 150, this.player.y - 72, "Checkpoint Reached", style);
             setTimeout(function() {text.destroy(); }, 2000);
         }
-        else if (this.player.x >= 1728 && this.player.y <= 448) {
+        else if (this.player.x >= 1728 && this.player.y <= 384 && this.checkDisplay == 0) {
             this.check = 1;
             this.checkDisplay = 1;
             console.log("checkpoint 1 reached");

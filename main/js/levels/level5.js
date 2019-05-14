@@ -69,7 +69,7 @@ var level4 = new Phaser.Class({
          //music
          music = this.sound.add('level1audio',1,true);
          music.play('', {delay: 0.0,loop:true, seek: 0});
-
+        music.volume = 0.3;
          var laserSound = this.sound.add('laser',1,true);
          laserSound.volume = 0.2;
         //spawn point of player from tiled
@@ -383,7 +383,7 @@ var level4 = new Phaser.Class({
             var text = this.add.text(this.player.x - 150, this.player.y - 72, "Checkpoint Reached", style);
             setTimeout(function() {text.destroy(); }, 2000);
         }
-        else if (this.player.x >= 1920 && this.checkDisplay === 0) {
+        else if (this.player.x >= 1984 && this.checkDisplay === 0) {
             this.check = 1;
             this.checkDisplay = 1;
             console.log("checkpoint 1 reached");
