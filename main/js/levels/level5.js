@@ -63,7 +63,7 @@ var level5 = new Phaser.Class({
 
          //music
          music = this.sound.add('level1audio',1,true);
-         music.play('', {delay: 0.3,loop:true});
+         music.play('', {delay: 0.0,loop:true, seek: 0});
 
          var laserSound = this.sound.add('laser',1,true);
          laserSound.volume = 0.2;
@@ -253,8 +253,8 @@ var level5 = new Phaser.Class({
                 this.deathTime = time;
                 this.camera.zoomTo(0.5,500);
             }
-        this. checkIfPlayerCheckpoint();
-        this.checkDeath(time);
+            this. checkIfPlayerCheckpoint();
+            this.checkDeath(time);
         }
 
         //level1.putTileAt(101 , level1.worldToTileX(this.player.x), level1.worldToTileY(this.player.y), true, this.trapsLayer);, level1.worldToTileX(this.player.x), level1.worldToTileY(this.player.y), true, this.trapsLayer);
@@ -278,7 +278,6 @@ var level5 = new Phaser.Class({
 
         //Time elapsed in seconds
         me.timeElapsed = Math.abs(timeDifference / 1000);
-
         //Convert seconds into minutes and seconds
         var minutes = Math.floor(me.timeElapsed / 60);
         var seconds = Math.floor(me.timeElapsed) - (60 * minutes);
@@ -390,7 +389,7 @@ var level5 = new Phaser.Class({
         tileArray.forEach(function(element) {
             element.renderX = element.x;
             element.renderY = element.y * 2 - 256;
-            element.currentIndex = 0;
+            element.currentIndex = 1;
             element.counter = 0; //this is for the duration of the death frame of the trap
             element.currentDurationIndex = 0;
             element.currentWaitIndex = 0;
@@ -418,8 +417,9 @@ var level5 = new Phaser.Class({
         tileArray.forEach(function(element) {
             if (element.delay > 0)
             {
-                level1.putTileAtWorldXY( indicesArray[element.currentIndex], element.renderX, element.renderY, true, this.cameras.main, this.spikeLayer);
+                level1.putTileAtWorldXY( indicesArray[0], element.renderX, element.renderY, true, this.cameras.main, this.spikeLayer);
                 element.delay --;
+                element.currentIndex = 1;
             }
             else{
                     element.currentIndex %= indicesArray.length;
