@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="64" tileheight="64" infinite="0" nextlayerid="7" nextobjectid="486">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="64" tileheight="64" infinite="0" nextlayerid="7" nextobjectid="490">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64" tilecount="100" columns="10">
-  <image source="../tilesets/tileset2.png" width="640" height="640"/>
+  <image source="../tilesets/tileset.png" width="640" height="640"/>
  </tileset>
  <tileset firstgid="101" name="spikes" tilewidth="64" tileheight="128" tilecount="5" columns="5">
   <image source="../sprites/spikesnew.png" width="320" height="128"/>
@@ -264,5 +264,7 @@
  <objectgroup id="5" name="objectsLayer">
   <object id="160" name="Spawn Point" gid="12" x="612" y="598" width="64" height="64"/>
   <object id="184" name="End" gid="12" x="576" y="1344" width="64" height="64"/>
+  <object id="486" name="Checkpoint" gid="12" x="1762" y="345.667" width="64" height="64"/>
+  <object id="487" name="Checkpoint2" gid="12" x="1953.33" y="1306.67" width="64" height="64"/>
  </objectgroup>
 </map>

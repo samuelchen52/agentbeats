@@ -750,6 +750,30 @@
                  "width":64,
                  "x":576,
                  "y":1344
+                }, 
+                {
+                 "gid":12,
+                 "height":64,
+                 "id":486,
+                 "name":"Checkpoint",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":1762,
+                 "y":345.666666666667
+                }, 
+                {
+                 "gid":12,
+                 "height":64,
+                 "id":487,
+                 "name":"Checkpoint2",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":1953.33333333333,
+                 "y":1306.66666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -758,7 +782,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":486,
+ "nextobjectid":490,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.3",
@@ -767,7 +791,7 @@
         {
          "columns":10,
          "firstgid":1,
-         "image":"..\/tilesets\/tileset2.png",
+         "image":"..\/tilesets\/tileset.png",
          "imageheight":640,
          "imagewidth":640,
          "margin":0,

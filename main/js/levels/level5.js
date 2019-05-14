@@ -253,8 +253,8 @@ var level5 = new Phaser.Class({
                 this.deathTime = time;
                 this.camera.zoomTo(0.5,500);
             }
-        this. checkIfPlayerCheckpoint();
-        this.checkDeath(time);
+            this. checkIfPlayerCheckpoint();
+            this.checkDeath(time);
         }
 
         //level1.putTileAt(101 , level1.worldToTileX(this.player.x), level1.worldToTileY(this.player.y), true, this.trapsLayer);, level1.worldToTileX(this.player.x), level1.worldToTileY(this.player.y), true, this.trapsLayer);
