@@ -1,6 +1,6 @@
 this.levels = this.levels || {};
 
-var level3 = new Phaser.Class({
+var level6 = new Phaser.Class({
 
     Extends: Phaser.Scene,
 
