@@ -1,15 +1,15 @@
 this.levels = this.levels || {};
 
-var level4 = new Phaser.Class({
+var level5 = new Phaser.Class({
 
     Extends: Phaser.Scene,
 
     initialize:
 
-    function level4 ()
+    function level5 ()
     {
-        this.key = "level4";
-        Phaser.Scene.call(this, { key: 'level4' });
+        this.key = "level5";
+        Phaser.Scene.call(this, { key: 'level5' });
     },
 
 
@@ -360,6 +360,11 @@ var level4 = new Phaser.Class({
     {
         if (level1.getTileAtWorldXY( this.player.x, this.player.y, true, this.cameras.main, this.objectLayer).index !== -1)
         {
+<<<<<<< HEAD
+            // this.game.nextLevel = "level5";
+            // this.game.currentLevel = this.key;
+            // music.pause();
+=======
             this.game.nextLevel = "level3";
             this.game.currentLevel = this.key;
             var score = this.timeLabel.text;
@@ -371,8 +376,9 @@ var level4 = new Phaser.Class({
             }
             
             music.pause();
+>>>>>>> 482145f935152577013b01497225644cc3d17ff0
             this.scene.pause(this.key);
-            this.scene.launch('win');
+            this.scene.start('mainmenu');
 
         }
     },
@@ -684,4 +690,4 @@ var level4 = new Phaser.Class({
 }
 );
 
-this.levels.level4 = level4;
+this.levels.level5 = level5;
