@@ -59,6 +59,11 @@ var level3 = new Phaser.Class({
         this.check = -1;
         this.checkpoint = level1.findObject("objectsLayer", obj => obj.name === "Checkpoint");
         this.checkpoint2 = level1.findObject("objectsLayer", obj => obj.name === "Checkpoint2");
+        this.backgroundLayer.getTileAtWorldXY(this.checkpoint.x, this.checkpoint.y).tint = 0x0f0ff00;
+        this.backgroundLayer.getTileAtWorldXY(this.checkpoint2.x, this.checkpoint2.y).tint = 0x0f0ff00;
+
+        //65344 green
+
          //music
          music = this.sound.add('level3audio',1,true);
 
