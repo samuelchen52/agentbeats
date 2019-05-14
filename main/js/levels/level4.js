@@ -19,7 +19,7 @@ var level4 = new Phaser.Class({
         var deathTime = 0;
         //this.add.image(0, 0, 'ingame').setOrigin(0);
         //make our map
-        level1 = this.add.tilemap('level2');
+        level1 = this.add.tilemap('level4');
         level1.setBaseTileSize(64,64);
         this.level1 = level1;
         console.log(level1);
@@ -39,6 +39,7 @@ var level4 = new Phaser.Class({
         this.prepareSpikeTiles(this.spikeTiles);
         this.spikeGid = this.findTileset(level1, "spikes").firstgid;
         this.spikeIndicesArray = [this.spikeGid,this.spikeGid + 1,this.spikeGid + 2,this.spikeGid + 1,this.spikeGid];
+        
 
 
         this.laserLayer = level1.createBlankDynamicLayer('laserLayer', lasers);
@@ -63,19 +64,19 @@ var level4 = new Phaser.Class({
          this.laserDate = Date.now();
          //waits for delay ms, then calls, even for the first call
          this.spikeEvent = this.time.addEvent({delay: 150, callback: function(){ 
-            var temp = Date.now();
+           // var temp = Date.now();
             //console.log("SPIKE " + (temp - this.spikeDate)); 
-            this.spikeDate = temp;
+            //this.spikeDate = temp;
             this.updateSpikeTiles(this.spikeTiles, this.spikeIndicesArray, this.spikeGid + 2, this.spikeGid + 2) }.bind(this), callbackScope: this, loop: true });
          this.laserEvent = this.time.addEvent({delay: 150, callback: function()
             { 
-                var temp = Date.now();
+                //var temp = Date.now();
                 //console.log("LASER" + (Date.now() - this.laserDate));
-                this.laserDate = temp;
+                //this.laserDate = temp;
                 this.updateLaserTiles(this.laserTiles, this.verticalLaserArray, this.horizontalLaserArray) 
 
             }.bind(this), callbackScope: this, loop: true });
-         music.play('', {delay: 0.2,loop:true, seek: 0});
+         music.play('', {delay: 0.0,loop:true, seek: 0});
 
          console.log(music);
          var laserSound = this.sound.add('laser',1,true);
@@ -85,6 +86,12 @@ var level4 = new Phaser.Class({
 
         this.player = this.physics.add.sprite(this.spawnPoint.x,this.spawnPoint.y,'agent');
         this.player.dead = false;
+
+        //this.backgroundLayer.getTileAtWorldXY(this.player.x, this.player.y).tint = 65344;
+        //this.backgroundLayer.getTileAtWorldXY(this.player.x, this.player.y).tint = 0x0f0ff00;
+
+
+        
         //create animations for the sprites
         this.anims.create({
             key: 'idleright',
@@ -340,7 +347,7 @@ var level4 = new Phaser.Class({
         tileArray.forEach(function(element) {
             element.renderX = element.x;
             element.renderY = element.y * 2 - 256;
-            element.currentIndex = 0;
+            element.currentIndex = 1;
             element.counter = 0; //this is for the duration of the death frame of the trap
             element.currentDurationIndex = 0;
             element.currentWaitIndex = 0;
@@ -368,8 +375,9 @@ var level4 = new Phaser.Class({
         tileArray.forEach(function(element) {
             if (element.delay > 0)
             {
-                level1.putTileAtWorldXY( indicesArray[element.currentIndex], element.renderX, element.renderY, true, this.cameras.main, this.spikeLayer);
+                level1.putTileAtWorldXY( indicesArray[0], element.renderX, element.renderY, true, this.cameras.main, this.spikeLayer);
                 element.delay --;
+                element.currentIndex = 1;
             }
             else{
                     element.currentIndex %= indicesArray.length;
