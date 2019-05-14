@@ -53,107 +53,182 @@ var level2 = new Phaser.Class({
         
        // this.laserEvent = this.time.addEvent({delay: 50, callback: function(){ this.updateLaserTiles(this.laserTiles, this.verticalLaserArray, this.horizontalLaserArray) }.bind(this), callbackScope: this, loop: true });
         //making our music
-        const synth = new Tone.Synth().toMaster();
-        const piano = SampleLibrary.load({
-            instruments: "guitar-electric",
-        });
-
-        piano.toMaster();
-        synth.volume.value = 20;
-        piano.volume.value = 0;
-        //membraneSynth.volume = 100;
-        const maintheme = [
-            "G2",
-            [null, "G2"],
-            null,
-            "Bb2",
-            "C3",
-            "G2",
-            [null, "G2"],
-            null,
-            "F2",
-            "F#2"
-          ];
-        const melody = [
-            ["Bb4", "G3"],
-            "D3",
-            null,
-            null,
-            null,
-            ["Bb4","G3"],
-            "C#3",
-            null,
-            null,
-            null,
-            ["Bb4","G3"],
-            "C3",
-            null,
-            ["Bb3","C3"],
-            null,
-            null,
-            null,
-            ["Bb3","G2"],
-            "F#3",
-            null,
-            null,
-            null,
-            ["Bb3","G2"],
-            "F3",
-            null,
-            null,
-            null,
-            ["Bb3","G2"],
-            "E3",
-            null,
-            ["Eb3","D3"],
-            null,
-            null,
-            null
-
-        ];
+        Tone.Transport.bpm.value = 107;
+        Tone.Transport.swing = 0.5;
+        Tone.Transport.swingSubdivision = "16t"; //16t or 32n sounds great
+        
+        //variables for trap delays
         var me = this;
-        this.laserDuration = 0;
-        this.laserCounter = 0;
-        this.maxLaserCounter = 2;
-        this.spikeDuration = 7;
-        this.spikeCounter = 0;
-        this.maxSpikeCounter = 7;
-        //const fireLaser = (x) => this.shootLaser(x);
-        const synthPart = new Tone.Sequence(
-            function(time, note){
-                synth.triggerAttackRelease(note, "10hz", time);
-                me.shootSpikes(me.spikeTiles);
-                me.fireSpikes = me.time.addEvent({delay:30, callback: function(){me.animateSpikes(me.spikeTiles,me.spikeIndicesArray, 103)}.bind(me), callbackScope: me, repeat: 11});
-                if(me.spikeCounter == me.maxSpikeCounter ){
-                    me.spikeCounter = 0;
-                }
-                else{
-                    me.spikeCounter++;
-                }
+        this.trapGroups = [
+            {laserDuration:0,laserCounter:0,maxLaserCounter:2,spikeDuration:7,spikeCounter:-1,maxSpikeCounter:10},
+            {laserDuration:0,laserCounter:0,maxLaserCounter:2,spikeDuration:7,spikeCounter:-1,maxSpikeCounter:1},
+            {laserDuration:0,laserCounter:0,maxLaserCounter:2,spikeDuration:7,spikeCounter:-1,maxSpikeCounter:3}
+        ];
+        // this.laserDuration = 0;
+        // this.laserCounter = 0;
+        // this.maxLaserCounter = 2;
+        // this.spikeDuration = 7;
+        // this.spikeCounter = 0;
+        // this.maxSpikeCounter = 1;
+        var synth = new Tone.FMSynth({
+            harmonicity: 1,
+            detune : -0,
+            
+            modulationIndex: 50, //50
+            oscillator: { 
+            type: "sawtooth"
+            },
+            modulation  : {
+            type  : "sawtooth"
+            }  ,
+            modulationEnvelope  : {
+            attack  : 1 ,
+            decay  : 0 ,
+            sustain  : 1 ,
+            release  : 0.5
+            },
+        });
+        
+        var reverb = new Tone.Freeverb();
+        var bdreverb = new Tone.Freeverb();
+        var feedbackDelay = new Tone.FeedbackDelay("16n",0.3);
+        var eq = new Tone.EQ3(-10,0,-10);
+        
+        var bell = new Tone.MetalSynth({
+                    "harmonicity" : 100, // 200 sounds like a timbali
+                    "resonance" : 200, // 200 is nice
+                    "modulationIndex" : 250,
+                    "envelope" : {
+                //attack  : 0.1 ,
+                "decay" : 0.4, // 0.2 gives some percusive snare sounds
+                    },
                 
-            },
-            maintheme,
-            "4n"
-        );
-        const melodyPart = new Tone.Sequence(
-            function(time, note){
-                piano.triggerAttackRelease(note, "3hz", time);
-                me.shootLaser(me.laserTiles);
-                me.fireLaser = me.time.addEvent({delay:20, callback: function(){me.animateLaser(musicLaser, musicLaserArrayY, musicLaserArrayX)}.bind(me), callbackScope: me, repeat: 6});
-                if(me.laserCounter == me.maxLaserCounter){
-                    me.laserCounter = 0;
+                    "volume" : -20
+                });
+        bell.chain(feedbackDelay, reverb, eq, Tone.Master);
+        bell.chain(eq, Tone.Master);
+            
+        
+        synth.chain(feedbackDelay, reverb,  eq, Tone.Master);
+        synth.chain(eq, Tone.Master);
+        
+        var bellPart = new Tone.Sequence(function(time, freq){
+                    bell.frequency.setValueAtTime(50,time);
+                    bell.triggerAttack(time,.7);
+                    me.shootSpikes(me.spikeTiles, 2);
+            
+                    me.fireSpikes = me.time.addEvent({delay:30, callback: function(){me.animateSpikes(me.spikeTiles,me.spikeIndicesArray, 103,2)}.bind(me), callbackScope: me, repeat: 11});
+                    if(me.trapGroups[2].spikeCounter == me.trapGroups[2].maxSpikeCounter){
+                        me.trapGroups[2].spikeCounter = 1;
+                    }
+                    else{
+                        me.trapGroups[2].spikeCounter++;
+                    }
+            }, [null,50], "4n");
+        //}, [50,50,50,50,50,50,55,50,50,50,55,50,50,51,50,50], "16n");
+                //}, [50,null,50,null,50,null,50,null,50,null,50,null,55,null,50,null,50,null,50,null,55,null,50,null,50,50,51,50,50,51,50,50], "32n");
+        bellPart.start();
+        
+        var snare = new Tone.MetalSynth({
+                    "harmonicity" : 200, // 200 sounds like a timbali
+                    "resonance" : 100, // 200 is nice
+                    "modulationIndex" : 250,
+                    "envelope" : {
+                        "decay" : 0.2, // 0.2 gives some percusive snare sounds
+                    },
+                    "volume" : -15
+                });
+        
+        snare.chain(eq, Tone.Master);
+        
+        var snarePart =  new Tone.Sequence(function(time, freq){
+            snare.frequency.setValueAtTime(freq ,time);
+            snare.triggerAttack(time,Math.random()*1);
+        },[null,null,null,55,55,null,55,55,null,55,55,null,55,null,55,55],"8n").start();
+        
+        
+        
+        var chain = new Tone.CtrlMarkov({
+            "beginning" : ["A1","F1","E1","D1"],
+            "middle":"end"
+        });
+        //chain.value = "beginning";
+        
+        //trapGroup 1
+        var bassPart = new Tone.Sequence(function(time, note) {
+            chain.value = "beginning";
+            
+            synth.triggerAttackRelease(chain.next(),"4n",time,0.5);
+            me.shootSpikes(me.spikeTiles, 1);
+            
+            me.fireSpikes = me.time.addEvent({delay:30, callback: function(){me.animateSpikes(me.spikeTiles,me.spikeIndicesArray, 103,1)}.bind(me), callbackScope: me, repeat: 11});
+            if(me.trapGroups[1].spikeCounter == me.trapGroups[1].maxSpikeCounter){
+                me.trapGroups[1].spikeCounter = 0;
+            }
+            else{
+                me.trapGroups[1].spikeCounter++;
+            }
+            me.shootLaser(me.laserTiles, 1);
+                me.fireLaser = me.time.addEvent({delay:20, callback: function(){me.animateLaser(musicLaser, musicLaserArrayY, musicLaserArrayX,1)}.bind(me), callbackScope: me, repeat: 6});
+                if(me.trapGroups[1].laserCounter == me.trapGroups[1].maxLaserCounter){
+                    me.trapGroups[1].laserCounter = 0;
                 }
                 else{
-                    me.laserCounter++;
+                    me.trapGroups[1].laserCounter++;
                 }
-                me.laserDuration = 0;
-            },
-            melody,
-            "4n"
-        );
-        synthPart.start();
-        melodyPart.start(5);
+                me.trapGroups[1].laserDuration = 0;
+        }, ["A1","A1","F1","F1"],"1n");
+        
+        bassPart.start();
+        
+        var drum = new Tone.MembraneSynth({
+                    "pitchDecay" : 0.008,
+                    "octaves" : 2,
+                    "envelope" : {
+                        "attack" : 0.0006,
+                        "decay" : 0.5,
+                        "sustain" : 0
+                    }
+                });
+        
+        
+        //drum.chain(reverb, Tone.Master);
+        drum.chain(bdreverb, Tone.Master);
+        drum.chain(Tone.Master);
+        
+        //trapGroup 0
+        var reverse = false;
+        var drumPart = new Tone.Sequence(function(time, pitch){
+            drum.triggerAttack(pitch, time,1); 
+            //		}, ["G1",null,null,null,"G1","G1",null,null], "8n").start(0);
+            me.shootSpikes(me.spikeTiles, 0);
+            
+            me.fireSpikes = me.time.addEvent({delay:30, callback: function(){me.animateSpikes(me.spikeTiles,me.spikeIndicesArray, 103, 0)}.bind(me), callbackScope: me, repeat: 11});
+            if(me.trapGroups[0].spikeCounter == me.trapGroups[0].maxSpikeCounter){
+                me.trapGroups[0].spikeCounter--;
+                reverse = true;
+            }
+            else if(me.trapGroups[0].spikeCounter == 1){
+                me.trapGroups[0].spikeCounter++;
+                reverse = false;
+            }
+            else{
+                if(reverse){
+                    me.trapGroups[0].spikeCounter--;
+                }
+                else{
+                    me.trapGroups[0].spikeCounter++;
+                }
+            }
+        }, ["G1"], "2n");
+        drumPart.start();
+                
+                
+        
         Tone.Transport.start();
+        //Tone.Transport.stop(10);
+        
+        
         //end music creation
 
         this.objectLayer = level1.createBlankDynamicLayer('objectlayer', tileset);
@@ -166,8 +241,6 @@ var level2 = new Phaser.Class({
          music = this.sound.add('level1audio',1,true);
          //music.play('', {delay: 0.3,loop:true});
 
-         var laserSound = this.sound.add('laser',1,true);
-         laserSound.volume = 0.2;
         //spawn point of player from tiled
         this.spawnPoint = level1.findObject("objectsLayer",obj => obj.name ==="Spawn Point");
 
@@ -328,6 +401,7 @@ var level2 = new Phaser.Class({
     
         }.bind(this));
         //TIMER
+        var me = this;
 	    me.startTime = new Date();
 	    me.totalTime = 120;
 	    me.timeElapsed = 0;
@@ -718,11 +792,11 @@ var level2 = new Phaser.Class({
     },
     //new laser functions
     //toggles laser on and off. put this in music callback
-    shootLaser: function(tileArray)
+    shootLaser: function(tileArray, trapGroupIndex)
     {
         var me = this;
         for(let element of tileArray){
-            if(element.delay > me.laserCounter)
+            if(element.delay > me.trapGroups[trapGroupIndex].laserCounter)
             {
                 continue;
             }
@@ -731,8 +805,8 @@ var level2 = new Phaser.Class({
             }
         }
     },
-    //if laser is on, animates it. should be checked every frame, so put it in update
-    animateLaser: function(tileArray, verticalLaserArray, horizontalLaserArray)
+    
+    animateLaser: function(tileArray, verticalLaserArray, horizontalLaserArray, trapGroupIndex)
     {
         
         var camera = this.cameras.main;
@@ -743,7 +817,7 @@ var level2 = new Phaser.Class({
             
            if(element.fireLaser){
                
-            if(me.laserDuration < 6){
+            if(me.trapGroups[trapGroupIndex].laserDuration < 6){
                 
                 if (element.direction === "horizontal"){
                     
@@ -767,50 +841,70 @@ var level2 = new Phaser.Class({
                 level1.putTileAtWorldXY( -1, element.x, element.y, true, camera, laserLayer);
             }
         }
-        me.laserDuration++;
+        me.trapGroups[trapGroupIndex].laserDuration++;
     },
     //new spike function
     //counter should loop up to number of frames in spikearray + duration of deathframe
-    shootSpikes: function(tileArray){
-        tileArray.forEach(function(element){
-            element.continue =true;
-        })
-    },
-    animateSpikes: function (tileArray, indicesArray, deathIndex)
-    {
-        var me = this;
+    shootSpikes: function(tileArray, trapGroupIndex){
         for(let element of tileArray){
-            if(element.delay > me.spikeCounter){
-                continue;
-            }
-            if(element.hold == me.spikeCounter){
-                continue;
-            }
-            if(element.continue == true)
-            if(indicesArray[element.currentIndex] == deathIndex){
-
-                if(element.counter == 0){
-                level1.putTileAtWorldXY(indicesArray[element.currentIndex], element.renderX,element.renderY, true, me.cameras.main, me.spikeLayer);
-                element.counter++;
-                }
-                else if (element.counter == me.spikeDuration){
-                    element.counter = 0;
-                    element.currentIndex++;
-                }
-                else{
-                    element.counter++;
-                }
-            }
-            else if (element.currentIndex == indicesArray.length-1){
-                level1.putTileAtWorldXY(indicesArray[element.currentIndex], element.renderX, element.renderY, true, me.cameras.main, me.spikeLayer);
-                element.currentIndex = 0;
-                element.continue = false;
+            if(element.group == trapGroupIndex){
+                
+                element.continue =true;
             }
             else{
-                level1.putTileAtWorldXY(indicesArray[element.currentIndex], element.renderX, element.renderY, true, me.cameras.main, me.spikeLayer);
-                element.currentIndex++;
+                continue;
             }
         }
+    },
+    animateSpikes: function (tileArray, indicesArray, deathIndex, trapGroupIndex)
+    {
+        
+        var me = this;
+        for(let element of tileArray){
+            if(element.group == trapGroupIndex){
+                if(element.wait > 0){
+                    element.wait--;
+                    element.continue = false;
+                    continue;
+                }
+                if(element.delay > me.trapGroups[trapGroupIndex].spikeCounter){
+                    
+                    continue;
+                }
+                if(element.hold <= me.trapGroups[trapGroupIndex].spikeCounter){
+                    continue;
+                }
+                if(element.continue == true){
+                    
+                    if(indicesArray[element.currentIndex] == deathIndex){
+
+                        if(element.counter == 0){
+                        level1.putTileAtWorldXY(indicesArray[element.currentIndex], element.renderX,element.renderY, true, me.cameras.main, me.spikeLayer);
+                        element.counter++;
+                        }
+                        else if (element.counter == me.trapGroups[trapGroupIndex].spikeDuration){
+                            element.counter = 0;
+                            element.currentIndex++;
+                        }
+                        else{
+                            element.counter++;
+                        }
+                    }
+                    else if (element.currentIndex == indicesArray.length-1){
+                        level1.putTileAtWorldXY(indicesArray[element.currentIndex], element.renderX, element.renderY, true, me.cameras.main, me.spikeLayer);
+                        element.currentIndex = 0;
+                        element.continue = false;
+                    }
+                    else{
+                        level1.putTileAtWorldXY(indicesArray[element.currentIndex], element.renderX, element.renderY, true, me.cameras.main, me.spikeLayer);
+                        element.currentIndex++;
+                    }
+            }
+        }
+        else{
+            continue;
+        }
+    }
         
     }
 

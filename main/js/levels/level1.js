@@ -258,6 +258,7 @@ var level1 = new Phaser.Class({
             if (event.key === "2")
             {
             music.stop();
+            Tone.Transport.cancel();
             Tone.Transport.stop();
             this.scene.start('level2');
             }
@@ -461,7 +462,7 @@ var level1 = new Phaser.Class({
             this.game.nextLevel = "level2";
             this.game.currentLevel = this.key;
             music.pause();
-            
+            Tone.Transport.cancel();
             Tone.Transport.stop();
             this.scene.pause(this.key);
             this.scene.launch('win');
