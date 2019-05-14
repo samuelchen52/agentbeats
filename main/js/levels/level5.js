@@ -390,27 +390,6 @@ var level5 = new Phaser.Class({
         tileArray.forEach(function(element) {
             element.renderX = element.x;
             element.renderY = element.y * 2 - 256;
-            element.currentIndex = 0;
-            element.counter = 0; //this is for the duration of the death frame of the trap
-            element.currentDurationIndex = 0;
-            element.currentWaitIndex = 0;
-            //copy properties from tiled over
-            for (var i = 0; i < element.properties.length; i ++)
-            {
-                element[element.properties[i].name] = element.properties[i].value;
-            }
-            element.wait = element.wait.split(" ");
-            element.duration = element.duration.split(" ");
-            for (var i = 0; i < element.wait.length; i ++) {element.wait[i] = parseInt(element.wait[i]); }
-            for (var i = 0; i < element.duration.length; i ++) {element.duration[i] = parseInt(element.duration[i]); }
-
-          }.bind(this));
-    },
-    prepareSpikeTiles: function(tileArray) //spikes are bigger than 64x64, so have to do some offset
-    {
-        tileArray.forEach(function(element) {
-            element.renderX = element.x;
-            element.renderY = element.y * 2 - 256;
             element.currentIndex = 1;
             element.counter = 0; //this is for the duration of the death frame of the trap
             element.currentDurationIndex = 0;
