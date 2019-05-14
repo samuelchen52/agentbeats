@@ -328,12 +328,33 @@ var level2 = new Phaser.Class({
         //CHEATS
         this.invincible = false;
         this.input.keyboard.on('keydown', function (event) {
-            if (event.key === "2")
+            if (event.key === "1")
             {
             music.stop();
             Tone.Transport.cancel();
             Tone.Transport.stop();
-            this.scene.start('level2');
+            this.scene.start('level1');
+            }
+            else if (event.key === "3")
+            {
+                music.stop();
+                Tone.Transport.cancel();
+                Tone.Transport.stop();
+                this.scene.start('level3');
+            }
+            else if (event.key === "4")
+            {
+                music.stop();
+                Tone.Transport.cancel();
+                Tone.Transport.stop();
+                this.scene.start('level4');
+            }
+            else if (event.key === "5")
+            {
+                music.stop();
+                Tone.Transport.cancel();
+                Tone.Transport.stop();
+                this.scene.start('level5');
             }
             else if(event.key === "I" || event.key === "i")
             {

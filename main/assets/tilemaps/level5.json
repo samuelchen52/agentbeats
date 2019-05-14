@@ -51,15 +51,15 @@
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":2015.55680224404,
-                 "y":1052.44319775596
+                 "x":2015.56,
+                 "y":1052.44
                 }, 
                 {
                  "gid":12,
                  "height":64,
                  "id":116,
                  "name":"End",
-                 "rotation":-0.469529445057489,
+                 "rotation":-0.469529,
                  "type":"",
                  "visible":true,
                  "width":64,
@@ -75,8 +75,8 @@
                  "type":"",
                  "visible":true,
                  "width":64,
-                 "x":2656,
-                 "y":605
+                 "x":2595.47940463828,
+                 "y":665.059190031153
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -4547,7 +4547,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":298,
+ "nextobjectid":301,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.3",

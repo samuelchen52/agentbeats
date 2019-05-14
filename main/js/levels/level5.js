@@ -159,16 +159,38 @@ var level4 = new Phaser.Class({
         //CHEATS
         this.invincible = false;
         this.input.keyboard.on('keydown', function (event) {
-            if (event.key === "1")
+            if (event.key === "2")
             {
             music.stop();
-            this.scene.start('level1');
+            Tone.Transport.cancel();
+            Tone.Transport.stop();
+            this.scene.start('level2');
+            }
+            else if (event.key === "3")
+            {
+                music.stop();
+                Tone.Transport.cancel();
+                Tone.Transport.stop();
+                this.scene.start('level3');
+            }
+            else if (event.key === "5")
+            {
+                music.stop();
+                Tone.Transport.cancel();
+                Tone.Transport.stop();
+                this.scene.start('level5');
+            }
+            else if (event.key === "1")
+            {
+                music.stop();
+                Tone.Transport.cancel();
+                Tone.Transport.stop();
+                this.scene.start('level1');
             }
             else if(event.key === "I" || event.key === "i")
             {
             this.invincible = !this.invincible;
             }
-
         }, this);
 
         document.onkeydown = function(evt) {
@@ -383,7 +405,7 @@ var level4 = new Phaser.Class({
             var text = this.add.text(this.player.x - 150, this.player.y - 72, "Checkpoint Reached", style);
             setTimeout(function() {text.destroy(); }, 2000);
         }
-        else if (this.player.x >= 1920 && this.checkDisplay === 0) {
+        else if (this.player.x >= 1984 && this.checkDisplay === 0) {
             this.check = 1;
             this.checkDisplay = 1;
             console.log("checkpoint 1 reached");
