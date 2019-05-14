@@ -360,11 +360,6 @@ var level5 = new Phaser.Class({
     {
         if (level1.getTileAtWorldXY( this.player.x, this.player.y, true, this.cameras.main, this.objectLayer).index !== -1)
         {
-<<<<<<< HEAD
-            // this.game.nextLevel = "level5";
-            // this.game.currentLevel = this.key;
-            // music.pause();
-=======
             this.game.nextLevel = "level3";
             this.game.currentLevel = this.key;
             var score = this.timeLabel.text;
@@ -376,7 +371,6 @@ var level5 = new Phaser.Class({
             }
             
             music.pause();
->>>>>>> 482145f935152577013b01497225644cc3d17ff0
             this.scene.pause(this.key);
             this.scene.start('mainmenu');
 

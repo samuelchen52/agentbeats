@@ -92,7 +92,7 @@
   <object id="60" name="Spawn Point" gid="12" x="157" y="1053" width="64" height="64"/>
   <object id="115" name="Checkpoint" gid="12" x="2015.56" y="1052.44" width="64" height="64"/>
   <object id="116" name="End" gid="12" x="3584" y="1344" width="64" height="64" rotation="-0.469529"/>
-  <object id="144" name="Checkpoint2" gid="12" x="2656" y="605" width="64" height="64"/>
+  <object id="144" name="Checkpoint2" gid="12" x="2595.48" y="665.059" width="64" height="64"/>
  </objectgroup>
  <objectgroup id="3" name="laserObjectLayer">
   <object id="69" gid="111" x="384" y="1280" width="64" height="64">

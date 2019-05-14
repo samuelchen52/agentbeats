@@ -383,7 +383,7 @@ var level4 = new Phaser.Class({
             var text = this.add.text(this.player.x - 150, this.player.y - 72, "Checkpoint Reached", style);
             setTimeout(function() {text.destroy(); }, 2000);
         }
-        else if (this.player.x >= 1920 && this.checkDisplay === 0) {
+        else if (this.player.x >= 1984 && this.checkDisplay === 0) {
             this.check = 1;
             this.checkDisplay = 1;
             console.log("checkpoint 1 reached");
