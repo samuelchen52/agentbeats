@@ -268,21 +268,21 @@ var level1 = new Phaser.Class({
             }
         }, this);
 
-        document.onkeydown = function(evt) {
-            evt = evt || window.event;
-            if (evt.keyCode == 27) {
-                pause = true;
-                this.scene.pause(this.key);
-                music.pause();
+        // this.input.onkeydown = function(evt) {
+        //     evt = evt || window.event;
+        //     if (evt.keyCode == 27) {
+        //         pause = true;
+        //         this.scene.pause(this.key);
+        //         music.pause();
             
-                Tone.Transport.pause();
-                //launch paused screen
-                this.game.currentLevel = this.key;
-                this.scene.launch('paused');
+        //         Tone.Transport.pause();
+        //         //launch paused screen
+        //         this.game.currentLevel = this.key;
+        //         this.scene.launch('paused');
                 
-                //pause itself
-            }
-        }.bind(this);
+        //         //pause itself
+        //     }
+        // }.bind(this);
 
     
 
