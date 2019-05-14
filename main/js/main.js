@@ -531,13 +531,7 @@ var Win = new Phaser.Class({
             Tone.Transport.stop();
 
             console.log(this.game.nextLevel);
-            if (this.game.nextLevel == "level3") {
-                console.log("mainmenu");
-                this.scene.start('level2');
-            }
-            else {
             this.scene.start(this.game.nextLevel);
-        }
         }, this);
 
     }
