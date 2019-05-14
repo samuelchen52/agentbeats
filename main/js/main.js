@@ -228,11 +228,11 @@ var LevelSelect = new Phaser.Class({
             
         }).setOrigin().setInteractive().key = 5;
 
-        var level6 = this.add.text( 655,370, 'level 6', {
-            fontFamily: 'retrocycles',
-            fontSize: 40,
+        // var level6 = this.add.text( 655,370, 'level 6', {
+        //     fontFamily: 'retrocycles',
+        //     fontSize: 40,
             
-        }).setOrigin().setInteractive().key = 6;
+        // }).setOrigin().setInteractive().key = 6;
 
 
         // back.on('pointerover', function () {
@@ -301,10 +301,10 @@ var LevelSelect = new Phaser.Class({
                 Tone.Transport.stop();
                 break;
 
-                case 6: this.scene.start('level6');
-                music.stop();
-                Tone.Transport.stop();
-                break;
+                // case 6: this.scene.start('level6');
+                // music.stop();
+                // Tone.Transport.stop();
+                // break;
 
             }
     
@@ -416,7 +416,7 @@ var level2 = this.levels.level2;
 var level3 = this.levels.level3;
 var level4 = this.levels.level4;
 var level5 = this.levels.level5;
-var level6 = this.levels.level6;
+//var level6 = this.levels.level6;
 
 
 var Paused = new Phaser.Class({
