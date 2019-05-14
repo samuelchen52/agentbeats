@@ -470,16 +470,16 @@ var Paused = new Phaser.Class({
             {
                 case 1: 
                 this.scene.stop(this.game.currentLevel);
-                this.scene.start(this.game.currentLevel);
                 music.stop();
                 Tone.Transport.stop();
+                this.scene.start(this.game.currentLevel);
                 break;
 
                 case 2: 
                 this.scene.stop(this.game.currentLevel);
-                this.scene.start('levelselect');
                 music.stop();
                 Tone.Transport.stop();
+                this.scene.start('levelselect');
                 break;
                 
                 case 3: 

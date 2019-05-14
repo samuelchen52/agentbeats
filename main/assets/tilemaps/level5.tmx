@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="115">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="60" height="34" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="117">
  <tileset firstgid="1" name="tileset" tilewidth="64" tileheight="64" tilecount="100" columns="10">
   <image source="../tilesets/tileset.png" width="640" height="640"/>
  </tileset>
@@ -59,26 +59,26 @@
 13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,
 13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,
 13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,
-14,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
-16,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-16,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-16,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-16,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-16,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-16,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,0,0,0,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-16,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-16,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,1,1,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-16,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-16,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,1,1,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-16,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-16,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,0,0,0,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-16,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-16,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-16,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-16,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-16,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-16,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-14,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,
+13,14,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,2684354574,13,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,
+13,16,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,18,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+13,16,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,18,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+13,16,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,18,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+13,16,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,18,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+13,16,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,18,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+13,16,0,0,0,0,0,0,0,0,0,0,0,3,3,0,0,0,0,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,18,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+13,16,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,3,3,0,0,0,0,0,0,0,0,2,0,0,0,0,3,3,18,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+13,16,0,0,0,0,0,0,0,0,0,0,0,3,3,0,1,1,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,18,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+13,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,18,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+13,16,0,0,0,0,0,0,0,0,0,0,0,3,3,0,1,1,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,18,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+13,16,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,3,3,0,0,0,0,0,0,0,0,2,0,0,0,0,3,3,18,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+13,16,0,0,0,0,0,0,0,0,0,0,0,3,3,0,0,0,0,3,3,2,2,2,2,2,2,2,2,2,0,0,0,0,2,2,18,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+13,16,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,18,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+13,16,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,18,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+13,16,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,18,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+13,16,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,18,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+13,16,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,18,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+13,16,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,1,18,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+13,1610612750,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,3221225486,13,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,
 13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,
 13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,
 13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,
@@ -89,415 +89,416 @@
 </data>
  </layer>
  <objectgroup id="2" name="objectsLayer">
-  <object id="2" name="End" gid="12" x="2240" y="1088" width="64" height="64"/>
   <object id="60" name="Spawn Point" gid="12" x="158.303" y="1054.67" width="64" height="64"/>
+  <object id="115" name="Checkpoint" gid="12" x="2018" y="1058" width="64" height="64"/>
+  <object id="116" name="End" gid="12" x="2018" y="1568" width="64" height="64"/>
  </objectgroup>
  <objectgroup id="3" name="laserObjectLayer">
   <object id="69" gid="111" x="384" y="1280" width="64" height="64">
    <properties>
     <property name="delay" type="int" value="30"/>
     <property name="direction" value="up"/>
-    <property name="duration" type="int" value="15"/>
-    <property name="wait" type="int" value="30"/>
+    <property name="duration" value="10"/>
+    <property name="wait" value="20"/>
    </properties>
   </object>
   <object id="70" gid="111" x="640" y="1280" width="64" height="64">
    <properties>
     <property name="delay" type="int" value="30"/>
     <property name="direction" value="up"/>
-    <property name="duration" type="int" value="15"/>
-    <property name="wait" type="int" value="30"/>
+    <property name="duration" value="10"/>
+    <property name="wait" value="20"/>
    </properties>
   </object>
   <object id="79" gid="121" x="896" y="1216" width="64" height="64">
    <properties>
     <property name="delay" type="int" value="30"/>
     <property name="direction" value="right"/>
-    <property name="duration" type="int" value="15"/>
-    <property name="wait" type="int" value="30"/>
+    <property name="duration" value="10"/>
+    <property name="wait" value="20"/>
    </properties>
   </object>
   <object id="80" gid="121" x="896" y="960" width="64" height="64">
    <properties>
     <property name="delay" type="int" value="30"/>
     <property name="direction" value="right"/>
-    <property name="duration" type="int" value="15"/>
-    <property name="wait" type="int" value="30"/>
+    <property name="duration" value="10"/>
+    <property name="wait" value="20"/>
    </properties>
   </object>
   <object id="112" gid="121" x="1344" y="960" width="64" height="64">
    <properties>
     <property name="delay" type="int" value="30"/>
     <property name="direction" value="right"/>
-    <property name="duration" type="int" value="15"/>
-    <property name="wait" type="int" value="30"/>
+    <property name="duration" value="10"/>
+    <property name="wait" value="20"/>
    </properties>
   </object>
   <object id="113" gid="121" x="1344" y="1216" width="64" height="64">
    <properties>
     <property name="delay" type="int" value="30"/>
     <property name="direction" value="right"/>
-    <property name="duration" type="int" value="15"/>
-    <property name="wait" type="int" value="30"/>
+    <property name="duration" value="10"/>
+    <property name="wait" value="20"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup id="4" name="spikeObjectLayer">
   <object id="37" gid="211" x="256" y="1088" width="64" height="128">
    <properties>
-    <property name="delay" type="int" value="110"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="delay" type="int" value="65"/>
+    <property name="duration" value="30"/>
+    <property name="wait" value="45 55"/>
    </properties>
   </object>
   <object id="38" gid="211" x="320" y="1025" width="64" height="128">
    <properties>
-    <property name="delay" type="int" value="110"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="delay" type="int" value="65"/>
+    <property name="duration" value="30"/>
+    <property name="wait" value="45 55"/>
    </properties>
   </object>
   <object id="40" gid="211" x="384" y="960" width="64" height="128">
    <properties>
-    <property name="delay" type="int" value="110"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="delay" type="int" value="65"/>
+    <property name="duration" value="30"/>
+    <property name="wait" value="45 55"/>
    </properties>
   </object>
   <object id="41" gid="211" x="320" y="1152" width="64" height="128">
    <properties>
-    <property name="delay" type="int" value="110"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="delay" type="int" value="65"/>
+    <property name="duration" value="30"/>
+    <property name="wait" value="45 55"/>
    </properties>
   </object>
   <object id="47" gid="211" x="576" y="896" width="64" height="128">
    <properties>
-    <property name="delay" type="int" value="110"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="delay" type="int" value="65"/>
+    <property name="duration" value="30"/>
+    <property name="wait" value="45 55"/>
    </properties>
   </object>
   <object id="49" gid="211" x="704" y="1024" width="64" height="128">
    <properties>
-    <property name="delay" type="int" value="110"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="delay" type="int" value="65"/>
+    <property name="duration" value="30"/>
+    <property name="wait" value="45 55"/>
    </properties>
   </object>
   <object id="50" gid="211" x="768" y="1088" width="64" height="128">
    <properties>
-    <property name="delay" type="int" value="110"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="delay" type="int" value="65"/>
+    <property name="duration" value="30"/>
+    <property name="wait" value="45 55"/>
    </properties>
   </object>
   <object id="51" gid="211" x="704" y="1152" width="64" height="128">
    <properties>
-    <property name="delay" type="int" value="110"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="delay" type="int" value="65"/>
+    <property name="duration" value="30"/>
+    <property name="wait" value="45 55"/>
    </properties>
   </object>
   <object id="53" gid="211" x="576" y="1280" width="64" height="128">
    <properties>
-    <property name="delay" type="int" value="110"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="delay" type="int" value="65"/>
+    <property name="duration" value="30"/>
+    <property name="wait" value="45 55"/>
    </properties>
   </object>
   <object id="56" gid="211" x="448" y="1280" width="64" height="128">
    <properties>
-    <property name="delay" type="int" value="110"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="delay" type="int" value="65"/>
+    <property name="duration" value="30"/>
+    <property name="wait" value="45 55"/>
    </properties>
   </object>
   <object id="62" gid="211" x="448" y="1024" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="50"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="10"/>
+    <property name="wait" value="20"/>
    </properties>
   </object>
   <object id="63" gid="211" x="512" y="960" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="50"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="10"/>
+    <property name="wait" value="20"/>
    </properties>
   </object>
   <object id="64" gid="211" x="576" y="1024" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="50"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="10"/>
+    <property name="wait" value="20"/>
    </properties>
   </object>
   <object id="66" gid="211" x="448" y="1152" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="50"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="10"/>
+    <property name="wait" value="20"/>
    </properties>
   </object>
   <object id="67" gid="211" x="512" y="1216" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="50"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="10"/>
+    <property name="wait" value="20"/>
    </properties>
   </object>
   <object id="68" gid="211" x="576" y="1152" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="50"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="10"/>
+    <property name="wait" value="20"/>
    </properties>
   </object>
   <object id="71" gid="211" x="448" y="896" width="64" height="128">
    <properties>
-    <property name="delay" type="int" value="50"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="delay" type="int" value="65"/>
+    <property name="duration" value="30"/>
+    <property name="wait" value="45 55"/>
    </properties>
   </object>
   <object id="73" gid="211" x="384" y="1216" width="64" height="128">
    <properties>
-    <property name="delay" type="int" value="50"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="delay" type="int" value="65"/>
+    <property name="duration" value="30"/>
+    <property name="wait" value="45 55"/>
    </properties>
   </object>
   <object id="74" gid="211" x="640" y="960" width="64" height="128">
    <properties>
-    <property name="delay" type="int" value="50"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="delay" type="int" value="65"/>
+    <property name="duration" value="30"/>
+    <property name="wait" value="45 55"/>
    </properties>
   </object>
   <object id="75" gid="211" x="640" y="1216" width="64" height="128">
    <properties>
-    <property name="delay" type="int" value="50"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="delay" type="int" value="65"/>
+    <property name="duration" value="30"/>
+    <property name="wait" value="45 55"/>
    </properties>
   </object>
   <object id="77" gid="211" x="512" y="1088" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="50"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="10"/>
+    <property name="wait" value="20"/>
    </properties>
   </object>
   <object id="81" gid="211" x="960" y="1088" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="110"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="10"/>
+    <property name="wait" value="20"/>
    </properties>
   </object>
   <object id="82" gid="211" x="1024" y="1280" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="110"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="10"/>
+    <property name="wait" value="20"/>
    </properties>
   </object>
   <object id="83" gid="211" x="1088" y="1280" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="110"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="10"/>
+    <property name="wait" value="20"/>
    </properties>
   </object>
   <object id="84" gid="211" x="1024" y="896" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="110"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="10"/>
+    <property name="wait" value="20"/>
    </properties>
   </object>
   <object id="85" gid="211" x="1088" y="896" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="110"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="10"/>
+    <property name="wait" value="20"/>
    </properties>
   </object>
   <object id="86" gid="211" x="1152" y="1088" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="110"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="10"/>
+    <property name="wait" value="20"/>
    </properties>
   </object>
   <object id="87" gid="211" x="1408" y="1088" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="0"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="20"/>
+    <property name="wait" value="35"/>
    </properties>
   </object>
   <object id="88" gid="211" x="1408" y="1152" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="0"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="20"/>
+    <property name="wait" value="35"/>
    </properties>
   </object>
   <object id="89" gid="211" x="1472" y="1152" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="20"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="20"/>
+    <property name="wait" value="35"/>
    </properties>
   </object>
   <object id="90" gid="211" x="1536" y="1152" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="40"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="20"/>
+    <property name="wait" value="35"/>
    </properties>
   </object>
   <object id="91" gid="211" x="1600" y="1152" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="60"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="20"/>
+    <property name="wait" value="35"/>
    </properties>
   </object>
   <object id="92" gid="211" x="1664" y="1152" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="80"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="20"/>
+    <property name="wait" value="35"/>
    </properties>
   </object>
   <object id="93" gid="211" x="1728" y="1152" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="100"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="20"/>
+    <property name="wait" value="35"/>
    </properties>
   </object>
   <object id="94" gid="211" x="1792" y="1152" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="120"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="20"/>
+    <property name="wait" value="35"/>
    </properties>
   </object>
   <object id="95" gid="211" x="1856" y="1152" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="140"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="20"/>
+    <property name="wait" value="35"/>
    </properties>
   </object>
   <object id="96" gid="211" x="1472" y="1088" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="20"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="20"/>
+    <property name="wait" value="35"/>
    </properties>
   </object>
   <object id="97" gid="211" x="1536" y="1088" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="40"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="20"/>
+    <property name="wait" value="35"/>
    </properties>
   </object>
   <object id="98" gid="211" x="1600" y="1088" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="60"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="20"/>
+    <property name="wait" value="35"/>
    </properties>
   </object>
   <object id="99" gid="211" x="1664" y="1088" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="80"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="20"/>
+    <property name="wait" value="35"/>
    </properties>
   </object>
   <object id="100" gid="211" x="1728" y="1088" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="100"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="20"/>
+    <property name="wait" value="35"/>
    </properties>
   </object>
   <object id="101" gid="211" x="1792" y="1088" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="120"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="20"/>
+    <property name="wait" value="35"/>
    </properties>
   </object>
   <object id="102" gid="211" x="1856" y="1088" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="140"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="20"/>
+    <property name="wait" value="35"/>
    </properties>
   </object>
   <object id="103" gid="211" x="1408" y="1024" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="0"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="20"/>
+    <property name="wait" value="35"/>
    </properties>
   </object>
   <object id="104" gid="211" x="1472" y="1024" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="20"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="20"/>
+    <property name="wait" value="35"/>
    </properties>
   </object>
   <object id="105" gid="211" x="1536" y="1024" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="40"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="20"/>
+    <property name="wait" value="35"/>
    </properties>
   </object>
   <object id="106" gid="211" x="1600" y="1024" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="60"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="20"/>
+    <property name="wait" value="35"/>
    </properties>
   </object>
   <object id="107" gid="211" x="1664" y="1024" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="80"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="20"/>
+    <property name="wait" value="35"/>
    </properties>
   </object>
   <object id="109" gid="211" x="1728" y="1024" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="100"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="20"/>
+    <property name="wait" value="35"/>
    </properties>
   </object>
   <object id="110" gid="211" x="1792" y="1024" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="120"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="20"/>
+    <property name="wait" value="35"/>
    </properties>
   </object>
   <object id="111" gid="211" x="1856" y="1024" width="64" height="128">
    <properties>
     <property name="delay" type="int" value="140"/>
-    <property name="duration" type="int" value="20"/>
-    <property name="wait" type="int" value="50"/>
+    <property name="duration" value="20"/>
+    <property name="wait" value="35"/>
    </properties>
   </object>
  </objectgroup>

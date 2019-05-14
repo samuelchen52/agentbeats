@@ -57,6 +57,8 @@ var level5 = new Phaser.Class({
         //level1.createFromObjects("objectsLayer", this.endPoint.id, {key: "agentsprite", frame: this.endPoint.gid});
         level1.putTileAtWorldXY( this.endPoint.gid, this.endPoint.x , this.endPoint.y - 64, true, this.cameras.main, this.objectLayer);
 
+        this.check = false;
+        this.checkpoint = level1.findObject("objectsLayer", obj => obj.name === "Checkpoint");
 
          //music
          music = this.sound.add('level1audio',1,true);
@@ -238,7 +240,7 @@ var level5 = new Phaser.Class({
                 this.deathTime = time;
                 this.camera.zoomTo(0.5,500);
             }
-        
+        this.checkIfPlayerCheckpoint();
         this.checkDeath(time);
         }
 
@@ -302,20 +304,29 @@ var level5 = new Phaser.Class({
             music.pause();
             this.scene.pause(this.key);
             this.scene.launch('win');
-
+        }
+    },
+    checkIfPlayerCheckpoint: function() {
+        if (this.player.x >= 1900) {
+            this.check = true;
+            console.log("checkpoint reached");
         }
     },
     checkDeath: function (time){
         if(this.player.dead == true){
             if(time - this.deathTime >= 1000){
                 this.player.destroy();
-                this.player = this.physics.add.sprite(this.spawnPoint.x,this.spawnPoint.y,'agent');
+                if (!this.check) {
+                    this.player = this.physics.add.sprite(this.spawnPoint.x,this.spawnPoint.y,'agent');
+                }
+                else {
+                    this.player = this.physics.add.sprite(this.checkpoint.x,this.checkpoint.y,'agent');
+                }
                 this.player.anims.play('idleright',true);
                 this.player.dead = false;
                 this.cameras.main.pan(0,0,1000,'Linear',false, function(){this.camera.startFollow(this.player)});
                 this.camera.zoomTo(1,500);
                 //restore keyboard use
-
             }
         }
     },
