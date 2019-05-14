@@ -44,6 +44,7 @@ var Preloader = new Phaser.Class({
 
         this.load.tilemapTiledJSON('level1','./assets/tilemaps/level1.json');
         this.load.tilemapTiledJSON('level2','./assets/tilemaps/level2.json');
+        this.load.tilemapTiledJSON('level3','./assets/tilemaps/level3.json');
 
 
         //SPRITESHEETS
@@ -53,6 +54,7 @@ var Preloader = new Phaser.Class({
 
         //SOUNDS
         this.load.audio("level1audio", './assets/sounds/level_1.mp3');
+        this.load.audio("level3audio", './assets/sounds/level_3.wav')
         this.load.audio("laser", './assets/sounds/laser.mp3');
         this.load.audio("mainmenu", './assets/sounds/mainmenu.mp3');
     },

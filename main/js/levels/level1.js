@@ -17,7 +17,6 @@ var level1 = new Phaser.Class({
         var deathTime = 0;
         //this.add.image(0, 0, 'ingame').setOrigin(0);
         //make our map
-        //pause var
         level1 = this.add.tilemap('level1');
         level1.setBaseTileSize(64,64);
         this.level1 = level1;
@@ -38,7 +37,7 @@ var level1 = new Phaser.Class({
         this.prepareSpikeTiles(this.spikeTiles);
         this.spikeGid = this.findTileset(level1, "spikes").firstgid;
         this.spikeIndicesArray = [this.spikeGid,this.spikeGid + 1,this.spikeGid + 2,this.spikeGid + 1,this.spikeGid];
-       // this.spikeEvent = this.time.addEvent({delay: 25, callback: function(){ this.updateSpikeTiles(this.spikeTiles, this.spikeIndicesArray, 103) }.bind(this), callbackScope: this, loop: true });
+        this.spikeEvent = this.time.addEvent({delay: 25, callback: function(){ this.updateSpikeTiles(this.spikeTiles, this.spikeIndicesArray, 103) }.bind(this), callbackScope: this, loop: true });
 
 
         this.laserLayer = level1.createBlankDynamicLayer('laserLayer', lasers);
@@ -50,7 +49,6 @@ var level1 = new Phaser.Class({
         const musicLaserArrayX = this.horizontalLaserArray;
         this.verticalLaserArray = [this.laserGid,this.laserGid + 1, this.laserGid + 2];
         const musicLaserArrayY = this.verticalLaserArray;
-        
        // this.laserEvent = this.time.addEvent({delay: 50, callback: function(){ this.updateLaserTiles(this.laserTiles, this.verticalLaserArray, this.horizontalLaserArray) }.bind(this), callbackScope: this, loop: true });
         //making our music
         const synth = new Tone.MembraneSynth().toMaster();
@@ -66,19 +64,11 @@ var level1 = new Phaser.Class({
             "F2",
             "F#2"
           ];
-        var me = this;
-        this.lasercounter = 0;
-        this.spikeduration = 6;
-        //const fireLaser = (x) => this.shootLaser(x);
+        const fireLaser = (x) => this.shootLaser(x);
         const synthPart = new Tone.Sequence(
             function(time, note){
                 synth.triggerAttackRelease(note, "10hz", time);
-                me.shootLaser(me.laserTiles);
-                me.fireLaser = me.time.addEvent({delay:50, callback: function(){me.animateLaser(musicLaser, musicLaserArrayY, musicLaserArrayX)}.bind(me), callbackScope: me, repeat: 6});
-                me.shootSpikes(me.spikeTiles);
-                me.fireSpikes = me.time.addEvent({delay:20, callback: function(){me.animateSpikes(me.spikeTiles,me.spikeIndicesArray, 103)}.bind(me), callbackScope: me, repeat: 11});
-                me.lasercounter = 0;
-                
+                fireLaser(musicLaser);
             },
             notes,
             "4n"
@@ -169,9 +159,6 @@ var level1 = new Phaser.Class({
 
             }
             this.checkIfPlayerWin();
-            //TIMER COORD
-            me.timeLabel.setX(this.player.x-20);
-            me.timeLabel.setY(this.player.y-200);
         }.bind(this);
 
         this.input.keyboard.addKey(37);
@@ -182,6 +169,7 @@ var level1 = new Phaser.Class({
         this.input.keyboard.on('keydown-RIGHT', arrowkeyCallback);
         this.input.keyboard.on('keydown-UP', arrowkeyCallback);
         this.input.keyboard.on('keydown-DOWN', arrowkeyCallback);
+
 
         //CHEATS
         this.invincible = false;
@@ -196,24 +184,8 @@ var level1 = new Phaser.Class({
             {
             this.invincible = !this.invincible;
             }
+
         }, this);
-
-        document.onkeydown = function(evt) {
-            evt = evt || window.event;
-            if (evt.keyCode == 27) {
-                pause = true;
-                this.scene.pause(this.key);
-                music.pause();
-            
-                Tone.Transport.pause();
-                //launch paused screen
-                this.game.currentLevel = this.key;
-                this.scene.launch('paused');
-                
-                //pause itself
-            }
-        }.bind(this);
-
     
 
         const camera = this.cameras.main;
@@ -258,14 +230,7 @@ var level1 = new Phaser.Class({
 
     
         }.bind(this));
-        //TIMER
-	    me.startTime = new Date();
-	    me.totalTime = 120;
-	    me.timeElapsed = 0;
-
-	    me.createTimer();
-
-        this.gameTimer = this.time.addEvent({ delay: 100, callback: this.updateTimer, callbackScope: this, loop: true });
+        
         //setInterval(function(){ this.updateSpikeTiles(this.spikeTiles, [101,102,103,104,105,105,105,105,105,104,103,102,101]) }.bind(this), 100);
         //SPIKES
         //this.SpikeEvent = this.time.addEvent({delay:0, callback: function() {this.updateSpikeTiles(spikeTiles, [101,102,103,104,105])}.bind(this), callbackScope: this, loop: true});
@@ -306,39 +271,15 @@ var level1 = new Phaser.Class({
         
         this.checkDeath(time);
         
-       // this.animateLaser(this.laserTiles,this.verticalLaserArray,this.horizontalLaserArray);
+        this.animateLaser(this.laserTiles,this.verticalLaserArray,this.horizontalLaserArray);
        }
+
         //level1.putTileAt(101 , level1.worldToTileX(this.player.x), level1.worldToTileY(this.player.y), true, this.trapsLayer);, level1.worldToTileX(this.player.x), level1.worldToTileY(this.player.y), true, this.trapsLayer);
-       
+        //console.log(this.backgroundLayer.getTileAtWorldXY(this.player.x, this.player.y));
+        //console.log(this.objectsLayer);
+
         
 
-    },
-    createTimer: function() {
-        var me = this;
-        me.timeLabel = me.add.text(this.player.x-20, this.player.y-200, "00:00", {font: "20px jetset", fill: "#fff"}); 
-        me.timeLabel.align = 'center';
-    },
-    updateTimer: function(){
-
-        var me = this;
-        
-        var currentTime = new Date();
-        var timeDifference = me.startTime.getTime() - currentTime.getTime();
-
-        //Time elapsed in seconds
-        me.timeElapsed = Math.abs(timeDifference / 1000);
-
-        //Convert seconds into minutes and seconds
-        var minutes = Math.floor(me.timeElapsed / 60);
-        var seconds = Math.floor(me.timeElapsed) - (60 * minutes);
-
-        //Display minutes, add a 0 to the start if less than 10
-        var result = (minutes < 10) ? "0" + minutes : minutes; 
-
-        //Display seconds, add a 0 to the start if less than 10
-        result += (seconds < 10) ? ":0" + seconds : ":" + seconds; 
-
-        me.timeLabel.text = result;
     },
 
     findTileLayerObjects(map, key)
@@ -408,10 +349,6 @@ var level1 = new Phaser.Class({
                 this.player.dead = false;
                 this.cameras.main.pan(0,0,1000,'Linear',false, function(){this.camera.startFollow(this.player)});
                 this.camera.zoomTo(1,500);
-                //reset timer
-                var me = this;
-                me.timeLabel.setX(this.player.x-20);
-                me.timeLabel.setY(this.player.y-200);
                 //restore keyboard use
 
             }
@@ -647,7 +584,6 @@ var level1 = new Phaser.Class({
     //toggles laser on and off. put this in music callback
     shootLaser: function(tileArray)
     {
-        
         tileArray.forEach(function(element){
             if(!element.fireLaser)
             {
@@ -661,18 +597,12 @@ var level1 = new Phaser.Class({
     //if laser is on, animates it. should be checked every frame, so put it in update
     animateLaser: function(tileArray, verticalLaserArray, horizontalLaserArray)
     {
-        
         var camera = this.cameras.main;
         var laserLayer = this.laserLayer;
         var randomIndex = Math.floor(Math.random()*verticalLaserArray.length);
-        var me = this;
         tileArray.forEach(function(element){
-           if(element.fireLaser){
-               
-            if(me.lasercounter < 5){
-                
+            if(element.fireLaser){
                 if (element.direction === "horizontal"){
-                    
                     level1.putTileAtWorldXY(horizontalLaserArray[randomIndex], element.x, element.y, true, camera, laserLayer);
                 }
                 else
@@ -682,64 +612,10 @@ var level1 = new Phaser.Class({
                 }
             }
             else{
-                element.fireLaser = false;
-                level1.putTileAtWorldXY( -1, element.x, element.y, true, camera, laserLayer);
-            }
-        }
-            else{
                 //if laser not being fired
-                
-                element.fireLaser = false;
                 level1.putTileAtWorldXY( -1, element.x, element.y, true, camera, laserLayer);
             }
         })
-        me.lasercounter++;
-    },
-    //new spike function
-    //counter should loop up to number of frames in spikearray + duration of deathframe
-    shootSpikes: function(tileArray){
-        tileArray.forEach(function(element){
-            element.continue =true;
-        })
-    },
-    animateSpikes: function (tileArray, indicesArray, deathIndex)
-    {
-        //level1.putTileAtWorldXY(101, this.player.x, this.player.y * 2 - 64, true, this.cameras.main, this.spikeLayer);
-        //for some reason, putTileAtWorldXY puts the tile based on the tile height / width, i.e. goes to the location at (width/ tilewidth, height/tileheight)
-
-        //tileArray holds an array of objects representing tiles in the layer. they arent ACTUALLY tiles in the layer
-        //they have all the custom properties we put in from TILED, and we render all the tiles based on these objects
-        //currentIndex refers to index in the indicesArray
-        var me = this;
-        
-        tileArray.forEach(function(element) {
-            //console.log(element.currentIndex);
-            if(element.continue == true)
-            if(indicesArray[element.currentIndex] == deathIndex){
-
-                if(element.counter == 0){
-                level1.putTileAtWorldXY(indicesArray[element.currentIndex], element.renderX,element.renderY, true, me.cameras.main, me.spikeLayer);
-                element.counter++;
-                }
-                else if (element.counter == me.spikeduration){
-                    element.counter = 0;
-                    element.currentIndex++;
-                }
-                else{
-                    element.counter++;
-                }
-            }
-            else if (element.currentIndex == indicesArray.length-1){
-                level1.putTileAtWorldXY(indicesArray[element.currentIndex], element.renderX, element.renderY, true, me.cameras.main, me.spikeLayer);
-                element.currentIndex = 0;
-                element.continue = false;
-            }
-            else{
-                level1.putTileAtWorldXY(indicesArray[element.currentIndex], element.renderX, element.renderY, true, me.cameras.main, me.spikeLayer);
-                element.currentIndex++;
-            }
-          })
-        
     }
 
 }
