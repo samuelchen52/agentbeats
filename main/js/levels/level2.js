@@ -35,9 +35,9 @@ var level2 = new Phaser.Class({
         //render spikes
         this.spikeLayer = level1.createBlankDynamicLayer('spikeLayer',spikes);
         this.spikeTiles = this.findTileLayerObjects(level1, "spikeObjectLayer");
-        this.prepareSpikeTiles(this.spikeTiles);
         this.spikeGid = this.findTileset(level1, "spikes").firstgid;
         this.spikeIndicesArray = [this.spikeGid,this.spikeGid + 1,this.spikeGid + 2,this.spikeGid + 1,this.spikeGid];
+        this.prepareSpikeTiles(this.spikeTiles);
        // this.spikeEvent = this.time.addEvent({delay: 25, callback: function(){ this.updateSpikeTiles(this.spikeTiles, this.spikeIndicesArray, 103) }.bind(this), callbackScope: this, loop: true });
 
 
@@ -53,8 +53,16 @@ var level2 = new Phaser.Class({
         
        // this.laserEvent = this.time.addEvent({delay: 50, callback: function(){ this.updateLaserTiles(this.laserTiles, this.verticalLaserArray, this.horizontalLaserArray) }.bind(this), callbackScope: this, loop: true });
         //making our music
-        const synth = new Tone.MembraneSynth().toMaster();
-        const notes = [
+        const synth = new Tone.Synth().toMaster();
+        const piano = SampleLibrary.load({
+            instruments: "guitar-electric",
+        });
+
+        piano.toMaster();
+        synth.volume.value = 20;
+        piano.volume.value = 0;
+        //membraneSynth.volume = 100;
+        const maintheme = [
             "G2",
             [null, "G2"],
             null,
@@ -66,32 +74,85 @@ var level2 = new Phaser.Class({
             "F2",
             "F#2"
           ];
+        const melody = [
+            ["Bb4", "G3"],
+            "D3",
+            null,
+            null,
+            null,
+            ["Bb4","G3"],
+            "C#3",
+            null,
+            null,
+            null,
+            ["Bb4","G3"],
+            "C3",
+            null,
+            ["Bb3","C3"],
+            null,
+            null,
+            null,
+            ["Bb3","G2"],
+            "F#3",
+            null,
+            null,
+            null,
+            ["Bb3","G2"],
+            "F3",
+            null,
+            null,
+            null,
+            ["Bb3","G2"],
+            "E3",
+            null,
+            ["Eb3","D3"],
+            null,
+            null,
+            null
+
+        ];
         var me = this;
-        this.lasercounter = 0;
-        this.spikeDuration = 6;
+        this.laserDuration = 0;
+        this.laserCounter = 0;
+        this.maxLaserCounter = 2;
+        this.spikeDuration = 7;
         this.spikeCounter = 0;
-        this.maxSpikeCounter = 1;
+        this.maxSpikeCounter = 7;
         //const fireLaser = (x) => this.shootLaser(x);
         const synthPart = new Tone.Sequence(
             function(time, note){
                 synth.triggerAttackRelease(note, "10hz", time);
-                me.shootLaser(me.laserTiles);
-                me.fireLaser = me.time.addEvent({delay:50, callback: function(){me.animateLaser(musicLaser, musicLaserArrayY, musicLaserArrayX)}.bind(me), callbackScope: me, repeat: 6});
                 me.shootSpikes(me.spikeTiles);
-                me.fireSpikes = me.time.addEvent({delay:20, callback: function(){me.animateSpikes(me.spikeTiles,me.spikeIndicesArray, 103)}.bind(me), callbackScope: me, repeat: 11});
+                me.fireSpikes = me.time.addEvent({delay:30, callback: function(){me.animateSpikes(me.spikeTiles,me.spikeIndicesArray, 103)}.bind(me), callbackScope: me, repeat: 11});
                 if(me.spikeCounter == me.maxSpikeCounter ){
                     me.spikeCounter = 0;
                 }
                 else{
                     me.spikeCounter++;
                 }
-                me.lasercounter = 0;
                 
             },
-            notes,
+            maintheme,
+            "4n"
+        );
+        const melodyPart = new Tone.Sequence(
+            function(time, note){
+                piano.triggerAttackRelease(note, "3hz", time);
+                me.shootLaser(me.laserTiles);
+                me.fireLaser = me.time.addEvent({delay:20, callback: function(){me.animateLaser(musicLaser, musicLaserArrayY, musicLaserArrayX)}.bind(me), callbackScope: me, repeat: 6});
+                if(me.laserCounter == me.maxLaserCounter){
+                    me.laserCounter = 0;
+                }
+                else{
+                    me.laserCounter++;
+                }
+                me.laserDuration = 0;
+            },
+            melody,
             "4n"
         );
         synthPart.start();
+        melodyPart.start(5);
         Tone.Transport.start();
         //end music creation
 
@@ -197,7 +258,7 @@ var level2 = new Phaser.Class({
             if (event.key === "2")
             {
             music.stop();
-            
+            Tone.Transport.stop();
             this.scene.start('level2');
             }
             else if(event.key === "I" || event.key === "i")
@@ -427,11 +488,15 @@ var level2 = new Phaser.Class({
     },
     prepareSpikeTiles: function(tileArray) //spikes are bigger than 64x64, so have to do some offset
     {
+        console.log(tileArray);
+        var me = this;
         tileArray.forEach(function(element) {
             element.renderX = element.x;
             element.renderY = element.y * 2 - 256;
             element.currentIndex = 0;
             element.counter = 0; //this is for the duration of the death frame of the trap
+            //put empty spike holes
+            level1.putTileAtWorldXY(me.spikeIndicesArray[0], element.renderX,element.renderY,true, me.cameras.main, me.spikeLayer);
             //copy properties from tiled over
             for (var i = 0; i < element.properties.length; i ++)
             {
@@ -655,16 +720,16 @@ var level2 = new Phaser.Class({
     //toggles laser on and off. put this in music callback
     shootLaser: function(tileArray)
     {
-        
-        tileArray.forEach(function(element){
-            if(!element.fireLaser)
+        var me = this;
+        for(let element of tileArray){
+            if(element.delay > me.laserCounter)
             {
-                element.fireLaser = true;
+                continue;
             }
             else{
-                element.fireLaser = false;
+                element.fireLaser = true;
             }
-        })
+        }
     },
     //if laser is on, animates it. should be checked every frame, so put it in update
     animateLaser: function(tileArray, verticalLaserArray, horizontalLaserArray)
@@ -674,10 +739,11 @@ var level2 = new Phaser.Class({
         var laserLayer = this.laserLayer;
         var randomIndex = Math.floor(Math.random()*verticalLaserArray.length);
         var me = this;
-        tileArray.forEach(function(element){
+        for(let element of tileArray){
+            
            if(element.fireLaser){
                
-            if(me.lasercounter < 5){
+            if(me.laserDuration < 6){
                 
                 if (element.direction === "horizontal"){
                     
@@ -700,8 +766,8 @@ var level2 = new Phaser.Class({
                 element.fireLaser = false;
                 level1.putTileAtWorldXY( -1, element.x, element.y, true, camera, laserLayer);
             }
-        })
-        me.lasercounter++;
+        }
+        me.laserDuration++;
     },
     //new spike function
     //counter should loop up to number of frames in spikearray + duration of deathframe
@@ -715,6 +781,9 @@ var level2 = new Phaser.Class({
         var me = this;
         for(let element of tileArray){
             if(element.delay > me.spikeCounter){
+                continue;
+            }
+            if(element.hold == me.spikeCounter){
                 continue;
             }
             if(element.continue == true)
