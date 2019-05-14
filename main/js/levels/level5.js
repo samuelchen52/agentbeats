@@ -1,15 +1,15 @@
 this.levels = this.levels || {};
 
-var level5 = new Phaser.Class({
+var level4 = new Phaser.Class({
 
     Extends: Phaser.Scene,
 
     initialize:
 
-    function level5 ()
+    function level4 ()
     {
-        this.key = "level5";
-        Phaser.Scene.call(this, { key: 'level5' });
+        this.key = "level4";
+        Phaser.Scene.call(this, { key: 'level4' });
     },
 
 
@@ -356,7 +356,7 @@ var level5 = new Phaser.Class({
     {
         if (level1.getTileAtWorldXY( this.player.x, this.player.y, true, this.cameras.main, this.objectLayer).index !== -1)
         {
-            this.game.nextLevel = "level3";
+            this.game.nextLevel = "level5";
             this.game.currentLevel = this.key;
             music.pause();
             this.scene.pause(this.key);
@@ -684,5 +684,5 @@ var level5 = new Phaser.Class({
 
 }
 );
-
-this.levels.level5 = level5;
+ 
+this.levels.level4 = level4;

@@ -362,7 +362,7 @@ var level3 = new Phaser.Class({
     {
         if (level1.getTileAtWorldXY( this.player.x, this.player.y, true, this.cameras.main, this.objectLayer).index !== -1)
         {
-            this.game.nextLevel = "level3";
+            this.game.nextLevel = "level4";
             this.game.currentLevel = this.key;
             music.pause();
             this.scene.pause(this.key);
