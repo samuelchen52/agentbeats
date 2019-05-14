@@ -63,19 +63,19 @@ var level3 = new Phaser.Class({
          this.laserDate = Date.now();
          //waits for delay ms, then calls, even for the first call
          this.spikeEvent = this.time.addEvent({delay: 150, callback: function(){ 
-            var temp = Date.now();
+           // var temp = Date.now();
             //console.log("SPIKE " + (temp - this.spikeDate)); 
-            this.spikeDate = temp;
+            //this.spikeDate = temp;
             this.updateSpikeTiles(this.spikeTiles, this.spikeIndicesArray, this.spikeGid + 2, this.spikeGid + 2) }.bind(this), callbackScope: this, loop: true });
          this.laserEvent = this.time.addEvent({delay: 150, callback: function()
             { 
-                var temp = Date.now();
+                //var temp = Date.now();
                 //console.log("LASER" + (Date.now() - this.laserDate));
-                this.laserDate = temp;
+                //this.laserDate = temp;
                 this.updateLaserTiles(this.laserTiles, this.verticalLaserArray, this.horizontalLaserArray) 
 
             }.bind(this), callbackScope: this, loop: true });
-         music.play('', {delay: 0.2,loop:true, seek: 0});
+         music.play('', {delay: 0.0,loop:true, seek: 0});
 
          console.log(music);
          var laserSound = this.sound.add('laser',1,true);
@@ -340,7 +340,7 @@ var level3 = new Phaser.Class({
         tileArray.forEach(function(element) {
             element.renderX = element.x;
             element.renderY = element.y * 2 - 256;
-            element.currentIndex = 0;
+            element.currentIndex = 1;
             element.counter = 0; //this is for the duration of the death frame of the trap
             element.currentDurationIndex = 0;
             element.currentWaitIndex = 0;
@@ -368,8 +368,9 @@ var level3 = new Phaser.Class({
         tileArray.forEach(function(element) {
             if (element.delay > 0)
             {
-                level1.putTileAtWorldXY( indicesArray[element.currentIndex], element.renderX, element.renderY, true, this.cameras.main, this.spikeLayer);
+                level1.putTileAtWorldXY( indicesArray[0], element.renderX, element.renderY, true, this.cameras.main, this.spikeLayer);
                 element.delay --;
+                element.currentIndex = 1;
             }
             else{
                     element.currentIndex %= indicesArray.length;
