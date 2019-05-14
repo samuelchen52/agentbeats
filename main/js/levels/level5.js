@@ -57,9 +57,14 @@ var level5 = new Phaser.Class({
         //level1.createFromObjects("objectsLayer", this.endPoint.id, {key: "agentsprite", frame: this.endPoint.gid});
         level1.putTileAtWorldXY( this.endPoint.gid, this.endPoint.x , this.endPoint.y - 64, true, this.cameras.main, this.objectLayer);
 
+        //checkpoints
         this.check = -1;
         this.checkpoint = level1.findObject("objectsLayer", obj => obj.name === "Checkpoint");
         this.checkpoint2 = level1.findObject("objectsLayer", obj => obj.name === "Checkpoint2");
+        this.backgroundLayer.getTileAtWorldXY(this.checkpoint.x, this.checkpoint.y).tint = 0x0f0ff00;
+        this.backgroundLayer.getTileAtWorldXY(this.checkpoint2.x, this.checkpoint2.y).tint = 0x0f0ff00;
+        // check if checkpoint reached has displayed yet
+        this.checkDisplay = 0;
 
          //music
          music = this.sound.add('level1audio',1,true);
@@ -165,6 +170,20 @@ var level5 = new Phaser.Class({
             }
 
         }, this);
+
+        document.onkeydown = function(evt) {
+            evt = evt || window.event;
+            if (evt.keyCode == 27) {
+                pause = true;
+                this.scene.pause(this.key);
+                music.pause();
+                //launch paused screen
+                this.game.currentLevel = this.key;
+                this.scene.launch('paused');
+                
+                //pause itself
+            }
+        }.bind(this);
     
 
         const camera = this.cameras.main;
@@ -348,13 +367,21 @@ var level5 = new Phaser.Class({
         if (this.check === 2) {
             return;
         }
-        if (this.player.x >= 2432 && this.player.y <= 704) {
+        if (this.player.x >= 2432 && this.player.y <= 704 && this.checkDisplay === 1) {
             this.check = 2;
+            this.checkDisplay = 2;
             console.log("checkpoint 2 reached");
+            var style = { font: "30px jetset", fill: "#fff", align: "center" };
+            var text = this.add.text(this.player.x - 150, this.player.y - 72, "Checkpoint Reached", style);
+            setTimeout(function() {text.destroy(); }, 2000);
         }
-        else if (this.player.x >= 1920) {
+        else if (this.player.x >= 1920 && this.checkDisplay === 0) {
             this.check = 1;
+            this.checkDisplay = 1;
             console.log("checkpoint 1 reached");
+            var style = { font: "30px jetset", fill: "#fff", align: "center" };
+            var text = this.add.text(this.player.x - 150, this.player.y - 72, "Checkpoint Reached", style);
+            setTimeout(function() {text.destroy(); }, 2000);
         }
     },
     checkDeath: function (time){

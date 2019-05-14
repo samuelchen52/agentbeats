@@ -62,6 +62,8 @@ var level3 = new Phaser.Class({
         this.backgroundLayer.getTileAtWorldXY(this.checkpoint.x, this.checkpoint.y).tint = 0x0f0ff00;
         this.backgroundLayer.getTileAtWorldXY(this.checkpoint2.x, this.checkpoint2.y).tint = 0x0f0ff00;
 
+        this.checkDisplay = 0;
+
         //65344 green
 
          //music
@@ -374,11 +376,19 @@ var level3 = new Phaser.Class({
         }
         if (this.player.x >= 1920 && this.player.y >= 1280) {
             this.check = 2;
+            this.checkDisplay = 2;
             console.log("checkpoint 2 reached");
+            var style = { font: "30px jetset", fill: "#fff", align: "center" };
+            var text = this.add.text(this.player.x - 150, this.player.y - 72, "Checkpoint Reached", style);
+            setTimeout(function() {text.destroy(); }, 2000);
         }
         else if (this.player.x >= 1728 && this.player.y <= 384) {
             this.check = 1;
+            this.checkDisplay = 1;
             console.log("checkpoint 1 reached");
+            var style = { font: "30px jetset", fill: "#fff", align: "center" };
+            var text = this.add.text(this.player.x - 150, this.player.y - 72, "Checkpoint Reached", style);
+            setTimeout(function() {text.destroy(); }, 2000);
         }
     },
     checkDeath: function (time){
