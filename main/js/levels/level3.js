@@ -365,6 +365,14 @@ var level3 = new Phaser.Class({
             this.game.nextLevel = "level3";
             this.game.currentLevel = this.key;
             music.pause();
+            var score = this.timeLabel.text;
+            
+            if(localStorage.getItem("level3scores") == null){
+                localStorage.setItem("level3scores", score + " ");
+            }else{
+                localStorage.setItem("level3scores", localStorage.getItem("level3scores")+ score + " ");
+            }
+            
             this.scene.pause(this.key);
             this.scene.launch('win');
 
